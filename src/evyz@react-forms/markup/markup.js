@@ -1,8 +1,20 @@
 import React from "react";
 import "./markup.css";
 
-const Row = ({ children }) => {
-  return <div className='system_row'>{children}</div>;
+const Row = ({ children, style, className, onClick }) => {
+  function clickHandler(e) {
+    onClick && onClick(e);
+  }
+
+  return (
+    <div
+      onClick={clickHandler}
+      className={`system_row ${className ? className : ""} `}
+      style={{ ...style }}
+    >
+      {children}
+    </div>
+  );
 };
 
 const Cell = ({ children, size, style }) => {

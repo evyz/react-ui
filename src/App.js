@@ -4,16 +4,20 @@ import { useEffect, useState } from "react";
 import "./evyz@react-forms/index.css";
 import Input from "./evyz@react-forms/inputs/input";
 import Button from "./evyz@react-forms/buttons/button";
+import Popup from "./evyz@react-forms/popup/popup";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
-
   const [searchValue, setSearchValue] = useState("");
+  const [isActivePopup, setIsActivePopup] = useState(false);
 
   return (
     <Wrapper isDarkMode={isDarkMode}>
+      <Popup isActive={isActivePopup} setIsActive={setIsActivePopup}>
+        123
+      </Popup>
       <Row>
-        <Cell size={4}>
+        <Cell size={2}>
           <Row>
             <Input
               value={searchValue}
@@ -26,30 +30,30 @@ function App() {
           </Row>
         </Cell>
         <Cell size={8}>
-          <Row>
+          <Row className={"j-between"}>
             <Cell
               style={{ border: "1px solid var(--main-input-color)" }}
-              size={4}
+              size={3}
             >
               <h1>Новость</h1>
               <desc>Описание описание описание</desc>
-              <Button>Открыть</Button>
+              <Button onClick={() => setIsActivePopup(true)}>Открыть</Button>
             </Cell>
             <Cell
               style={{ border: "1px solid var(--main-input-color)" }}
-              size={4}
+              size={3}
             >
               <h1>Новость</h1>
               <desc>Описание описание описание</desc>
-              <Button>Открыть</Button>
+              <Button onClick={() => setIsActivePopup(true)}>Открыть</Button>
             </Cell>
             <Cell
               style={{ border: "1px solid var(--main-input-color)" }}
-              size={4}
+              size={3}
             >
               <h1>Новость</h1>
               <desc>Описание описание описание</desc>
-              <Button>Открыть</Button>
+              <Button onClick={() => setIsActivePopup(true)}>Открыть</Button>
             </Cell>
           </Row>
         </Cell>

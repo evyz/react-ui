@@ -5,7 +5,7 @@
 
   --main-cell-color: #fff;
   --main-cell-border-radius: 20px;
-  --main-cell-col-size: 7%;
+  --main-cell-col-size: 9%;
 
   --main-text-color: #292d32;
 
@@ -31,6 +31,9 @@
   --main-button-color-active: #575757;
   --main-button-font-size: 16px;
   --main-button-border-radius: 15px;
+
+  --main-popup-background: rgba(0, 0, 0, 0.3);
+  --main-popup-content-background: #fff;
 }
 
 .system_mode-dark {
@@ -42,4 +45,7 @@
   --main-input-background: #363636;
   --main-input-label-color: #a0a0a0;
   --main-input-color: #cdd1d6;
+
+  --main-popup-background: rgba(0, 0, 0, 0.9);
+  --main-popup-content-background: #222222;
 }

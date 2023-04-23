@@ -18,5 +18,5 @@ button.system_button:hover {
 
 button.system_button:active {
   background: var(--main-button-background-active);
-  transform: scale(0.99);
+  transform: scale(0.95);
 }
