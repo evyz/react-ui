@@ -1,24 +1,60 @@
-import logo from './logo.svg';
-import './App.css';
+import { Cell, Row } from "./evyz@react-forms/markup/markup";
+import Wrapper from "./evyz@react-forms/wrapper/wrapper";
+import { useEffect, useState } from "react";
+import "./evyz@react-forms/index.css";
+import Input from "./evyz@react-forms/inputs/input";
+import Button from "./evyz@react-forms/buttons/button";
 
 function App() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const [searchValue, setSearchValue] = useState("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Wrapper isDarkMode={isDarkMode}>
+      <Row>
+        <Cell size={4}>
+          <Row>
+            <Input
+              value={searchValue}
+              setValue={setSearchValue}
+              label={"Поиск по сайту"}
+            />
+            <Button onClick={() => setIsDarkMode(!isDarkMode)}>
+              Тёмная тема
+            </Button>
+          </Row>
+        </Cell>
+        <Cell size={8}>
+          <Row>
+            <Cell
+              style={{ border: "1px solid var(--main-input-color)" }}
+              size={4}
+            >
+              <h1>Новость</h1>
+              <desc>Описание описание описание</desc>
+              <Button>Открыть</Button>
+            </Cell>
+            <Cell
+              style={{ border: "1px solid var(--main-input-color)" }}
+              size={4}
+            >
+              <h1>Новость</h1>
+              <desc>Описание описание описание</desc>
+              <Button>Открыть</Button>
+            </Cell>
+            <Cell
+              style={{ border: "1px solid var(--main-input-color)" }}
+              size={4}
+            >
+              <h1>Новость</h1>
+              <desc>Описание описание описание</desc>
+              <Button>Открыть</Button>
+            </Cell>
+          </Row>
+        </Cell>
+      </Row>
+    </Wrapper>
   );
 }
 

@@ -1,0 +1,16 @@
+.system_wrapper {
+  width: 100%;
+  min-height: 100vh;
+
+  background: var(--main-bg-color);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: var(--main-text-color);
+}
+
+.system_wrapper > div {
+  width: var(--main-wrapper-default-width);
+}

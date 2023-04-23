@@ -1,0 +1,30 @@
+.system_input {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  position: relative;
+
+  margin: var(--main-input-margin);
+  background: var(--main-input-background);
+  border: var(--main-input-border);
+  border-radius: var(--main-input-border-radius);
+}
+
+.system_input > input {
+  width: 100%;
+  padding: var(--main-input-padding);
+
+  outline: none;
+  border: none;
+  background: none;
+
+  font-size: var(--main-input-font-size);
+  color: var(--main-input-color);
+}
+
+.system_input > input::placeholder {
+  color: var(--main-input-label-color);
+  font-size: var(--main-input-label-font-size);
+}

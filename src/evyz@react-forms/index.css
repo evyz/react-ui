@@ -1,0 +1,45 @@
+:root {
+  --main-wrapper-default-width: 1440px;
+
+  --main-bg-color: #edeef0;
+
+  --main-cell-color: #fff;
+  --main-cell-border-radius: 20px;
+  --main-cell-col-size: 7%;
+
+  --main-text-color: #292d32;
+
+  --main-input-padding-vertical: 12px;
+  --main-input-padding-horizontal: 16px;
+  --main-input-padding: var(--main-input-padding-vertical)
+    var(--main-input-padding-horizontal);
+  --main-input-border-radius: 15px;
+  --main-input-background: #f8f8f8;
+  --main-input-border: none;
+  --main-input-font-size: 16px;
+  --main-input-color: #292d32;
+  --main-input-margin: 8px 2px;
+  --main-input-label-font-size: 16px;
+  --main-input-label-color: #a0a0a0;
+
+  --main-button-padding: 12px 20px;
+  --main-button-margin: 8px 2px;
+  --main-button-background: #10684b;
+  --main-button-background-hover: #01b075;
+  --main-button-background-active: #03c483;
+  --main-button-color: #ffffff;
+  --main-button-color-active: #575757;
+  --main-button-font-size: 16px;
+  --main-button-border-radius: 15px;
+}
+
+.system_mode-dark {
+  --main-bg-color: #141414;
+  --main-cell-color: #222222;
+
+  --main-text-color: #cdd1d6;
+
+  --main-input-background: #363636;
+  --main-input-label-color: #a0a0a0;
+  --main-input-color: #cdd1d6;
+}
