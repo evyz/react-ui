@@ -8,6 +8,8 @@ button.system_button {
   font-size: var(--main-button-font-size);
   border-radius: var(--main-button-border-radius);
 
+  position: relative;
+
   transition: 0.15s all;
 }
 
@@ -20,3 +22,22 @@ button.system_button:active {
   background: var(--main-button-background-active);
   transform: scale(0.95);
 }
+
+
+button.system_button:disabled {
+  background: var(--main-button-background-inactive);
+}
+
+button.system_button:disabled:hover {
+  transform: scale(1);
+}
+
+/* button.system_button[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  left: 0;
+  bottom: calc((var(--main-input-padding-vertical) + 6px) * -1);
+  background-color: red;
+
+  width: max-content;
+} */

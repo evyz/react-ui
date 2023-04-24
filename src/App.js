@@ -9,6 +9,9 @@ import Popup from "./evyz@react-forms/popup/popup";
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [name, setName] = useState("");
+  const [errorName, setErrorName] = useState({}) 
+
   const [isActivePopup, setIsActivePopup] = useState(false);
 
   return (
@@ -19,14 +22,25 @@ function App() {
       <Row>
         <Cell size={2}>
           <Row>
-            <Input
-              value={searchValue}
-              setValue={setSearchValue}
-              label={"Поиск по сайту"}
-            />
-            <Button onClick={() => setIsDarkMode(!isDarkMode)}>
-              Тёмная тема
-            </Button>
+              <Input
+                  value={searchValue}
+                  setValue={setSearchValue}
+                  label={"Поиск по сайту"}
+              />
+                <Input
+                  value={name}
+                  setValue={setName}
+                  label={"Введите имя"}
+                  error={errorName}
+                  setError={setErrorName}
+                  rules={{notNull: true}}
+              />
+              <Button deps={[searchValue, name]} rulesToDeps={{notNull: true}}>Найти</Button>
+            <Row style={{borderTop: '1px solid black'}}>
+              <Button onClick={() => setIsDarkMode(!isDarkMode)}>
+                Тёмная тема
+              </Button>
+            </Row>
           </Row>
         </Cell>
         <Cell size={8}>

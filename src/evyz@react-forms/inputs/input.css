@@ -10,9 +10,11 @@
   background: var(--main-input-background);
   border: var(--main-input-border);
   border-radius: var(--main-input-border-radius);
+
+  transition: 0.3s all;
 }
 
-.system_input > input {
+.system_input>input {
   width: 100%;
   padding: var(--main-input-padding);
 
@@ -24,7 +26,66 @@
   color: var(--main-input-color);
 }
 
-.system_input > input::placeholder {
+.system_input>input::placeholder {
   color: var(--main-input-label-color);
   font-size: var(--main-input-label-font-size);
 }
+
+.system_input.system_error {
+  border: var(--main-input-background-error);
+}
+
+
+/* error  */
+.system_input>label.system_error {
+  position: absolute;
+  right: calc(var(--main-input-padding-horizontal) * 1);
+
+  border-radius: 15px;
+
+  font-size: 14px;
+
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--main-input-background);
+
+  border-radius: 50%;
+
+  color: var(--main-input-error-label-color);
+  border: var(--main-input-background-error);
+
+}
+
+.system_input>label.system_error[title]:hover::after {
+  content: attr(title);
+
+  position: absolute;
+  bottom: calc((var(--main-input-padding-vertical) * -1) - 12px);
+
+  width: max-content;
+
+  background: var(--main-input-background);
+}
+
+/* error  */
+
+/* hover */
+
+.system_input:hover {
+  background: var(--main-input-background-hover);
+}
+
+/* hover */
+
+/* focus */
+
+.system_input.system_focused {
+  background: var(--main-input-background-focus);
+}
+
+/* focus */
