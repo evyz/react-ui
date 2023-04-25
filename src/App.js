@@ -10,7 +10,8 @@ function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [name, setName] = useState("");
-  const [errorName, setErrorName] = useState({}) 
+  const [errorSearchValue, setErrorSearchValue] = useState({});
+  const [errorName, setErrorName] = useState({});
 
   const [isActivePopup, setIsActivePopup] = useState(false);
 
@@ -22,21 +23,26 @@ function App() {
       <Row>
         <Cell size={2}>
           <Row>
-              <Input
-                  value={searchValue}
-                  setValue={setSearchValue}
-                  label={"Поиск по сайту"}
-              />
-                <Input
-                  value={name}
-                  setValue={setName}
-                  label={"Введите имя"}
-                  error={errorName}
-                  setError={setErrorName}
-                  rules={{notNull: true}}
-              />
-              <Button deps={[searchValue, name]} rulesToDeps={{notNull: true}}>Найти</Button>
-            <Row style={{borderTop: '1px solid black'}}>
+            <Input
+              value={searchValue}
+              setValue={setSearchValue}
+              label={"Поиск по сайту"}
+              rules={{ notNull: true }}
+              error={errorSearchValue}
+              setError={setErrorSearchValue}
+            />
+            <Input
+              value={name}
+              setValue={setName}
+              label={"Введите имя"}
+              error={errorName}
+              setError={setErrorName}
+              rules={{ notNull: true }}
+            />
+            <Button deps={[searchValue, name]} rulesToDeps={{ notNull: true }}>
+              Найти
+            </Button>
+            <Row>
               <Button onClick={() => setIsDarkMode(!isDarkMode)}>
                 Тёмная тема
               </Button>
@@ -70,6 +76,12 @@ function App() {
               <Button onClick={() => setIsActivePopup(true)}>Открыть</Button>
             </Cell>
           </Row>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell size={12}>
+          <h1>Рекламный баннер</h1>
+          <desc>траляляля</desc>
         </Cell>
       </Row>
     </Wrapper>
