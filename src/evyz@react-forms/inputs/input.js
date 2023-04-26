@@ -76,19 +76,44 @@ const Input = ({ value, setValue, label, error, setError, rules }) => {
   const [isHoveringError, setIsHoveringError] = useState(false);
   const [isActiveError, setIsActiveError] = useState(false);
   const errorRef = useRef(null);
+  const [errorRefOffsetHeigth, setErrorRefOffsetHeigth] = useState(0)
+
+
+  useEffect(() => {
+    // init hook
+
+    if(typeof error === "object" && typeof setError === 'function'){
+      setError({status: false, message: "its okay"})
+    } 
+  }, [])
+
+  const recalculateErrorLabel = () => {
+    setErrorRefOffsetHeigth(errorRef.current?.clientHeight)
+  }
 
   const blurHandler = (e) => {
     setIsFocused(false);
 
     if (rules?.notNull) {
       if (!value || !value.length) {
+        recalculateErrorLabel()
         if (setError) setError({ status: true, message: "Fill in the field" });
         return;
       }
     }
 
+    recalculateErrorLabel()
     if (setError) setError({ status: false, message: "It`s okay" });
   };
+
+  // useEffect(() => {
+  //   console.log('errorRef =>',errorRef?.current?.clientHeight)
+
+  //   if(errorRef.current?.clientHeight !== errorRefOffsetHeigth){
+  //     setErrorRefOffsetHeigth(errorRef.current?.clientHeight)
+  //   }
+  // }, [errorRef])
+
 
   return (
     <div
@@ -99,11 +124,11 @@ const Input = ({ value, setValue, label, error, setError, rules }) => {
         }`
       }
       style={{
-        marginBottom: error?.status ? errorRef.current?.offsetHeight : 0,
+        marginBottom: error?.status ? errorRefOffsetHeigth : 0,
       }}
-      onMouseLeave={() => {
-        setIsActiveError(false);
-      }}
+      // onMouseLeave={() => {
+      //   setIsActiveError(false);
+      // }}
     >
       <input
         onFocus={() => setIsFocused(true)}
@@ -112,28 +137,15 @@ const Input = ({ value, setValue, label, error, setError, rules }) => {
         onBlur={blurHandler}
         placeholder={label}
       />
-      {/* {error?.status && error?.message && (
-        <span
-          onMouseEnter={() => {
-            !isFocused && setIsHoveringError(true);
-          }}
-          onMouseLeave={() => {
-            !isFocused && setIsHoveringError(false);
-          }}
-          className={`system_icon ${isHoveringError ? "" : "disabled"}`}
-          onClick={() => setIsActiveError(true)}
-        >
-          {renderIco("warning")[isHoveringError ? "hover" : "default"]}
-        </span>
-      )} */}
-      {/* {error?.status && error?.message && <label className="system_error" title={error?.message}><h1>!</h1></label>} */}
+
       <label
         ref={errorRef}
         style={{
-          bottom: error?.status ? `-${errorRef.current?.offsetHeight}px` : 0,
+          bottom: error?.status ? errorRefOffsetHeigth * -1 : 0 ,
+          opacity: error?.status ? 1 : 0
         }}
       >
-        {error?.status && error?.message && error?.message}
+        {error?.message}
       </label>
     </div>
   );
