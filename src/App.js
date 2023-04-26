@@ -5,7 +5,6 @@ import "./evyz@react-forms/index.css";
 import Input from "./evyz@react-forms/inputs/input";
 import Button from "./evyz@react-forms/buttons/button";
 import Popup from "./evyz@react-forms/popup/popup";
-import WidgetEditor from "./evyz@react-forms/formbuilder/formbuilder";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -26,8 +25,7 @@ function App() {
   }
 
   return (
-    <Wrapper isDarkMode={isDarkMode}>
-      <WidgetEditor></WidgetEditor>
+    <Wrapper useCoreConsole={true} isDarkMode={isDarkMode}>
 
       <Popup isActive={isActivePopup} setIsActive={setIsActivePopup}>
         123

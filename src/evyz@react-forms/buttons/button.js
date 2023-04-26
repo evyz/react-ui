@@ -1,10 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./button.css";
+import {uuidv4} from '../formbuilder/formbuilder'
 
-const Button = ({ children, deps, onClick, rulesToDeps, useLocalLoader, isLoading, setIsLoading }) => {
+const Button = ({ widgetId, children, deps, onClick, rulesToDeps, useLocalLoader, isLoading, setIsLoading }) => {
 
   const [isDisabled, setIsDisabled] = useState(false)
   const [isLocalLoader, setIsLocalLoader] = useState(false)
+  const ref = useRef()
+  const [refId, setRefId] = useState()
+
+  useEffect(() => {
+    setRefId( widgetId ? widgetId : uuidv4())
+  }, [])
 
   useEffect(() => {
     if(rulesToDeps?.notNull){
@@ -25,6 +32,17 @@ const Button = ({ children, deps, onClick, rulesToDeps, useLocalLoader, isLoadin
   }, [deps, rulesToDeps])
 
   const buttonHandler = () => {
+    
+    console.log('clicked', window?.core?._subscribersToLogs)
+    if (window?.core?._subscribersToLogs?.length > 0) {
+      console.log("window?.core?._subscribersToLogs", window?.core?._subscribersToLogs)
+      window?.core?._subscribersToLogs.forEach(subscribe => {
+        if (subscribe?.id === refId) {
+          window?.core?.console?.log("called method inside widget =>", refId)
+        }
+      })
+    }
+
     if(useLocalLoader){
       setIsLocalLoader(true)
       onClick().then(() => {
@@ -36,7 +54,7 @@ const Button = ({ children, deps, onClick, rulesToDeps, useLocalLoader, isLoadin
   }
 
   return (
-    <button title={isDisabled ? rulesToDeps?.notNull ? "Заполните поля" : "" : null} disabled={isDisabled} className={'system_button ' + ((isLoading || isLocalLoader) ? "isloading" : "")} onClick={buttonHandler}>
+    <button ref={ref} widgetId={refId} title={isDisabled ? rulesToDeps?.notNull ? "Заполните поля" : "" : null} disabled={isDisabled} className={'system_button ' + ((isLoading || isLocalLoader) ? "isloading" : "")} onClick={buttonHandler}>
       {(isLocalLoader || isLoading)  &&
         <div className="system_loader">
           <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" version="1.1" id="Capa_1" width={30} height={30} viewBox="0 0 26.349 26.35" >

@@ -77,8 +77,10 @@ const Input = ({ value, setValue, label, error, setError, rules }) => {
 
 
   useEffect(() => {
-    if(typeof error !== "object" || typeof setError !== "function"){
-      
+    if (typeof error !== "object" || typeof setError !== "function") {
+      if (error?.status === undefined || !error?.message) {
+        setError({stasus: false, message: "its ok"})
+      }
     } 
   }, [error, setError])
 
@@ -88,7 +90,6 @@ const Input = ({ value, setValue, label, error, setError, rules }) => {
 
   const blurHandler = (e) => {
     setIsFocused(false);
-
 
     if (rules?.notNull) {
       if (!value || !value.length) {
