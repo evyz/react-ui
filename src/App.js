@@ -1,6 +1,6 @@
 import { Cell, Row } from "./evyz@react-forms/markup/markup";
 import Wrapper from "./evyz@react-forms/wrapper/wrapper";
-import {  useState } from "react";
+import { useState } from "react";
 import "./evyz@react-forms/index.css";
 import Input from "./evyz@react-forms/inputs/input";
 import Button from "./evyz@react-forms/buttons/button";
@@ -15,18 +15,17 @@ function App() {
 
   const [isActivePopup, setIsActivePopup] = useState(false);
 
-  const [isLoadingButton, setIsLoadingButton] = useState(false)
+  const [isLoadingButton, setIsLoadingButton] = useState(false);
 
-  const method =( ) => {
-    setIsLoadingButton(true)
+  const method = () => {
+    setIsLoadingButton(true);
     setTimeout(() => {
-      setIsLoadingButton(false)
-    }, 1000)
-  }
+      setIsLoadingButton(false);
+    }, 1000);
+  };
 
   return (
     <Wrapper useCoreConsole={true} isDarkMode={isDarkMode}>
-
       <Popup isActive={isActivePopup} setIsActive={setIsActivePopup}>
         123
       </Popup>
@@ -49,11 +48,18 @@ function App() {
               setError={setErrorName}
               rules={{ notNull: true }}
             />
-            <Button onClick={method} useLocalLoader={false} isLoading={isLoadingButton} setIsLoading={setIsLoadingButton} deps={[searchValue, name]} rulesToDeps={{ notNull: true }}>
+            <Button
+              onClick={method}
+              useLocalLoader={false}
+              isLoading={isLoadingButton}
+              setIsLoading={setIsLoadingButton}
+              deps={[searchValue, name]}
+              rulesToDeps={{ notNull: true }}
+            >
               Найти
             </Button>
             <Row>
-              <Button onClick={() => setIsDarkMode(!isDarkMode)}>
+              <Button widgetId={1} onClick={() => setIsDarkMode(!isDarkMode)}>
                 Тёмная тема
               </Button>
             </Row>
