@@ -1,6 +1,5 @@
-import React, {   useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./input.css";
-
 
 const icons = [
   {
@@ -70,36 +69,34 @@ export const renderIco = (name) => {
 };
 
 const Input = ({ value, setValue, label, error, setError, rules }) => {
-
   const [isFocused, setIsFocused] = useState(false);
   const errorRef = useRef(null);
-  const [errorRefOffsetHeigth, setErrorRefOffsetHeigth] = useState(0)
-
+  const [errorRefOffsetHeigth, setErrorRefOffsetHeigth] = useState(0);
 
   useEffect(() => {
     if (typeof error !== "object" || typeof setError !== "function") {
       if (error?.status === undefined || !error?.message) {
-        setError({stasus: false, message: "its ok"})
+        setError && setError({ stasus: false, message: "its ok" });
       }
-    } 
-  }, [error, setError])
+    }
+  }, [error, setError]);
 
   const recalculateErrorLabel = () => {
-    setErrorRefOffsetHeigth(errorRef.current?.clientHeight)
-  }
+    setErrorRefOffsetHeigth(errorRef.current?.clientHeight);
+  };
 
   const blurHandler = (e) => {
     setIsFocused(false);
 
     if (rules?.notNull) {
       if (!value || !value.length) {
-        recalculateErrorLabel()
+        recalculateErrorLabel();
         if (setError) setError({ status: true, message: "Fill in the field" });
         return;
       }
     }
 
-    recalculateErrorLabel()
+    recalculateErrorLabel();
     if (setError) setError({ status: false, message: "It`s okay" });
   };
 
@@ -126,8 +123,8 @@ const Input = ({ value, setValue, label, error, setError, rules }) => {
       <label
         ref={errorRef}
         style={{
-          bottom: error?.status ? errorRefOffsetHeigth * -1 : 0 ,
-          opacity: error?.status ? 1 : 0
+          bottom: error?.status ? errorRefOffsetHeigth * -1 : 0,
+          opacity: error?.status ? 1 : 0,
         }}
       >
         {error?.message}

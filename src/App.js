@@ -1,103 +1,70 @@
-import { Cell, Row } from "./evyz@react-forms/markup/markup";
 import Wrapper from "./evyz@react-forms/wrapper/wrapper";
 import { useState } from "react";
 import "./evyz@react-forms/index.css";
+import { Row, Cell } from "./evyz@react-forms/markup/markup";
 import Input from "./evyz@react-forms/inputs/input";
 import Button from "./evyz@react-forms/buttons/button";
-import Popup from "./evyz@react-forms/popup/popup";
+import Selectize from "./evyz@react-forms/inputs/selectize";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
+
+  const [tags, setTags] = useState([]);
+
   const [name, setName] = useState("");
-  const [errorSearchValue, setErrorSearchValue] = useState({});
-  const [errorName, setErrorName] = useState({});
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const [isActivePopup, setIsActivePopup] = useState(false);
+  const [errorName, setErrorName] = useState({
+    status: false,
+    message: "its okay",
+  });
 
-  const [isLoadingButton, setIsLoadingButton] = useState(false);
-
-  const method = () => {
-    setIsLoadingButton(true);
+  const handler = () => {
+    setIsLoading(true);
     setTimeout(() => {
-      setIsLoadingButton(false);
+      console.log("ended");
+      setIsLoading(false);
     }, 1000);
   };
 
   return (
     <Wrapper useCoreConsole={true} isDarkMode={isDarkMode}>
-      <Popup isActive={isActivePopup} setIsActive={setIsActivePopup}>
-        123
-      </Popup>
       <Row>
-        <Cell size={2}>
-          <Row>
-            <Input
-              value={searchValue}
-              setValue={setSearchValue}
-              label={"Поиск по сайту"}
-              rules={{ notNull: true }}
-              error={errorSearchValue}
-              setError={setErrorSearchValue}
-            />
-            <Input
-              value={name}
-              setValue={setName}
-              label={"Введите имя"}
-              error={errorName}
-              setError={setErrorName}
-              rules={{ notNull: true }}
-            />
-            <Button
-              onClick={method}
-              useLocalLoader={false}
-              isLoading={isLoadingButton}
-              setIsLoading={setIsLoadingButton}
-              deps={[searchValue, name]}
-              rulesToDeps={{ notNull: true }}
-            >
-              Найти
-            </Button>
-            <Row>
-              <Button widgetId={1} onClick={() => setIsDarkMode(!isDarkMode)}>
-                Тёмная тема
-              </Button>
-            </Row>
-          </Row>
+        {/* <Cell size={5}>
+          <Selectize value={tags} setValue={setTags} />
         </Cell>
-        <Cell size={8}>
-          <Row className={"j-between"}>
-            <Cell
-              style={{ border: "1px solid var(--main-input-color)" }}
-              size={3}
-            >
-              <h1>Новость</h1>
-              <desc>Описание описание описание</desc>
-              <Button onClick={() => setIsActivePopup(true)}>Открыть</Button>
-            </Cell>
-            <Cell
-              style={{ border: "1px solid var(--main-input-color)" }}
-              size={3}
-            >
-              <h1>Новость</h1>
-              <desc>Описание описание описание</desc>
-              <Button onClick={() => setIsActivePopup(true)}>Открыть</Button>
-            </Cell>
-            <Cell
-              style={{ border: "1px solid var(--main-input-color)" }}
-              size={3}
-            >
-              <h1>Новость</h1>
-              <desc>Описание описание описание</desc>
-              <Button onClick={() => setIsActivePopup(true)}>Открыть</Button>
-            </Cell>
-          </Row>
-        </Cell>
-      </Row>
-      <Row>
-        <Cell size={12}>
-          <h1>Рекламный баннер</h1>
-          <desc>траляляля</desc>
+        <Cell size={5}></Cell> */}
+        <Cell size={11}>
+          <h1>Авторизация!</h1>
+
+          <Input
+            value={name}
+            setValue={setName}
+            label={"Введите имя"}
+            rules={{ notNull: true }}
+            error={errorName}
+            setError={setErrorName}
+          />
+          <Input
+            value={password}
+            setValue={setPassword}
+            label={"Введите пароль"}
+          />
+
+          <Button
+            rulesToDeps={{ notNull: true }}
+            deps={[name, password]}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            onClick={handler}
+          >
+            Войти
+          </Button>
+
+          <Button onClick={() => setIsDarkMode(!isDarkMode)}>
+            Тёмная тема
+          </Button>
         </Cell>
       </Row>
     </Wrapper>
