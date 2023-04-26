@@ -1,8 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {   useEffect, useRef, useState } from "react";
 import "./input.css";
 
-import icoWarning from "../assets/warning-ico.svg";
-import icoWarningAlt from "../assets/warning-ico-alt.svg";
 
 const icons = [
   {
@@ -72,20 +70,17 @@ export const renderIco = (name) => {
 };
 
 const Input = ({ value, setValue, label, error, setError, rules }) => {
+
   const [isFocused, setIsFocused] = useState(false);
-  const [isHoveringError, setIsHoveringError] = useState(false);
-  const [isActiveError, setIsActiveError] = useState(false);
   const errorRef = useRef(null);
   const [errorRefOffsetHeigth, setErrorRefOffsetHeigth] = useState(0)
 
 
   useEffect(() => {
-    // init hook
-
-    if(typeof error === "object" && typeof setError === 'function'){
-      setError({status: false, message: "its okay"})
+    if(typeof error !== "object" || typeof setError !== "function"){
+      
     } 
-  }, [])
+  }, [error, setError])
 
   const recalculateErrorLabel = () => {
     setErrorRefOffsetHeigth(errorRef.current?.clientHeight)
@@ -93,6 +88,7 @@ const Input = ({ value, setValue, label, error, setError, rules }) => {
 
   const blurHandler = (e) => {
     setIsFocused(false);
+
 
     if (rules?.notNull) {
       if (!value || !value.length) {
@@ -106,15 +102,6 @@ const Input = ({ value, setValue, label, error, setError, rules }) => {
     if (setError) setError({ status: false, message: "It`s okay" });
   };
 
-  // useEffect(() => {
-  //   console.log('errorRef =>',errorRef?.current?.clientHeight)
-
-  //   if(errorRef.current?.clientHeight !== errorRefOffsetHeigth){
-  //     setErrorRefOffsetHeigth(errorRef.current?.clientHeight)
-  //   }
-  // }, [errorRef])
-
-
   return (
     <div
       className={
@@ -126,9 +113,6 @@ const Input = ({ value, setValue, label, error, setError, rules }) => {
       style={{
         marginBottom: error?.status ? errorRefOffsetHeigth : 0,
       }}
-      // onMouseLeave={() => {
-      //   setIsActiveError(false);
-      // }}
     >
       <input
         onFocus={() => setIsFocused(true)}

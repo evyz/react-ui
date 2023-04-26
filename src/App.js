@@ -1,6 +1,6 @@
 import { Cell, Row } from "./evyz@react-forms/markup/markup";
 import Wrapper from "./evyz@react-forms/wrapper/wrapper";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import "./evyz@react-forms/index.css";
 import Input from "./evyz@react-forms/inputs/input";
 import Button from "./evyz@react-forms/buttons/button";
@@ -14,6 +14,15 @@ function App() {
   const [errorName, setErrorName] = useState({});
 
   const [isActivePopup, setIsActivePopup] = useState(false);
+
+  const [isLoadingButton, setIsLoadingButton] = useState(false)
+
+  const method =( ) => {
+    setIsLoadingButton(true)
+    setTimeout(() => {
+      setIsLoadingButton(false)
+    }, 1000)
+  }
 
   return (
     <Wrapper isDarkMode={isDarkMode}>
@@ -39,7 +48,7 @@ function App() {
               setError={setErrorName}
               rules={{ notNull: true }}
             />
-            <Button deps={[searchValue, name]} rulesToDeps={{ notNull: true }}>
+            <Button onClick={method} useLocalLoader={false} isLoading={isLoadingButton} setIsLoading={setIsLoadingButton} deps={[searchValue, name]} rulesToDeps={{ notNull: true }}>
               Найти
             </Button>
             <Row>
