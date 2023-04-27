@@ -14,8 +14,11 @@
   border-radius: 7px;
 }
 
-.system_selectize > input {
+.system_selectize>input {
   padding: 4px;
+
+  width: min-content;
+  flex: auto;
 
   outline: none;
   border: none;

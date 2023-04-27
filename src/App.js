@@ -31,10 +31,10 @@ function App() {
   return (
     <Wrapper useCoreConsole={true} isDarkMode={isDarkMode}>
       <Row>
-        {/* <Cell size={5}>
-          <Selectize value={tags} setValue={setTags} />
+        <Cell size={5}>
+          <Selectize value={tags} setValue={setTags} rules={{uniqueValues: true, prefix: "#"}} />
         </Cell>
-        <Cell size={5}></Cell> */}
+        <Cell size={5}></Cell>
         <Cell size={11}>
           <h1>Авторизация!</h1>
 
