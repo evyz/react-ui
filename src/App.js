@@ -5,6 +5,7 @@ import { Row, Cell } from "./evyz@react-forms/markup/markup";
 import Input from "./evyz@react-forms/inputs/input";
 import Button from "./evyz@react-forms/buttons/button";
 import Selectize from "./evyz@react-forms/inputs/selectize";
+import Collapse from "./evyz@react-forms/collapse/collapse";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -20,6 +21,11 @@ function App() {
     message: "its okay",
   });
 
+  const [errorPassword, setErrorPassword] = useState({
+    status: false,
+    message: "its okay",
+  });
+
   const handler = () => {
     setIsLoading(true);
     setTimeout(() => {
@@ -30,37 +36,43 @@ function App() {
 
   return (
     <Wrapper useCoreConsole={true} isDarkMode={isDarkMode}>
-      <Row>
-        <Cell size={5}>
-          <Selectize value={tags} setValue={setTags} rules={{uniqueValues: true, prefix: "#"}} />
-        </Cell>
-        <Cell size={5}></Cell>
-        <Cell size={11}>
-          <h1>Авторизация!</h1>
-
+      <Row isFlex={true} flexParams={{ justifyContent: "center" }}>
+        <Cell size={8}>
           <Input
             value={name}
             setValue={setName}
-            label={"Введите имя"}
-            rules={{ notNull: true }}
             error={errorName}
             setError={setErrorName}
+            label={"Your name"}
+            rules={{ notNull: true }}
           />
           <Input
             value={password}
             setValue={setPassword}
-            label={"Введите пароль"}
+            error={errorPassword}
+            setError={setErrorPassword}
+            label={"Your password"}
+            rules={{ notNull: true }}
           />
 
           <Button
             rulesToDeps={{ notNull: true }}
             deps={[name, password]}
             isLoading={isLoading}
-            setIsLoading={setIsLoading}
             onClick={handler}
           >
-            Войти
+            Log In
           </Button>
+
+          <Collapse label={"Теги"}>
+            <h1>Укажите теги:</h1>
+            <Selectize
+              label={"Заполните теги"}
+              value={tags}
+              setValue={setTags}
+              rules={{ uniqueValues: true, prefix: "#" }}
+            ></Selectize>
+          </Collapse>
 
           <Button onClick={() => setIsDarkMode(!isDarkMode)}>
             Тёмная тема

@@ -12,5 +12,30 @@
 }
 
 .system_wrapper > div {
-  width: var(--main-wrapper-default-width);
+  /* width: var(--main-wrapper-default-width); */
+  width: 1440px;
+}
+
+@media (max-width: 1440px) {
+  .system_wrapper > div {
+    width: 1140px;
+  }
+}
+
+@media (max-width: 1140px) {
+  .system_wrapper > div {
+    width: 768px;
+  }
+  .system_wrapper > div .system_row > .system_cell {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .system_wrapper > div {
+    width: 440px;
+  }
+  .system_wrapper > div .system_row > .system_cell {
+    width: 100%;
+  }
 }

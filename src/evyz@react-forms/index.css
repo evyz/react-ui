@@ -4,6 +4,8 @@
   --main-bg-color: #edeef0;
   --main-br-color: #292d32;
 
+  --main-border-radius: 7px;
+
   --main-cell-color: #fff;
   --main-cell-border-radius: 20px;
   --main-cell-col-size: 9%;
@@ -40,6 +42,13 @@
 
   --main-popup-background: rgba(0, 0, 0, 0.3);
   --main-popup-content-background: #fff;
+
+  --main-collapse-button-background: #f8f8f8;
+  --main-collapse-button-background-active: #eceaea;
+  --main-collapse-div-background: #f8f8f8;
+  --main-collapse-label-color: #292d32;
+  --main-collapse-label-active: #575757;
+  --main-collapse-border: none;
 }
 
 .system_mode-dark {
@@ -53,7 +62,14 @@
   --main-input-background-hover: #3d3d3d;
   --main-input-label-color: #a0a0a0;
   --main-input-color: #cdd1d6;
+  --main-input-border: 1px solid var(--main-input-background);
 
   --main-popup-background: rgba(0, 0, 0, 0.9);
   --main-popup-content-background: #222222;
+
+  --main-collapse-button-background: #363636;
+  --main-collapse-button-background-active: #444444;
+  --main-collapse-div-background: #363636;
+  --main-collapse-label-color: #cdd1d6;
+  --main-collapse-label-active: #dadde2;
 }
