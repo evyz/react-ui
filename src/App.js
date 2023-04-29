@@ -36,44 +36,13 @@ function App() {
 
   return (
     <Wrapper useCoreConsole={true} isDarkMode={isDarkMode}>
-      <Row isFlex={true} flexParams={{ justifyContent: "center" }}>
-        <Cell size={8}>
-          <Input
-            value={name}
-            setValue={setName}
-            error={errorName}
-            setError={setErrorName}
-            label={"Your name"}
-            rules={{ notNull: true }}
-          />
-          <Input
-            value={password}
-            setValue={setPassword}
-            error={errorPassword}
-            setError={setErrorPassword}
-            label={"Your password"}
-            rules={{ notNull: true }}
-          />
-
-          <Button
-            rulesToDeps={{ notNull: true }}
-            deps={[name, password]}
-            isLoading={isLoading}
-            onClick={handler}
-          >
-            Log In
-          </Button>
-
-          <Collapse label={"Теги"}>
-            <h1>Укажите теги:</h1>
-            <Selectize
-              label={"Заполните теги"}
-              value={tags}
-              setValue={setTags}
-              rules={{ uniqueValues: true, prefix: "#" }}
-            ></Selectize>
-          </Collapse>
-
+      <Row>
+        <Cell size={4}>
+          <Input type={"calendarpicker"} />
+        </Cell>
+      </Row>
+      <Row>
+        <Cell>
           <Button onClick={() => setIsDarkMode(!isDarkMode)}>
             Тёмная тема
           </Button>

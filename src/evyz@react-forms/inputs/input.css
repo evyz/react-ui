@@ -14,7 +14,7 @@
   transition: 0.3s all;
 }
 
-.system_input>input {
+.system_input > input {
   width: 100%;
   padding: var(--main-input-padding);
 
@@ -26,9 +26,28 @@
   color: var(--main-input-color);
 }
 
-.system_input>input::placeholder {
+.system_input > input::placeholder {
   color: var(--main-input-label-color);
   font-size: var(--main-input-label-font-size);
+}
+
+.system_input > button.system_btn_ico {
+  background: none;
+  border: none;
+  outline: none;
+
+  position: relative;
+
+  transform: 0.3s all;
+}
+
+.system_input > button.system_btn_ico > div {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 240px;
+  height: 240px;
+  background: white;
 }
 
 /* error  */
@@ -36,7 +55,7 @@
   border: var(--main-input-background-error);
 }
 
-.system_input>label.system_error {
+.system_input > label.system_error {
   position: absolute;
   right: calc(var(--main-input-padding-horizontal) * 1);
 
@@ -59,7 +78,7 @@
   border: var(--main-input-background-error);
 }
 
-.system_input>label.system_error[title]:hover::after {
+.system_input > label.system_error[title]:hover::after {
   content: attr(title);
 
   position: absolute;
@@ -74,40 +93,40 @@
   margin-bottom: 20px;
 }
 
-.system_input.system_error>.system_icon {
+.system_input.system_error > .system_icon {
   margin-right: 7px;
 }
 
-.system_input.system_error>.system_icon,
-.system_input.system_error>.system_icon.disabled {
+.system_input.system_error > .system_icon,
+.system_input.system_error > .system_icon.disabled {
   display: flex;
   align-items: center;
   justify-content: center;
   transition: 0.3s all;
 }
 
-.system_input.system_error>.system_icon.disabled circle {
+.system_input.system_error > .system_icon.disabled circle {
   fill: var(--main-input-error-label-color);
 }
 
-.system_input.system_error>.system_icon.disabled path {
+.system_input.system_error > .system_icon.disabled path {
   stroke: var(--main-input-error-label-color);
 }
 
-.system_input.system_error>.system_icon:not(.disabled) {
+.system_input.system_error > .system_icon:not(.disabled) {
   fill: var(--main-input-error-label-color) !important;
   stroke: var(--main-input-background) !important;
 }
 
-.system_input.system_error>.system_icon:hover {
+.system_input.system_error > .system_icon:hover {
   transform: scale(1.05);
 }
 
-.system_input.system_error>.system_icon:active {
+.system_input.system_error > .system_icon:active {
   transform: scale(0.99);
 }
 
-.system_input.system_error>.system_icon>label {
+.system_input.system_error > .system_icon > label {
   position: absolute;
   bottom: -30px;
   width: max-content;
@@ -116,14 +135,14 @@
   color: var(--main-input-background);
 }
 
-.system_input>label {
+.system_input > label {
   position: absolute;
   bottom: -23px;
   left: var(--main-input-padding-horizontal);
   color: var(--main-input-error-label-color);
 }
 
-.system_input.system_error>label {
+.system_input.system_error > label {
   position: absolute;
   bottom: -23px;
   left: var(--main-input-padding-horizontal);
@@ -138,6 +157,10 @@
   background: var(--main-input-background-hover);
 }
 
+.system_input > button.system_btn_ico.disabled:hover {
+  transform: scale(1.05);
+}
+
 /* hover */
 
 /* focus */
@@ -147,3 +170,11 @@
 }
 
 /* focus */
+
+/* active */
+
+.system_input > button.system_btn_ico:active {
+  transform: scale(0.99);
+}
+
+/* active */
