@@ -38,7 +38,7 @@ function App() {
     <Wrapper useCoreConsole={true} isDarkMode={isDarkMode}>
       <Row>
         <Cell size={4}>
-          <Input type={"calendarpicker"} />
+          <Input value={name} setValue={setName} type={"calendarpicker"} />
         </Cell>
       </Row>
       <Row>

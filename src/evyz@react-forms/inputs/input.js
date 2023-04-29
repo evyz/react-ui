@@ -70,9 +70,19 @@ export const renderIco = (name) => {
 
 const CalendarPicker = ({ date, setDate, monthToShow, setMonthToShow }) => {
   const [matrix, setMatrix] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const switchMonth = (moveTo) => {
+    moveTo = moveTo ? 1 : -1;
+
+    setMonthToShow(
+      new Date(monthToShow?.getFullYear(), monthToShow?.getMonth() + moveTo, 1)
+    );
+  };
 
   useEffect(() => {
     let monthToRender = monthToShow ? monthToShow : new Date();
+    setIsLoading(true);
 
     let firstDay = new Date(
       monthToRender.getFullYear(),
@@ -101,19 +111,100 @@ const CalendarPicker = ({ date, setDate, monthToShow, setMonthToShow }) => {
 
     for (let date of dates) {
       if (!rows.length) {
-        let arr = [];
-        for (let i = 1; i < date.getDay() - 1; i++) {
-          arr.push("NOT_SELECTED");
+        let row = [];
+        for (let i = 0; i < date.getDay() - 1; i++) {
+          row.push("not_selected");
         }
-        rows.push([...arr, date]);
-        continue;
+        rows.push([...row, date]);
+      } else {
+        if (rows[rows.length - 1].length !== 7) {
+          rows[rows.length - 1].push(date);
+        } else {
+          rows.push([date]);
+        }
       }
     }
 
-    console.log(rows);
+    if (rows[rows.length - 1].length !== 7) {
+      let row = [];
+      for (let i = rows[rows.length - 1].length; i < 8; i++) {
+        row.push("not_selected");
+      }
+      rows[rows.length - 1] = [...rows[rows.length - 1], ...row];
+    }
+
+    setMatrix(rows);
+    setIsLoading(false);
   }, [monthToShow]);
 
-  return <div></div>;
+  if (isLoading) {
+    return (
+      <div>
+        <h1>Загрузка...</h1>
+      </div>
+    );
+  }
+
+  return (
+    <div className='system_calendar'>
+      <div className='system_row thead'>
+        <span onClick={() => switchMonth()}>
+          <svg
+            width='24'
+            height='24'
+            viewBox='0 0 24 24'
+            fill='none'
+            xmlns='http://www.w3.org/2000/svg'
+          >
+            <path
+              d='M14.9998 19.92L8.47984 13.4C7.70984 12.63 7.70984 11.37 8.47984 10.6L14.9998 4.07999'
+              stroke='#292D32'
+              stroke-width='1.5'
+              stroke-miterlimit='10'
+              stroke-linecap='round'
+              stroke-linejoin='round'
+            />
+          </svg>
+        </span>
+        {monthToShow &&
+          typeof monthToShow === "object" &&
+          `${monthToShow.getMonth()} ${monthToShow.getFullYear()} г.`}
+        <span className='reversed' onClick={() => switchMonth(1)}>
+          <svg
+            width='24'
+            height='24'
+            viewBox='0 0 24 24'
+            fill='none'
+            xmlns='http://www.w3.org/2000/svg'
+          >
+            <path
+              d='M14.9998 19.92L8.47984 13.4C7.70984 12.63 7.70984 11.37 8.47984 10.6L14.9998 4.07999'
+              stroke='#292D32'
+              stroke-width='1.5'
+              stroke-miterlimit='10'
+              stroke-linecap='round'
+              stroke-linejoin='round'
+            />
+          </svg>
+        </span>
+      </div>
+      {matrix &&
+        matrix.length > 0 &&
+        matrix.map((row) => (
+          <div className='system_row'>
+            {row &&
+              row.length > 0 &&
+              row.map((item) => (
+                <span onClick={() => setDate(item)}>
+                  {item && typeof item === "object"
+                    ? item?.getDate()
+                    : item === "not_selected" && "A"}
+                </span>
+              ))}
+          </div>
+        ))}
+    </div>
+  );
 };
 
 const Input = ({ value, setValue, label, error, setError, rules, type }) => {
@@ -154,6 +245,12 @@ const Input = ({ value, setValue, label, error, setError, rules, type }) => {
     if (setError) setError({ status: false, message: "It`s okay" });
   };
 
+  useEffect(() => {
+    if (type === "calendarpicker") {
+      setValue(date);
+    }
+  }, [date]);
+
   return (
     <div
       className={
@@ -168,7 +265,29 @@ const Input = ({ value, setValue, label, error, setError, rules, type }) => {
     >
       <input
         onFocus={() => setIsFocused(true)}
-        value={value}
+        value={
+          type === "calendarpicker"
+            ? typeof value === "object"
+              ? `${value?.getFullYear()}.${
+                  value?.getMonth() < 10
+                    ? "0" + value?.getMonth()
+                    : value?.getMonth()
+                }.${
+                  value?.getDate() < 10
+                    ? "0" + value?.getDate()
+                    : value?.getDate()
+                }`
+              : `${new Date()?.getFullYear()}.${
+                  new Date()?.getMonth() < 10
+                    ? "0" + new Date()?.getMonth()
+                    : new Date()?.getMonth()
+                }.${
+                  new Date()?.getDate() < 10
+                    ? "0" + new Date()?.getDate()
+                    : new Date()?.getDate()
+                }`
+            : value
+        }
         onChange={(e) => setValue(e.target.value)}
         onBlur={blurHandler}
         placeholder={label}

@@ -149,6 +149,41 @@
   color: var(--main-input-error-label-color);
 }
 
+.system_btn_ico > div > .system_calendar {
+  width: 100%;
+  height: 100%;
+}
+
+.system_btn_ico > div > .system_calendar {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.system_btn_ico > div > .system_calendar .system_row {
+  justify-content: space-between;
+  height: 26px;
+  margin: 4px 0;
+}
+
+.system_btn_ico > div > .system_calendar span {
+  width: 26px;
+  text-align: center;
+}
+
+.system_btn_ico > div > .system_calendar .reversed {
+  transform: scaleX(-1);
+}
+
+.system_btn_ico > div > .system_calendar .thead {
+  width: 100%;
+
+  border-bottom: 1px solid black;
+}
+
 /* error  */
 
 /* hover */
@@ -173,7 +208,7 @@
 
 /* active */
 
-.system_input > button.system_btn_ico:active {
+.system_input > button.system_btn_ico.disabled:active {
   transform: scale(0.99);
 }
 
