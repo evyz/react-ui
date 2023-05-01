@@ -68,7 +68,13 @@ export const renderIco = (name) => {
   return icon;
 };
 
-const CalendarPicker = ({ date, setDate, monthToShow, setMonthToShow }) => {
+const CalendarPicker = ({
+  date,
+  setDate,
+  monthToShow,
+  setMonthToShow,
+  rules,
+}) => {
   const [matrix, setMatrix] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -114,6 +120,10 @@ const CalendarPicker = ({ date, setDate, monthToShow, setMonthToShow }) => {
         let row = [];
         let startOfDate = new Date(date.getFullYear(), date.getMonth(), 0);
         for (let i = 0; i < date.getDay() - 1; i++) {
+          if (rules?.showCurrentMonth) {
+            row.push("not_selected");
+            continue;
+          }
           row.push(
             new Date(
               startOfDate.getFullYear(),
@@ -141,6 +151,10 @@ const CalendarPicker = ({ date, setDate, monthToShow, setMonthToShow }) => {
         1
       );
       for (let i = 0; i < 8 - rows[rows.length - 1].length; i++) {
+        if (rules?.showCurrentMonth) {
+          row.push("not_selected");
+          continue;
+        }
         row.push(
           new Date(
             startOfDate.getFullYear(),
@@ -154,7 +168,7 @@ const CalendarPicker = ({ date, setDate, monthToShow, setMonthToShow }) => {
 
     setMatrix(rows);
     setIsLoading(false);
-  }, [monthToShow]);
+  }, [monthToShow, rules?.showCurrentMonth]);
 
   if (isLoading) {
     return (
@@ -217,13 +231,18 @@ const CalendarPicker = ({ date, setDate, monthToShow, setMonthToShow }) => {
                 <span
                   className={
                     typeof monthToShow === "object" &&
+                    monthToShow &&
+                    monthToShow?.getMonth &&
+                    item?.getMonth &&
                     monthToShow?.getMonth() !== item?.getMonth()
                       ? "disabled"
                       : ""
                   }
                   onClick={() => {
+                    item?.getMonth &&
                     monthToShow?.getMonth() !== item?.getMonth()
-                      ? setMonthToShow(
+                      ? !rules?.showCurrentMonth &&
+                        setMonthToShow(
                           new Date(
                             monthToShow?.getFullYear(),
                             monthToShow?.getMonth() +
@@ -237,7 +256,7 @@ const CalendarPicker = ({ date, setDate, monthToShow, setMonthToShow }) => {
                 >
                   {item && typeof item === "object"
                     ? item?.getDate()
-                    : item === "not_selected" && "A"}
+                    : item === "not_selected" && ""}
                 </span>
               ))}
           </div>
@@ -368,6 +387,7 @@ const Input = ({ value, setValue, label, error, setError, rules, type }) => {
               onClick={(e) => e.stopPropagation()}
             >
               <CalendarPicker
+                rules={rules}
                 date={date}
                 setDate={setDate}
                 monthToShow={monthToShow}
