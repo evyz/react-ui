@@ -184,6 +184,10 @@
   border-bottom: 1px solid black;
 }
 
+.system_btn_ico > div > .system_calendar span.disabled {
+  color: var(--main-input-text-disabled);
+}
+
 /* error  */
 
 /* hover */

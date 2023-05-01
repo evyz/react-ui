@@ -112,9 +112,17 @@ const CalendarPicker = ({ date, setDate, monthToShow, setMonthToShow }) => {
     for (let date of dates) {
       if (!rows.length) {
         let row = [];
+        let startOfDate = new Date(date.getFullYear(), date.getMonth(), 0);
         for (let i = 0; i < date.getDay() - 1; i++) {
-          row.push("not_selected");
+          row.push(
+            new Date(
+              startOfDate.getFullYear(),
+              startOfDate.getMonth(),
+              startOfDate.getDate() - i
+            )
+          );
         }
+        row = row.reverse();
         rows.push([...row, date]);
       } else {
         if (rows[rows.length - 1].length !== 7) {
@@ -127,8 +135,19 @@ const CalendarPicker = ({ date, setDate, monthToShow, setMonthToShow }) => {
 
     if (rows[rows.length - 1].length !== 7) {
       let row = [];
-      for (let i = rows[rows.length - 1].length; i < 8; i++) {
-        row.push("not_selected");
+      let startOfDate = new Date(
+        lastDay.getFullYear(),
+        lastDay.getMonth() + 1,
+        1
+      );
+      for (let i = 0; i < 8 - rows[rows.length - 1].length; i++) {
+        row.push(
+          new Date(
+            startOfDate.getFullYear(),
+            startOfDate.getMonth(),
+            startOfDate.getDate() + i
+          )
+        );
       }
       rows[rows.length - 1] = [...rows[rows.length - 1], ...row];
     }
@@ -195,7 +214,27 @@ const CalendarPicker = ({ date, setDate, monthToShow, setMonthToShow }) => {
             {row &&
               row.length > 0 &&
               row.map((item) => (
-                <span onClick={() => setDate(item)}>
+                <span
+                  className={
+                    typeof monthToShow === "object" &&
+                    monthToShow?.getMonth() !== item?.getMonth()
+                      ? "disabled"
+                      : ""
+                  }
+                  onClick={() => {
+                    monthToShow?.getMonth() !== item?.getMonth()
+                      ? setMonthToShow(
+                          new Date(
+                            monthToShow?.getFullYear(),
+                            monthToShow?.getMonth() +
+                              item?.getMonth() -
+                              monthToShow?.getMonth(),
+                            1
+                          )
+                        )
+                      : setDate(item);
+                  }}
+                >
                   {item && typeof item === "object"
                     ? item?.getDate()
                     : item === "not_selected" && "A"}

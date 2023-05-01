@@ -28,6 +28,7 @@
   --main-input-label-font-size: 16px;
   --main-input-label-color: #a0a0a0;
   --main-input-error-label-color: #da5656;
+  --main-input-text-disabled: #89929c;
 
   --main-button-padding: 12px 20px;
   --main-button-margin: 8px 2px;
