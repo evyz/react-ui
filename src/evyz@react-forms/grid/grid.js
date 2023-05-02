@@ -1,18 +1,31 @@
-import React, { memo, useEffect, useMemo, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import './grid.css'
+import Input from "../inputs/input";
 
-const Cell = ({ children }) => {
+const Cell = ({ children, item, cell }) => {
+    if (cell?.widget !== "input") {
+        switch (cell?.widget) {
+            case "checkbox":
+                return (
+                    <input type={"checkbox"} checked={children} disabled={true} />
+                )
+            default:
+                return <div>{children}</div>
+        }
+    }
     return (
         <div>
-            {children}
+            {String(children)}
         </div>
     )  
 }
 
-const Grid = ({ data, gridSettings, gridFilter,setGridFilter }) => {
+const Grid = ({ data, gridSettings, gridFilter,setGridFilter, isLoading, isHasFastSearch }) => {
     
     const [cells, setCells] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
+    const [isIniting, setIsIniting] = useState(true)
+    const [fastSearchValue, setFastSearchValue] = useState("")
+
 
     useEffect(() => {
         if (!Array.isArray(gridSettings)) {
@@ -21,15 +34,23 @@ const Grid = ({ data, gridSettings, gridFilter,setGridFilter }) => {
 
         if (gridSettings && gridSettings.length > 0) {
             setCells( gridSettings.map(setting => {
-                return { name: setting.name, value: setting.value, width: setting.width ? setting.width : 150, isCanSort: setting?.isCanSort ? true :false }
+                return { name: setting.name, value: setting.value, width: setting.width ? setting.width : 150, isCanSort: setting?.isCanSort ? true :false, widget: setting?.widget ? setting?.widget : "input"  }
             }))
         }
 
-        setIsLoading(false)
-    }, [data, gridSettings])
+        setIsIniting(false)
+    }, [gridSettings])
+
+    const recalculateGridSettings = () => {
+        setGridFilter(prev => {return {...prev, fastSearch: {value: fastSearchValue}}})
+    }
 
     return (
         <div className="system_grid">
+
+            {isHasFastSearch && <Input onBlur={recalculateGridSettings}  value={fastSearchValue} setValue={setFastSearchValue} />}
+
+            {isIniting && "Пожалуйста, подождите"}
             <table>
                 <thead>
                     <tr>
@@ -44,11 +65,11 @@ const Grid = ({ data, gridSettings, gridFilter,setGridFilter }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data && data.length > 0 && data.map(item =>
+                    {!isLoading && data && data.length > 0 && data.map(item =>
                         <tr>
                             {
                                 cells && cells.length > 0 && cells.map(cell => 
-                                    <td style={{width: cell?.width}}><Cell>{item[cell?.value]}</Cell></td>
+                                    <td style={{width: cell?.width}}><Cell cell={cell} item={item} >{item[cell?.value]}</Cell></td>
                                 )    
                              }
                         </tr>

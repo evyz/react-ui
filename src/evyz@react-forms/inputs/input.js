@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useDeferredValue, useEffect, useRef, useState } from "react";
 import "./input.css";
 import { SystemLogger } from "../logger/logger";
 
@@ -266,7 +266,7 @@ const CalendarPicker = ({
   );
 };
 
-const Input = ({ value, setValue, label, error, setError, rules, type, enableLogs }) => {
+const Input = ({ value, setValue, label, error, setError, rules, type, enableLogs, onFocus, onBlur, onInput }) => {
   const [isFocused, setIsFocused] = useState(false);
   const errorRef = useRef(null);
   const [errorRefOffsetHeigth, setErrorRefOffsetHeigth] = useState(0);
@@ -299,7 +299,6 @@ const Input = ({ value, setValue, label, error, setError, rules, type, enableLog
 
   const blurHandler = (e) => {
     setIsFocused(false);
-
     if (rules?.notNull) {
       if (!value || !value.length) {
         recalculateErrorLabel();
@@ -307,10 +306,14 @@ const Input = ({ value, setValue, label, error, setError, rules, type, enableLog
         return;
       }
     }
-
+    onBlur && onBlur()
     recalculateErrorLabel();
     if (setError) setError({ status: false, message: "It`s okay" });
   };
+
+  const inputHandler = (e) => {
+    onInput && onInput()
+  }
 
   useEffect(() => {
     if (type === "calendarpicker") {
@@ -333,6 +336,7 @@ const Input = ({ value, setValue, label, error, setError, rules, type, enableLog
       }}
     >
       <input
+        onInput={inputHandler}
         onFocus={() => setIsFocused(true)}
         value={
           type === "calendarpicker"

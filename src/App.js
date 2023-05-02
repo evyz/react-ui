@@ -1,5 +1,5 @@
 import Wrapper from "./evyz@react-forms/wrapper/wrapper";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./evyz@react-forms/index.css";
 import { Row, Cell } from "./evyz@react-forms/markup/markup";
 import Input from "./evyz@react-forms/inputs/input";
@@ -11,42 +11,64 @@ function App() {
 
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [gridFilter, setGridFilter] = useState({sort: {field: "title",value:"ASC"}})
+  const [gridFilter, setGridFilter] = useState({ sort: { field: "title", value: "ASC" } })
+  
+  const [isLoading, setIsLoading] = useState(true)
 
-  const [todos, setTodos] = useState([
-  {
-  "userId": 1,
-  "id": 1,
-  "title": "delectus aut autem",
-  "completed": false
-    },
-     {
-  "userId": 1,
-  "id": 1,
-  "title": "delectus aut autem",
-  "completed": false
-},
- {
-  "userId": 1,
-  "id": 1,
-  "title": "delectus aut autem",
-  "completed": false
-},
- {
-  "userId": 1,
-  "id": 1,
-  "title": "delectus aut autem",
-  "completed": false
-},
- {
-  "userId": 1,
-  "id": 1,
-  "title": "delectus aut autem",
-  "completed": false
-},
-  ])
+  const [todos, setTodos] = useState([])
 
-  const gridSettings = [{id:1, name: "Название", value:"title", isCanSort: true}, {id: 2, name: "Выполнено", value: "completed"}]
+  useEffect(() => {
+    setIsLoading(true)
+    console.log('gridFilter => ', gridFilter)
+    setTimeout(() => {
+
+      let arr =[
+            {
+            "userId": 1,
+            "id": 1,
+            "title": "Поесть бебры",
+            "completed": true
+            },
+            {
+            "userId": 1,
+            "id": 1,
+            "title": "drunk vodka",
+            "completed": false
+          },
+          {
+            "userId": 1,
+            "id": 1,
+            "title": "meet with bear",
+            "completed": true
+          },
+          {
+            "userId": 1,
+            "id": 1,
+            "title": "buy matryoshka",
+            "completed": false
+          },
+          {
+            "userId": 1,
+            "id": 1,
+            "title": "take a tickets to Moscow",
+            "completed": false
+          },
+      ]
+        
+      if (gridFilter?.sort?.field === "completed") {
+        arr = arr.sort((x, y) => gridFilter?.sort?.value === "ASC" ?  x?.completed - y?.completed  : y?.completed - x?.completed)
+      }
+
+      if (gridFilter?.fastSearch) {
+        arr = arr.filter(item => item?.title.indexOf(gridFilter?.fastSearch?.value) !== -1 ? true : false)
+      }
+        
+      setTodos(arr)
+      setIsLoading(false)
+    }, 1000)
+  }, [gridFilter])
+
+  const gridSettings = [{id:1, name: "Название", value:"title", isCanSort: true}, {id: 2, name: "Выполнено", value: "completed", widget: "checkbox", isCanSort: true}]
 
   return (
     <Wrapper useCoreConsole={true} isDarkMode={isDarkMode}>
@@ -75,7 +97,7 @@ function App() {
       </Row>
       <Row>
         <Cell size={11}>
-          <Grid gridFilter={gridFilter} setGridFilter={setGridFilter} data={todos} gridSettings={gridSettings}></Grid>
+          <Grid isHasFastSearch={true} isLoading={isLoading} gridFilter={gridFilter} setGridFilter={setGridFilter} data={todos} gridSettings={gridSettings}></Grid>
         </Cell>
       </Row>
     </Wrapper>

@@ -82,7 +82,7 @@
 }
 
 .system_grid>table>thead button.system_sort_ico.active.reversed::after {
-    border-bottom: 7px solid #fff;
+    border-top: 7px solid #fff;
 }
 
 
