@@ -318,6 +318,8 @@ const Input = ({ value, setValue, label, error, setError, rules, type, enableLog
     }
   }, [date, type, setValue]);
 
+  // logger?.current?.log({type: "some_changes"})
+
   return (
     <div
       className={

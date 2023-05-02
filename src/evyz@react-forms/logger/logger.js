@@ -24,6 +24,11 @@ export class SystemLogger{
                 case "called_useEffect":
                     messageToSend.message = data
                     break;
+                case "some_changes":
+                    messageToSend.message = "some changes"
+                    messageToSend.widget = this.widget
+                    messageToSend.params = this.params
+                    break;
                 default:
                     messageToSend.data = "not_found"
                     break;
