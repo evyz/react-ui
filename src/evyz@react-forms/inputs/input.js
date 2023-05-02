@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./input.css";
+import { SystemLogger } from "../logger/logger";
 
 const icons = [
   {
@@ -265,7 +266,7 @@ const CalendarPicker = ({
   );
 };
 
-const Input = ({ value, setValue, label, error, setError, rules, type }) => {
+const Input = ({ value, setValue, label, error, setError, rules, type, enableLogs }) => {
   const [isFocused, setIsFocused] = useState(false);
   const errorRef = useRef(null);
   const [errorRefOffsetHeigth, setErrorRefOffsetHeigth] = useState(0);
@@ -276,7 +277,15 @@ const Input = ({ value, setValue, label, error, setError, rules, type }) => {
 
   const calendarButtonRef = useRef();
 
+  const logger = useRef(null)
+  logger.current = new SystemLogger({ value, setValue, label, error, setError, rules, type }, enableLogs, "input")
+  
   useEffect(() => {
+    logger.current.log({type: "first_init", data: "called useEffect first init"})
+  }, [])
+
+  useEffect(() => {
+    logger.current.log({type: "called_useEffect", data: "called useEffect with validations"})
     if (typeof error !== "object" || typeof setError !== "function") {
       if (error?.status === undefined || !error?.message) {
         setError && setError({ stasus: false, message: "its ok" });
@@ -307,7 +316,7 @@ const Input = ({ value, setValue, label, error, setError, rules, type }) => {
     if (type === "calendarpicker") {
       setValue(date);
     }
-  }, [date]);
+  }, [date, type, setValue]);
 
   return (
     <div

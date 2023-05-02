@@ -18,6 +18,8 @@ function App() {
             setValue={setName}
             type={"calendarpicker"}
             rules={{ showCurrentMonth: true }}
+            enableLogs={true}
+            label="Укажите дату"
           />
         </Cell>
       </Row>
