@@ -1,0 +1,97 @@
+.system_grid {
+    width: 100%;
+}
+
+.system_grid>table {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    border-spacing: 0;
+
+}
+
+.system_grid>table>thead>tr {
+    display: flex;
+    flex-direction: row;
+
+    background: #5e6366;
+    color: #fff;
+}
+
+.system_grid>table>thead>tr>td {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+
+    background: none;
+    position: relative;
+}
+
+.system_grid>table>thead>tr>td:not(:last-child) {
+    border-right: 1px solid #fff;
+}
+
+
+.system_grid>table>thead button.system_sort_ico {
+    position: absolute;
+    right: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: none;
+    outline: none;
+    border: none;
+}
+
+.system_grid>table>thead button.system_sort_ico::before {
+    content: '';
+
+
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 7px solid #b1b1b1;
+
+    margin-bottom: 2px;
+}
+
+.system_grid>table>thead button.system_sort_ico::after {
+    content: '';
+
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 7px solid #b1b1b1;
+}
+
+.system_grid>table>thead button.system_sort_ico.active::before {
+    border-bottom: 7px solid #fff;
+}
+
+.system_grid>table>thead button.system_sort_ico.active.reversed::before {
+    border-bottom: 7px solid #b1b1b1;
+}
+
+.system_grid>table>thead button.system_sort_ico.active.reversed::after {
+    border-top: 7px solid #fff;
+}
+
+
+
+.system_grid>table>tbody>tr>td:not(:last-child) {
+    border-right: 1px solid #5e6366;
+}
+
+
+.system_grid>table tr td {
+    padding: 2px 4px;
+}
