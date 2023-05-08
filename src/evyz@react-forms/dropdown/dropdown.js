@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./dropdown.css";
 
 const DropdownItem = ({ option, setOption, len }) => {
@@ -8,17 +8,23 @@ const DropdownItem = ({ option, setOption, len }) => {
       style={{
         borderBottom: len - 1 === option.id ? "none" : "1px solid gray",
       }}
-      className="system_dropdown_option"
+      className='system_dropdown_option'
     >
       {option.value}
     </div>
   );
 };
 
-const Dropdown = ({ options, defaultValue }) => {
+const Dropdown = ({ options, defaultValue, rules, label }) => {
   const [isOpened, setIsOpened] = useState(false);
   const [currOption, setCurrOption] = useState(null);
-  console.log(currOption);
+
+  useEffect(() => {
+    if (rules?.closeAfterSomeChanges) {
+      setIsOpened(false);
+    }
+  }, [currOption, rules]);
+
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <div
@@ -34,7 +40,13 @@ const Dropdown = ({ options, defaultValue }) => {
           className={`system_dropdown_ceiling`}
           onClick={() => setIsOpened(!isOpened)}
         >
-          <span>{currOption === null ? defaultValue : currOption.value}</span>
+          <span>
+            {currOption === null
+              ? !defaultValue
+                ? label
+                : defaultValue
+              : currOption.value}
+          </span>
           <div
             style={{
               display: "flex",

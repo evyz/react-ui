@@ -1,4 +1,4 @@
-import React, { useDeferredValue, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./input.css";
 import { SystemLogger } from "../logger/logger";
 
@@ -266,7 +266,19 @@ const CalendarPicker = ({
   );
 };
 
-const Input = ({ value, setValue, label, error, setError, rules, type, enableLogs, onFocus, onBlur, onInput }) => {
+const Input = ({
+  value,
+  setValue,
+  label,
+  error,
+  setError,
+  rules,
+  type,
+  enableLogs,
+  onFocus,
+  onBlur,
+  onInput,
+}) => {
   const [isFocused, setIsFocused] = useState(false);
   const errorRef = useRef(null);
   const [errorRefOffsetHeigth, setErrorRefOffsetHeigth] = useState(0);
@@ -277,15 +289,25 @@ const Input = ({ value, setValue, label, error, setError, rules, type, enableLog
 
   const calendarButtonRef = useRef();
 
-  const logger = useRef(null)
-  logger.current = new SystemLogger({ value, setValue, label, error, setError, rules, type }, enableLogs, "input")
-  
-  useEffect(() => {
-    logger.current.log({type: "first_init", data: "called useEffect first init"})
-  }, [])
+  const logger = useRef(null);
+  logger.current = new SystemLogger(
+    { value, setValue, label, error, setError, rules, type },
+    enableLogs,
+    "input"
+  );
 
   useEffect(() => {
-    logger.current.log({type: "called_useEffect", data: "called useEffect with validations"})
+    logger.current.log({
+      type: "first_init",
+      data: "called useEffect first init",
+    });
+  }, []);
+
+  useEffect(() => {
+    logger.current.log({
+      type: "called_useEffect",
+      data: "called useEffect with validations",
+    });
     if (typeof error !== "object" || typeof setError !== "function") {
       if (error?.status === undefined || !error?.message) {
         setError && setError({ stasus: false, message: "its ok" });
@@ -306,14 +328,14 @@ const Input = ({ value, setValue, label, error, setError, rules, type, enableLog
         return;
       }
     }
-    onBlur && onBlur()
+    onBlur && onBlur();
     recalculateErrorLabel();
     if (setError) setError({ status: false, message: "It`s okay" });
   };
 
   const inputHandler = (e) => {
-    onInput && onInput()
-  }
+    onInput && onInput();
+  };
 
   useEffect(() => {
     if (type === "calendarpicker") {

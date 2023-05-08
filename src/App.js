@@ -106,9 +106,9 @@ function App() {
             setValue={setName}
             type={"calendarpicker"}
             enableLogs={true}
-            label="Укажите дату"
+            label='Укажите дату'
           />
-          <Input value={password} setValue={setPassword} label="Укажите 123" />
+          <Input value={password} setValue={setPassword} label='Укажите 123' />
         </Cell>
       </Row>
       <Row>
@@ -131,7 +131,14 @@ function App() {
         </Cell>
       </Row>
       <Row>
-        <Dropdown options={options} defaultValue={`Things my Войтенко does`} />
+        <Cell size={11}>
+          <Dropdown
+            rules={{ closeAfterSomeChanges: true }}
+            options={options}
+            defaultValue={`Things my Войтенко does`}
+            label={"Укажите свой гендер:"}
+          />
+        </Cell>
       </Row>
     </Wrapper>
   );
