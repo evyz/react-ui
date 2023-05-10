@@ -100,6 +100,16 @@ function App() {
   return (
     <Wrapper useCoreConsole={true} isDarkMode={isDarkMode}>
       <Row>
+        <Cell size={11}>
+          <Dropdown
+            rules={{ closeAfterSomeChanges: true }}
+            options={options}
+            defaultValue={`Things my Войтенко does`}
+            label={"Укажите свой гендер:"}
+          />
+        </Cell>
+      </Row>
+      <Row>
         <Cell size={4}>
           <Input
             value={name}
@@ -130,16 +140,7 @@ function App() {
           ></Grid>
         </Cell>
       </Row>
-      <Row>
-        <Cell size={11}>
-          <Dropdown
-            rules={{ closeAfterSomeChanges: true }}
-            options={options}
-            defaultValue={`Things my Войтенко does`}
-            label={"Укажите свой гендер:"}
-          />
-        </Cell>
-      </Row>
+   
     </Wrapper>
   );
 }

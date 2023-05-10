@@ -15,7 +15,7 @@ const DropdownItem = ({ option, setOption, len }) => {
   );
 };
 
-const Dropdown = ({ options, defaultValue, rules, label }) => {
+const Dropdown = ({ options, defaultValue, rules, label, styleRules }) => {
   const [isOpened, setIsOpened] = useState(false);
   const [currOption, setCurrOption] = useState(null);
 
@@ -26,7 +26,7 @@ const Dropdown = ({ options, defaultValue, rules, label }) => {
   }, [currOption, rules]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div className={`system_dropdown_wrapper`} style={{ display: "flex", flexDirection: "column" }}>
       <div
         style={{
           borderBottom: isOpened ? "none" : "2px solid gray",
@@ -73,7 +73,7 @@ const Dropdown = ({ options, defaultValue, rules, label }) => {
           display: isOpened ? "" : "none",
           border: "2px solid gray",
         }}
-        className={`system_dropdown_options`}
+        className={`system_dropdown_options ${!styleRules?.isModalOptions ? "isModal" : ""}` }
       >
         <div className={`system_dropdown_options_wrapper`}>
           {options.map((option) => (

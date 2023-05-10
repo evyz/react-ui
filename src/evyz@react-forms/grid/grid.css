@@ -85,8 +85,6 @@
     border-top: 7px solid #fff;
 }
 
-
-
 .system_grid>table>tbody>tr>td:not(:last-child) {
     border-right: 1px solid #5e6366;
 }
