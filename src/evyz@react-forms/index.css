@@ -50,6 +50,8 @@
   --main-collapse-label-color: #292d32;
   --main-collapse-label-active: #575757;
   --main-collapse-border: none;
+
+  --main-checkbox-accent-color: #10684b;
 }
 
 .system_mode-dark {

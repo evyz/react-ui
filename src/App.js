@@ -6,6 +6,7 @@ import Input from "./evyz@react-forms/inputs/input";
 import Button from "./evyz@react-forms/buttons/button";
 import Grid from "./evyz@react-forms/grid/grid";
 import Dropdown from "./evyz@react-forms/dropdown/dropdown";
+import Checkbox from "./evyz@react-forms/checkbox/checkbox";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -15,6 +16,8 @@ function App() {
   const [gridFilter, setGridFilter] = useState({
     sort: { field: "title", value: "ASC" },
   });
+
+  const [isSelected, setIsSelected] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -102,6 +105,7 @@ function App() {
       <Row>
         <Cell size={11}>
           <Dropdown
+            styleRules={{ isModalOptions: true }}
             rules={{ closeAfterSomeChanges: true }}
             options={options}
             defaultValue={`Things my Войтенко does`}
@@ -140,7 +144,17 @@ function App() {
           ></Grid>
         </Cell>
       </Row>
-   
+      <Row>
+        <Cell size={11}>
+          <Checkbox
+            labelOptions={{ isCantSelect: true }}
+            value={isSelected}
+            setValue={setIsSelected}
+          >
+            Является говном
+          </Checkbox>
+        </Cell>
+      </Row>
     </Wrapper>
   );
 }
