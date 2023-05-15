@@ -14,8 +14,7 @@
 
   --main-input-padding-vertical: 12px;
   --main-input-padding-horizontal: 16px;
-  --main-input-padding: var(--main-input-padding-vertical)
-    var(--main-input-padding-horizontal);
+  --main-input-padding: var(--main-input-padding-vertical) var(--main-input-padding-horizontal);
   --main-input-border-radius: 15px;
   --main-input-background: #f8f8f8;
   --main-input-background-error: 1px solid #da5656;
@@ -52,6 +51,10 @@
   --main-collapse-border: none;
 
   --main-checkbox-accent-color: #10684b;
+
+  --main-fullsize-loader-background: rgba(0, 0, 0, 0.5);
+  --main-fullsize-loader-label-color: #fff;
+  --main-fullsize-loader-label-font-size: 24px;
 }
 
 .system_mode-dark {

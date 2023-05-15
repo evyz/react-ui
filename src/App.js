@@ -7,6 +7,7 @@ import Button from "./evyz@react-forms/buttons/button";
 import Grid from "./evyz@react-forms/grid/grid";
 import Dropdown from "./evyz@react-forms/dropdown/dropdown";
 import Checkbox from "./evyz@react-forms/checkbox/checkbox";
+import FullSizeLoader from "./evyz@react-forms/loaders/fullSizeLoader";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -19,7 +20,7 @@ function App() {
 
   const [isSelected, setIsSelected] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [todos, setTodos] = useState([]);
   const [options, setOptions] = useState([
@@ -102,6 +103,8 @@ function App() {
 
   return (
     <Wrapper useCoreConsole={true} isDarkMode={isDarkMode}>
+      <FullSizeLoader label={"Загрузка, подождите пожалуйста..."} value={isLoading} setValue={setIsLoading} backgroundOpacity={0.5} >
+      </FullSizeLoader>
       <Row>
         <Cell size={11}>
           <Dropdown
