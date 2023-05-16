@@ -6,6 +6,7 @@ import { Checkbox } from "./checkbox/checkbox"
 import Fieldset from "./fieldset/fieldset"
 import Button from "./buttons/button"
 import Dropdown from "./dropdown/dropdown"
+import Collapse from "./collapse/collapse"
 
 
 const CheckboxSlide = () => {
@@ -100,11 +101,83 @@ const InputSlide = () => {
     )
 }
 
+const CollapseSlide = () => {
+
+    const [label, setLabel] = useState("Open this widget!")
+
+    return (
+            <Row>
+                <Cell size={11}>
+                    <h1>Widget <span style={{ color: `var(--main-accent-text-color)`,  }}>Collapse <i style={{textDecoration: 'underline', cursor: 'help'}}>#</i></span></h1>
+                    <desc>Товарищи! постоянное информационно-пропагандистское обеспечение нашей деятельности в значительной степени обуславливает создание модели развития. Задача организации, в особенности же постоянный количественный рост и сфера нашей активности влечет за собой процесс внедрения и модернизации систем массового участия. </desc>
+                    <hr />
+                    <Row>
+                        <Cell size={5}>
+                        <Fieldset cellStyles={{ minHeight: 400, display: 'flex', flexDirection: 'column',alignItems: 'center', justifyContent: 'flex-start' }} label={"Result"}>
+                            <Collapse label={label}>
+                                <Cell size={4}>
+                                    <h3>Hello! And welcome to los pollos hermanos family</h3>
+                                    <desc>My name is Gustavo but you can call me Gus</desc>
+                                </Cell>
+                            </Collapse>
+                             <Collapse label={label}>
+                                <Cell size={4}>
+                                    <h3>Hello! And welcome to los pollos hermanos family</h3>
+                                    <desc>My name is Gustavo but you can call me Gus</desc>
+                                </Cell>
+                            </Collapse>
+                            </Fieldset>
+                        </Cell>
+                        <Cell size={5}>
+                            <Input label={"Choose label"} value={label} setValue={setLabel} />
+                           
+                        </Cell>
+                    </Row>
+                </Cell>
+            </Row>
+    )
+}
+
+const ButtonSlide = () => {
+    const [label, setLabel] = useState("Open this widget!")
+    const [colors, setColors] = useState(['red', 'blue', 'yellow', 'green', 'black', 'grey', 'white'])
+    const [color,setColor] = useState(0)
+
+    return (
+            <Row>
+                <Cell size={11}>
+                    <h1>Widget <span style={{ color: `var(--main-accent-text-color)`,  }}>Collapse <i style={{textDecoration: 'underline', cursor: 'help'}}>#</i></span></h1>
+                    <desc>Товарищи! постоянное информационно-пропагандистское обеспечение нашей деятельности в значительной степени обуславливает создание модели развития. Задача организации, в особенности же постоянный количественный рост и сфера нашей активности влечет за собой процесс внедрения и модернизации систем массового участия. </desc>
+                    <hr />
+                    <Row>
+                        <Cell size={5}>
+                        <Fieldset cellStyles={{ minHeight: 200, display: 'flex', flexDirection: 'column',alignItems: 'center', justifyContent: 'center' }} label={"Result"}>
+                            <Button styles={{background: colors[color]}} onClick={() => {
+                                if (colors[color + 1]) {
+                                    setColor(color + 1)
+                                } else {
+                                    setColor(0)
+                                }
+                             }}>{label}</Button>
+                        </Fieldset>
+                        </Cell>
+                        <Cell size={5}>
+                            <Input label={"Choose label"} value={label} setValue={setLabel} />
+                        </Cell>
+                    </Row>
+                </Cell>
+            </Row>
+    )
+}
+
+
 const Wellcome = () => {
 
     const [components, setComponents] = useState([
         <CheckboxSlide></CheckboxSlide>,
         <InputSlide></InputSlide>,
+        <CollapseSlide />,
+        <ButtonSlide />
     ])
 
     const [activeComponent, setActiveComponent] = useState(0)

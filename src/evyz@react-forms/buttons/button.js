@@ -11,7 +11,8 @@ const Button = ({
   useLocalLoader,
   isLoading,
   setIsLoading,
-  customValidationToDisable
+  customValidationToDisable,
+  styles
 }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLocalLoader, setIsLocalLoader] = useState(false);
@@ -43,12 +44,12 @@ const Button = ({
   const buttonHandler = () => {
     if (useLocalLoader) {
       setIsLocalLoader(true);
-      onClick().then(() => {
+      onClick && onClick().then(() => {
         setIsLocalLoader(false);
       });
       return;
     }
-    onClick();
+    onClick && onClick();
   };
 
   useEffect(() => {
@@ -69,6 +70,7 @@ const Button = ({
         "system_button " + (isLoading || isLocalLoader ? "isloading" : "")
       }
       onClick={buttonHandler}
+      style={{...styles}}
     >
       {(isLocalLoader || isLoading) && (
         <div className='system_loader'>
