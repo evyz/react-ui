@@ -11,6 +11,7 @@
   --main-cell-col-size: 9%;
 
   --main-text-color: #292d32;
+  --main-accent-text-color: #10684b;
 
   --main-input-padding-vertical: 12px;
   --main-input-padding-horizontal: 16px;
@@ -53,6 +54,10 @@
   --main-checkbox-accent-color: #10684b;
 
   --main-switchbox-background-color: #292d32;
+  --main-switchbox-min-width: 25px;
+  --main-switchbox-margin-left: 5px;
+  --main-switchbox-size: 16px;
+  --main-switchbox-padding: 12px;
   --main-switchbox-active-background-color: #10684b;
 
   --main-fullsize-loader-background: rgba(0, 0, 0, 0.5);

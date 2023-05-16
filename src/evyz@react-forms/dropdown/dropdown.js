@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./dropdown.css";
 
-const DropdownItem = ({ option, setOption, len }) => {
+const DropdownItem = ({ option, setOption, len, onClickItem }) => {
   return (
     <div
-      onClick={() => setOption(option)}
+      onClick={() => {
+        onClickItem && onClickItem()
+        setOption(option)
+      }}
       style={{
         borderBottom: len - 1 === option.id ? "none" : "1px solid gray",
       }}
@@ -15,7 +18,7 @@ const DropdownItem = ({ option, setOption, len }) => {
   );
 };
 
-const Dropdown = ({ options, defaultValue, rules, label, styleRules }) => {
+const Dropdown = ({ options, defaultValue, rules, label, styleRules, onClickHandler }) => {
   const [isOpened, setIsOpened] = useState(false);
   const [currOption, setCurrOption] = useState(null);
 
@@ -58,7 +61,10 @@ const Dropdown = ({ options, defaultValue, rules, label, styleRules }) => {
           >
             <div
               style={{ zIndex: 2, cursor: "pointer" }}
-              onClick={() => setCurrOption(null)}
+              onClick={() => {
+                onClickHandler && onClickHandler({value: null}) 
+                setCurrOption(null)
+              }}
             >
               x
             </div>
@@ -87,6 +93,9 @@ const Dropdown = ({ options, defaultValue, rules, label, styleRules }) => {
               option={option}
               setOption={setCurrOption}
               len={options.length}
+              onClickItem={() => {
+                 onClickHandler && onClickHandler({value: option}) 
+              }}
             />
           ))}
         </div>

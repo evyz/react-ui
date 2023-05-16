@@ -8,6 +8,7 @@ import Grid from "./evyz@react-forms/grid/grid";
 import Dropdown from "./evyz@react-forms/dropdown/dropdown";
 import FullSizeLoader from "./evyz@react-forms/loaders/fullSizeLoader";
 import {Checkbox, SwitchBox} from "./evyz@react-forms/checkbox/checkbox";
+import Wellcome from "./evyz@react-forms/Wellcome";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -101,6 +102,10 @@ function App() {
     },
   ];
 
+  if (isSelected) {
+   return( <Wellcome></Wellcome>)
+  }
+
   return (
     <Wrapper useCoreConsole={true} isDarkMode={isDarkMode}>
       <FullSizeLoader label={"Загрузка, подождите пожалуйста..."} value={isLoading} setValue={setIsLoading} backgroundOpacity={0.5} >
@@ -153,7 +158,7 @@ function App() {
             value={isSelected}
             setValue={setIsSelected}
           >
-            Является говном
+            Is selected value
           </SwitchBox>
         </Cell>
       </Row>

@@ -11,6 +11,7 @@ const Button = ({
   useLocalLoader,
   isLoading,
   setIsLoading,
+  customValidationToDisable
 }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLocalLoader, setIsLocalLoader] = useState(false);
@@ -49,6 +50,14 @@ const Button = ({
     }
     onClick();
   };
+
+  useEffect(() => {
+    if (typeof customValidationToDisable === 'boolean') {
+      setIsDisabled(!customValidationToDisable)
+    } else {
+      console.error('customValidationToDisable is unvalidated. typeof must be boolean')
+    }
+  }, [customValidationToDisable])
 
   return (
     <button

@@ -21,10 +21,10 @@
 
 
 .system_switchbox>.box {
-  padding: 15px;
+  padding: var(--main-switchbox-padding);
   border-radius: 15px;
 
-  min-width: 30px;
+  min-width: var(--main-switchbox-min-width);
 
   background: var(--main-switchbox-background-color);
 
@@ -42,20 +42,20 @@
 
 .system_switchbox>.box::after {
   content: "";
-  width: 24px;
-  height: 24px;
+  width: var(--main-switchbox-size);
+  height: var(--main-switchbox-size);
   background: white;
 
   position: absolute;
   left: 0px;
-  margin-left: 5px;
+  margin-left: var(--main-switchbox-margin-left);
 
   border-radius: 50%;
   transition: 0.15s all;
 }
 
 .system_switchbox>.box.active::after {
-  margin-left: calc(100% - 24px - 5px);
+  margin-left: calc(100% - 16px - 5px);
   transition: 0.15s all;
 }
 

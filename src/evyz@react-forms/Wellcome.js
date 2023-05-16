@@ -1,0 +1,134 @@
+import { useEffect, useState } from "react"
+import { Cell, Row } from "./markup/markup"
+import Wrapper from "./wrapper/wrapper"
+import Input from "./inputs/input"
+import { Checkbox } from "./checkbox/checkbox"
+import Fieldset from "./fieldset/fieldset"
+import Button from "./buttons/button"
+import Dropdown from "./dropdown/dropdown"
+
+
+const CheckboxSlide = () => {
+
+    const [value, setValue] = useState(true)
+    const [label, setLabel] = useState("")
+    const [labelOptions, setLabelOptions] = useState({
+        isCantSelect: false
+    })
+    const [labelStyles, setLabelStyles] = useState("")
+
+    return (
+        <Row>
+            <Cell size={11}>
+                <h1>Widget <span style={{ color: `var(--main-accent-text-color)`, textDecoration: 'underline' }}>Checkbox</span></h1>
+                <desc>Товарищи! постоянное информационно-пропагандистское обеспечение нашей деятельности в значительной степени обуславливает создание модели развития. Задача организации, в особенности же постоянный количественный рост и сфера нашей активности влечет за собой процесс внедрения и модернизации систем массового участия. </desc>
+                <hr />
+                <Row>
+                    <Cell size={5}>
+                        <Fieldset cellStyles={{minHeight: 200, display: 'flex', alignItems: 'center', justifyContent: 'center'}}  label={"Result"}>
+                            <Checkbox styles={{width: 'max-content'}} labelStyles={labelStyles} setValue={setValue} value={value} labelOptions={labelOptions} label={label}>Write label</Checkbox>
+                        </Fieldset>
+                    </Cell>
+                    <Cell size={5}>
+                        <Input label={"Choose label"} value={label} setValue={setLabel} />
+                        {Object.keys(labelOptions).map(key =>
+                            typeof labelOptions[key] === 'boolean' ? <Checkbox value={labelOptions[key]} onClick={() => {
+                                let newObj = new Object()
+                                newObj[key] = !labelOptions[key]
+                                setLabelOptions(prev => {return {...prev,  ...newObj}})
+                            }}>{key}</Checkbox>     : <></>
+                        )}
+                    </Cell>
+                </Row>
+            </Cell>
+        </Row>
+       
+    )
+}
+
+const InputSlide = () => {
+
+    const [value, setValue] = useState("")
+    const [label, setLabel] = useState("")
+    const [rules, setRules] = useState({
+        notNull: false
+    })
+    const [error, setError] = useState({ stasus: false, message: "its ok" })
+    const [types, setTypes] = useState([
+        "default", "calendarpicker"
+    ])
+    const [type, setType] = useState(types[0])
+
+    useEffect(() => {
+        setValue("")
+    }, [type])
+
+    return (
+            <Row>
+                <Cell size={11}>
+                    <h1>Widget <span style={{ color: `var(--main-accent-text-color)`,  }}>Input <i style={{textDecoration: 'underline', cursor: 'help'}}>#</i></span></h1>
+                    <desc>Товарищи! постоянное информационно-пропагандистское обеспечение нашей деятельности в значительной степени обуславливает создание модели развития. Задача организации, в особенности же постоянный количественный рост и сфера нашей активности влечет за собой процесс внедрения и модернизации систем массового участия. </desc>
+                    <hr />
+                    <Row>
+                        <Cell size={5}>
+                            <Fieldset cellStyles={{ minHeight: 200, display: 'flex', alignItems: 'center', justifyContent: 'center' }} label={"Result"}>
+                                <Input error={error} setError={setError} rules={rules} label={label} value={value} setValue={setValue} type={type} />
+                            </Fieldset>
+                        </Cell>
+                        <Cell size={5}>
+                            <Input label={"Choose label"} value={label} setValue={setLabel} />
+                            <hr />
+                            <h3>Rules:</h3>
+                            {Object.keys(rules).map(key =>
+                                typeof rules[key] === 'boolean' ? <Checkbox value={rules[key]} onClick={() => {
+                                    let newObj = new Object()
+                                    newObj[key] = !rules[key]
+                                    setRules(prev => {return {...prev,  ...newObj}})
+                                }}>{key}</Checkbox> : <></>
+                            )}
+                            <hr />
+                            <h3>Type of widget:</h3>
+                            <Row>
+                                {types && types.length > 0 && types.map(value => 
+                                    <Button onClick={() => setType(value)} customValidationToDisable={type !== value}>{value}</Button>
+                                )}
+                            </Row>
+                        </Cell>
+                    </Row>
+                </Cell>
+            </Row>
+    )
+}
+
+const Wellcome = () => {
+
+    const [components, setComponents] = useState([
+        <CheckboxSlide></CheckboxSlide>,
+        <InputSlide></InputSlide>,
+    ])
+
+    const [activeComponent, setActiveComponent] = useState(0)
+
+    return (
+        <Wrapper>
+            <Row>
+                <Cell>
+                    <h1>Widgets {"(" + Number(activeComponent + 1) + ") / (" + components.length + ")"}</h1>
+                    <Row>
+                        <Button customValidationToDisable={activeComponent !== 0} onClick={() => setActiveComponent(activeComponent -1)}>Prev</Button>
+                        <Button customValidationToDisable={activeComponent < components.length - 1} onClick={() => setActiveComponent(activeComponent + 1)}>Next</Button>
+                    </Row>
+
+                </Cell>
+              
+            </Row>
+
+            <Row>
+                {components[activeComponent]}
+            </Row>
+        </Wrapper>
+    
+    )
+}
+
+export default Wellcome
