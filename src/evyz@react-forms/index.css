@@ -52,6 +52,9 @@
 
   --main-checkbox-accent-color: #10684b;
 
+  --main-switchbox-background-color: #292d32;
+  --main-switchbox-active-background-color: #10684b;
+
   --main-fullsize-loader-background: rgba(0, 0, 0, 0.5);
   --main-fullsize-loader-label-color: #fff;
   --main-fullsize-loader-label-font-size: 24px;

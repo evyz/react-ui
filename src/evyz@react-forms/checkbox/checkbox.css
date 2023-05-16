@@ -1,18 +1,64 @@
-.system_checkbox {
+.system_checkbox,
+.system_switchbox {
   width: 100%;
 
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.system_checkbox > input[type="checkbox"] {
+
+.system_checkbox>input[type="checkbox"] {
   padding: 10px;
 }
 
-.system_checkbox > input[type="checkbox"]:checked {
+.system_checkbox>input[type="checkbox"]:checked {
   accent-color: var(--main-checkbox-accent-color);
 }
 
-.system_checkbox > label {
+.system_checkbox>label {
   color: var(--main-text-color);
+}
+
+
+.system_switchbox>.box {
+  padding: 15px;
+  border-radius: 15px;
+
+  min-width: 30px;
+
+  background: var(--main-switchbox-background-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  transition: 0.15s all;
+}
+
+.system_switchbox>.box.active {
+  background: var(--main-switchbox-active-background-color);
+}
+
+.system_switchbox>.box::after {
+  content: "";
+  width: 24px;
+  height: 24px;
+  background: white;
+
+  position: absolute;
+  left: 0px;
+  margin-left: 5px;
+
+  border-radius: 50%;
+  transition: 0.15s all;
+}
+
+.system_switchbox>.box.active::after {
+  margin-left: calc(100% - 24px - 5px);
+  transition: 0.15s all;
+}
+
+.system_switchbox>label {
+  margin-left: 5px;
 }

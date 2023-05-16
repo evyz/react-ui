@@ -20,4 +20,20 @@ function Checkbox({ value, setValue, label, children, labelOptions }) {
   );
 }
 
-export default Checkbox;
+function SwitchBox({ value, setValue, label, children }) {
+  return (
+       <div
+      className='system_switchbox'
+      onClick={() => {
+        setValue && setValue(!value);
+      }}
+   >
+    <div className={`box ${value && "active"}`}></div>
+     <label>
+        {label ? label : children ? children : null}
+     </label>
+    </div>
+  )
+}
+
+export {Checkbox, SwitchBox};

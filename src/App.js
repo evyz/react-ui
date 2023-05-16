@@ -6,8 +6,8 @@ import Input from "./evyz@react-forms/inputs/input";
 import Button from "./evyz@react-forms/buttons/button";
 import Grid from "./evyz@react-forms/grid/grid";
 import Dropdown from "./evyz@react-forms/dropdown/dropdown";
-import Checkbox from "./evyz@react-forms/checkbox/checkbox";
 import FullSizeLoader from "./evyz@react-forms/loaders/fullSizeLoader";
+import {Checkbox, SwitchBox} from "./evyz@react-forms/checkbox/checkbox";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -149,13 +149,12 @@ function App() {
       </Row>
       <Row>
         <Cell size={11}>
-          <Checkbox
-            labelOptions={{ isCantSelect: true }}
+          <SwitchBox
             value={isSelected}
             setValue={setIsSelected}
           >
             Является говном
-          </Checkbox>
+          </SwitchBox>
         </Cell>
       </Row>
     </Wrapper>
