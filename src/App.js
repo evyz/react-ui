@@ -7,8 +7,10 @@ import Button from "./evyz@react-forms/buttons/button";
 import Grid from "./evyz@react-forms/grid/grid";
 import Dropdown from "./evyz@react-forms/dropdown/dropdown";
 import FullSizeLoader from "./evyz@react-forms/loaders/fullSizeLoader";
-import {Checkbox, SwitchBox} from "./evyz@react-forms/checkbox/checkbox";
+import { Checkbox, SwitchBox } from "./evyz@react-forms/checkbox/checkbox";
 import Wellcome from "./evyz@react-forms/Wellcome";
+import Collapse from "./evyz@react-forms/collapse/collapse";
+import Login from "./Login";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -20,52 +22,30 @@ function App() {
   });
 
   const [isSelected, setIsSelected] = useState(false);
+  const [path, setPath] = useState("/");
 
   const [isLoading, setIsLoading] = useState(false);
 
   const [todos, setTodos] = useState([]);
   const [options, setOptions] = useState([
-    { id: 0, value: "Бегит" },
-    { id: 1, value: "Пресс качат" },
-    { id: 2, value: "Анжуманя" },
-    { id: 3, value: "Турники ломат" },
-    { id: 4, value: "Яйца помыт" },
-    { id: 5, value: "Гречка навалит" },
+    { id: 0, value: "Заняться спортом" },
+    { id: 1, value: "Купить хлеба" },
   ]);
 
   useEffect(() => {
     setIsLoading(true);
-    console.log("gridFilter => ", gridFilter);
     setTimeout(() => {
       let arr = [
         {
           userId: 1,
           id: 1,
-          title: "Поесть бебры",
+          title: "Купить хлеба",
           completed: true,
         },
         {
           userId: 1,
           id: 1,
-          title: "drunk vodka",
-          completed: false,
-        },
-        {
-          userId: 1,
-          id: 1,
-          title: "meet with bear",
-          completed: true,
-        },
-        {
-          userId: 1,
-          id: 1,
-          title: "buy matryoshka",
-          completed: false,
-        },
-        {
-          userId: 1,
-          id: 1,
-          title: "take a tickets to Moscow",
+          title: "Купить воды",
           completed: false,
         },
       ];
@@ -102,22 +82,31 @@ function App() {
     },
   ];
 
+  if (path === "/login") {
+    return <Login />;
+  }
+
   if (isSelected) {
-   return( <Wellcome></Wellcome>)
+    return <Wellcome></Wellcome>;
   }
 
   return (
     <Wrapper useCoreConsole={true} isDarkMode={isDarkMode}>
-      <FullSizeLoader label={"Загрузка, подождите пожалуйста..."} value={isLoading} setValue={setIsLoading} backgroundOpacity={0.5} >
-      </FullSizeLoader>
+      <Button onClick={() => setPath("/login")}>Авторизация</Button>
+      <FullSizeLoader
+        label={"Загрузка, подождите пожалуйста..."}
+        value={isLoading}
+        setValue={setIsLoading}
+        backgroundOpacity={0.5}
+      ></FullSizeLoader>
       <Row>
         <Cell size={11}>
           <Dropdown
             styleRules={{ isModalOptions: true }}
             rules={{ closeAfterSomeChanges: true }}
             options={options}
-            defaultValue={`Things my Войтенко does`}
-            label={"Укажите свой гендер:"}
+            defaultValue={`Нужно выполнить:`}
+            label={"Укажите цель:"}
           />
         </Cell>
       </Row>
@@ -154,13 +143,26 @@ function App() {
       </Row>
       <Row>
         <Cell size={11}>
-          <SwitchBox
-            value={isSelected}
-            setValue={setIsSelected}
-          >
+          <SwitchBox value={isSelected} setValue={setIsSelected}>
             Is selected value
           </SwitchBox>
         </Cell>
+      </Row>
+
+      <Row>
+        <Collapse label={"Новости:"}>
+          <Row>
+            <Cell size={3}>
+              <h1>Wellcome!</h1>
+            </Cell>
+            <Cell size={3}>
+              <h1>Wellcome!</h1>
+            </Cell>
+            <Cell size={3}>
+              <h1>Wellcome!</h1>
+            </Cell>
+          </Row>
+        </Collapse>
       </Row>
     </Wrapper>
   );
