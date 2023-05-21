@@ -3,13 +3,12 @@ import { Cell, Row } from "../markup/markup";
 import "./popup.css";
 
 const Popup = ({ children, isActive, setIsActive }) => {
-  const stopPropagination = (e) => {
-    e.stopPropagination();
-  };
-
   if (isActive) {
     return (
-      <Row className={"system_popup"} onClick={() => setIsActive(false)}>
+      <Row
+        className={"system_popup"}
+        onClick={() => setIsActive && setIsActive(false)}
+      >
         <Row
           onClick={(e) => {
             if (!e) {

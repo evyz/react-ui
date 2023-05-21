@@ -11,6 +11,7 @@ import { Checkbox, SwitchBox } from "./evyz@react-forms/checkbox/checkbox";
 import Wellcome from "./evyz@react-forms/Wellcome";
 import Collapse from "./evyz@react-forms/collapse/collapse";
 import Login from "./Login";
+import Popup from "./evyz@react-forms/popup/popup";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
