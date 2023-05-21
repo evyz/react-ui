@@ -12,6 +12,7 @@ import Wellcome from "./evyz@react-forms/Wellcome";
 import Collapse from "./evyz@react-forms/collapse/collapse";
 import Login from "./Login";
 import Popup from "./evyz@react-forms/popup/popup";
+import Calendar from "./evyz@react-forms/calendar/calendar";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -119,9 +120,9 @@ function App() {
             setValue={setName}
             type={"calendarpicker"}
             enableLogs={true}
-            label='Укажите дату'
+            label="Укажите дату"
           />
-          <Input value={password} setValue={setPassword} label='Укажите 123' />
+          <Input value={password} setValue={setPassword} label="Укажите 123" />
         </Cell>
       </Row>
       <Row>
@@ -166,6 +167,11 @@ function App() {
             </Cell>
           </Row>
         </Collapse>
+      </Row>
+      <Row>
+        <Cell size={11}>
+          <Calendar></Calendar>
+        </Cell>
       </Row>
     </Wrapper>
   );
