@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./grid.css";
 import Input from "../inputs/input";
+import useDebouncedFunction from "../utils/useDebouce";
 
 const Cell = ({ children, item, cell }) => {
   if (cell?.widget !== "input") {
@@ -21,16 +22,18 @@ const Grid = ({
   setGridFilter,
   isLoading,
   isHasFastSearch,
+  enableDebounce,
+  debounceSettings,
 }) => {
   const [cells, setCells] = useState([]);
   const [isIniting, setIsIniting] = useState(true);
   const [fastSearchValue, setFastSearchValue] = useState("");
+  const [value, setValue] = useState("");
 
   useEffect(() => {
     if (!Array.isArray(gridSettings)) {
       throw new Error("GRID_SETTINGS must be array");
     }
-
     if (gridSettings && gridSettings.length > 0) {
       setCells(
         gridSettings.map((setting) => {
@@ -48,23 +51,45 @@ const Grid = ({
     setIsIniting(false);
   }, [gridSettings]);
 
-  const recalculateGridSettings = () => {
+  const setNewValue = () => {
+    setFastSearchValue(value);
     setGridFilter((prev) => {
       return { ...prev, fastSearch: { value: fastSearchValue } };
     });
   };
+  let debounced = useDebouncedFunction(
+    setNewValue,
+    debounceSettings?.delay ? debounceSettings?.delay : 300
+  );
+
+  const recalculateGridSettings = (e) => {
+    if (enableDebounce) {
+      setValue(e.target.value);
+      debounced();
+    } else {
+      setValue(e.target.value);
+      setNewValue();
+    }
+  };
+
+  if (!isIniting) {
+    return <div></div>;
+  }
 
   return (
     <div className='system_grid'>
       {isHasFastSearch && (
         <Input
-          onBlur={recalculateGridSettings}
-          value={fastSearchValue}
-          setValue={setFastSearchValue}
+          onInput={(e) => {
+            recalculateGridSettings(e);
+          }}
+          onBlur={(e) => {
+            setValue(e.target.value);
+            setNewValue();
+          }}
+          value={value}
         />
       )}
-
-      {isIniting && "Пожалуйста, подождите"}
       <table>
         <thead>
           <tr>
@@ -109,7 +134,7 @@ const Grid = ({
           </tr>
         </thead>
         <tbody>
-          {!isLoading &&
+          {!isLoading ? (
             data &&
             data.length > 0 &&
             data.map((item) => (
@@ -124,7 +149,12 @@ const Grid = ({
                     </td>
                   ))}
               </tr>
-            ))}
+            ))
+          ) : (
+            <tr>
+              <h3>Загрузка, пожалуйста подождите...</h3>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

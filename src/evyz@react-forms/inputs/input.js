@@ -328,13 +328,13 @@ const Input = ({
         return;
       }
     }
-    onBlur && onBlur();
+    onBlur && onBlur(e);
     recalculateErrorLabel();
     if (setError) setError({ status: false, message: "It`s okay" });
   };
 
   const inputHandler = (e) => {
-    onInput && onInput();
+    onInput && onInput(e);
   };
 
   useEffect(() => {
@@ -383,7 +383,7 @@ const Input = ({
                 }`
             : value
         }
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => setValue && setValue(e.target.value)}
         onBlur={blurHandler}
         placeholder={label}
         security={type === "password" ? true : false}

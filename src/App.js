@@ -26,6 +26,7 @@ function App() {
   const [path, setPath] = useState("/");
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isGridLoading, setIsGridLoading] = useState(false);
 
   const [todos, setTodos] = useState([]);
   const [options, setOptions] = useState([
@@ -34,7 +35,7 @@ function App() {
   ]);
 
   useEffect(() => {
-    setIsLoading(true);
+    setIsGridLoading(true);
     setTimeout(() => {
       let arr = [
         {
@@ -59,7 +60,7 @@ function App() {
         );
       }
 
-      if (gridFilter?.fastSearch) {
+      if (gridFilter?.fastSearch?.value) {
         arr = arr.filter((item) =>
           item?.title.indexOf(gridFilter?.fastSearch?.value) !== -1
             ? true
@@ -68,7 +69,7 @@ function App() {
       }
 
       setTodos(arr);
-      setIsLoading(false);
+      setIsGridLoading(false);
     }, 1000);
   }, [gridFilter]);
 
@@ -134,11 +135,12 @@ function App() {
         <Cell size={11}>
           <Grid
             isHasFastSearch={true}
-            isLoading={isLoading}
+            isLoading={isGridLoading}
             gridFilter={gridFilter}
             setGridFilter={setGridFilter}
             data={todos}
             gridSettings={gridSettings}
+            enableDebounce={true}
           ></Grid>
         </Cell>
       </Row>
