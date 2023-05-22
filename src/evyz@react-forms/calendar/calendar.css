@@ -1,4 +1,50 @@
-.system_calendar{
+.system_calendar {
     width: 100%;
-    padding: 15px
+    padding: 15px;
+    box-sizing: border-box;
+
+    position: relative;
+}
+
+.system_calendar>.popup {
+    width: 100%;
+    height: 100%;
+
+    background: white;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.system_calendar>.picker {
+    width: 100%;
+
+    justify-content: space-around;
+    margin: 10px;
+}
+
+.system_calendar>.row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.system_calendar>.row>.cell {
+    width: 14%;
+    min-height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.system_calendar>.row>.cell.inactive {
+    background: #edeef0;
+    color: grey;
+}
+
+.system_calendar>.row>.cell.active {
+    background: #10684b;
+    color: white;
 }

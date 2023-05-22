@@ -35,6 +35,9 @@ function App() {
     { id: 1, value: "Купить хлеба" },
   ]);
 
+  const [month, setMonth] = useState(new Date())
+  const [selectedDate, setSelectedDate] = useState(new Date())
+
   useEffect(() => {
     setIsGridLoading(true);
     setTimeout(() => {
@@ -170,7 +173,7 @@ function App() {
       </Row>
       <Row>
         <Cell size={11}>
-          <Calendar></Calendar>
+          <Calendar date={selectedDate} onChangeMonthHandler={(date) => setMonth(date)} monthToShow={month} typeRender={"month"} />
         </Cell>
       </Row>
     </Wrapper>
