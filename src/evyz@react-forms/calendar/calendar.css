@@ -44,6 +44,10 @@
     color: grey;
 }
 
+.system_calendar>.row>.cell.section_range{
+    background: #4c927a;
+}
+
 .system_calendar>.row>.cell.active {
     background: #10684b;
     color: white;

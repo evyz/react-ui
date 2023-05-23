@@ -13,6 +13,7 @@ import Collapse from "./evyz@react-forms/collapse/collapse";
 import Login from "./Login";
 import Popup from "./evyz@react-forms/popup/popup";
 import Calendar from "./evyz@react-forms/calendar/calendar";
+import { setSelectionRange } from "@testing-library/user-event/dist/utils";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -37,6 +38,7 @@ function App() {
 
   const [month, setMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [range, setRange] = useState([]);
 
   useEffect(() => {
     setIsGridLoading(true);
@@ -96,6 +98,8 @@ function App() {
     return <Wellcome></Wellcome>;
   }
 
+  console.log("range =>", range);
+
   return (
     <Wrapper useCoreConsole={true} isDarkMode={isDarkMode}>
       <Button onClick={() => setPath("/login")}>Авторизация</Button>
@@ -123,9 +127,9 @@ function App() {
             setValue={setName}
             type={"calendarpicker"}
             enableLogs={true}
-            label='Укажите дату'
+            label="Укажите дату"
           />
-          <Input value={password} setValue={setPassword} label='Укажите 123' />
+          <Input value={password} setValue={setPassword} label="Укажите 123" />
         </Cell>
       </Row>
       <Row>
@@ -179,6 +183,24 @@ function App() {
             monthToShow={month}
             typeRender={"month"}
             onChangeDate={(date) => setSelectedDate(date)}
+            rangeDates={range}
+            onChangeRangeData={(date) => {
+              if (range.length > 1) {
+                console.log(1);
+                if (new Date(range[0]) < new Date(date)) {
+                  let newRange = [range[0], date];
+                  setRange(newRange);
+                } else {
+                  let newRange = [date, range[1]];
+                  setRange(newRange);
+                }
+              } else if (range.length === 1) {
+                setRange((prev) => [...prev, date]);
+              } else {
+                setRange([date]);
+              }
+            }}
+            rules={{ enableRage: true }}
           />
         </Cell>
       </Row>

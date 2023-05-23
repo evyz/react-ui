@@ -25,7 +25,10 @@ const Calendar = ({
   onChangeMonthHandler,
   refBookOfMonths,
   date,
+  rangeDates,
   onChangeDate,
+  onChangeRangeData,
+  rules,
 }) => {
   const [matrix, setMatrix] = useState([]);
   const [editMode, setEditMode] = useState({ type: null, value: null });
@@ -114,13 +117,34 @@ const Calendar = ({
     let year = new Date(date).getFullYear(),
       month = new Date(date).getMonth(),
       day = new Date(date).getDate();
+    if (rules?.enableRage) {
+      onChangeRangeData && onChangeRangeData(new Date(year, month, day));
+      return;
+    }
+
     onChangeDate && onChangeDate(new Date(year, month, day));
+  };
+
+  const isInRange = (date) => {
+    if (rangeDates.length > 1) {
+      let first = new Date(rangeDates[0]),
+        second = new Date(rangeDates[1]);
+
+      if (
+        new Date(first).getDate() < new Date(date).getDate() &&
+        new Date(date).getDate() < new Date(second).getDate()
+      ) {
+        return true;
+      }
+      return false;
+    }
+    return false;
   };
 
   return (
     <div className={"system_calendar"}>
       {editMode?.type !== null && (
-        <div className='popup'>
+        <div className="popup">
           {editMode?.type === "year" && (
             <Row style={{ alignItems: "center", justifyContent: "center" }}>
               <Cell
@@ -147,7 +171,7 @@ const Calendar = ({
           )}
         </div>
       )}
-      <div className='picker row'>
+      <div className="picker row">
         <button onClick={() => switchMonthToShow(-1)}>{"<"}</button>
         <div>
           <button>
@@ -164,7 +188,7 @@ const Calendar = ({
       {matrix &&
         matrix.length &&
         matrix.map((row) => (
-          <div className='row'>
+          <div className="row">
             {row &&
               row.length &&
               row.map((item) => (
@@ -176,6 +200,16 @@ const Calendar = ({
                       ? "inactive"
                       : ""
                   } ${
+                    rangeDates.length > 1
+                      ? new Date(rangeDates[0]).getDate() <
+                          new Date(item).getDate() &&
+                        new Date(item).getDate() <
+                          new Date(rangeDates[1]).getDate()
+                        ? "section_range"
+                        : ""
+                      : ""
+                  }
+                  ${
                     new Date(
                       new Date(date).getFullYear(),
                       new Date(date).getMonth(),
