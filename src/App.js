@@ -35,8 +35,8 @@ function App() {
     { id: 1, value: "Купить хлеба" },
   ]);
 
-  const [month, setMonth] = useState(new Date())
-  const [selectedDate, setSelectedDate] = useState(new Date())
+  const [month, setMonth] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   useEffect(() => {
     setIsGridLoading(true);
@@ -123,9 +123,9 @@ function App() {
             setValue={setName}
             type={"calendarpicker"}
             enableLogs={true}
-            label="Укажите дату"
+            label='Укажите дату'
           />
-          <Input value={password} setValue={setPassword} label="Укажите 123" />
+          <Input value={password} setValue={setPassword} label='Укажите 123' />
         </Cell>
       </Row>
       <Row>
@@ -173,7 +173,13 @@ function App() {
       </Row>
       <Row>
         <Cell size={11}>
-          <Calendar date={selectedDate} onChangeMonthHandler={(date) => setMonth(date)} monthToShow={month} typeRender={"month"} />
+          <Calendar
+            date={selectedDate}
+            onChangeMonthHandler={(date) => setMonth(date)}
+            monthToShow={month}
+            typeRender={"month"}
+            onChangeDate={(date) => setSelectedDate(date)}
+          />
         </Cell>
       </Row>
     </Wrapper>
