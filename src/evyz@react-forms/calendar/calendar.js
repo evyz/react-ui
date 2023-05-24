@@ -4,72 +4,104 @@ import { Cell, Row } from "../markup/markup";
 import Input from "../inputs/input";
 import Button from "../buttons/button";
 
-const CalendarCell = ({item, rangeIsEnabled, rangeDates, monthToShow, switchDate,date }) => {
+const CalendarCell = ({
+  item,
+  rangeIsEnabled,
+  rangeDates,
+  monthToShow,
+  switchDate,
+  date,
+}) => {
   return (
     <div
-      date-value={`${new Date(item).getFullYear()}-${new Date(item).getMonth() < 10 ? '0' + new Date(item).getMonth() : new Date(item).getMonth()}-${new Date(item).getDate()}T${new Date(item).getHours()}:${new Date(item).getMinutes()}:${new Date().getSeconds()}`}
+      date-value={`${new Date(item).getFullYear()}-${
+        new Date(item).getMonth() < 10
+          ? "0" + new Date(item).getMonth()
+          : new Date(item).getMonth()
+      }-${new Date(item).getDate()}T${new Date(item).getHours()}:${new Date(
+        item
+      ).getMinutes()}:${new Date().getSeconds()}`}
       onClick={() => switchDate(item)}
       className={`cell ${
-        new Date(item).getMonth() !==
-        new Date(monthToShow).getMonth()
-          ?  "inactive"
+        new Date(
+          new Date().getFullYear(),
+          new Date().getMonth(),
+          new Date().getDate()
+        ).getTime() ===
+        new Date(
+          new Date(item).getFullYear(),
+          new Date(item).getMonth(),
+          new Date(item).getDate()
+        ).getTime()
+          ? "today"
+          : ""
+      } ${
+        new Date(item).getMonth() !== new Date(monthToShow).getMonth()
+          ? "inactive"
           : ""
       } ${
         rangeIsEnabled && rangeDates.length > 1
-          ? new Date(rangeDates[0]).getDate() <
-              new Date(item).getDate() &&
-            new Date(item).getDate() <
-              new Date(rangeDates[1]).getDate()
+          ? new Date(rangeDates[0]).getTime() < new Date(item).getTime() &&
+            new Date(item).getTime() < new Date(rangeDates[1]).getTime()
             ? "section_range"
             : ""
           : ""
-        }  ${
-        rangeIsEnabled ?
-          rangeDates?.length > 1 ?
-        new Date(
-          new Date(rangeDates[0]).getFullYear(),
-          new Date(rangeDates[0]).getMonth(),
-          new Date(rangeDates[0]).getDate()
-        ).getTime() === new Date(
-          new Date(item).getFullYear(),
-          new Date(item).getMonth(),
-          new Date(item).getDate()
-        ).getTime() ? 'active range start' : new Date(
-          new Date(rangeDates[1]).getFullYear(),
-          new Date(rangeDates[1]).getMonth(),
-          new Date(rangeDates[1]).getDate()
-        ).getTime() === new Date(
-          new Date(item).getFullYear(),
-          new Date(item).getMonth(),
-          new Date(item).getDate()
-        ).getTime() ? 'active range end' : '' :  new Date(
-          new Date(date).getFullYear(),
-          new Date(date).getMonth(),
-          new Date(date).getDate()
-        ).getTime() ===
-        new Date(
-          new Date(item).getFullYear(),
-          new Date(item).getMonth(),
-          new Date(item).getDate()
-        ).getTime() 
-        ? !rangeIsEnabled && "active"
+      }  ${
+        rangeIsEnabled
+          ? rangeDates?.length > 1
+            ? new Date(
+                new Date(rangeDates[0]).getFullYear(),
+                new Date(rangeDates[0]).getMonth(),
+                new Date(rangeDates[0]).getDate()
+              ).getTime() ===
+              new Date(
+                new Date(item).getFullYear(),
+                new Date(item).getMonth(),
+                new Date(item).getDate()
+              ).getTime()
+              ? "active range start"
+              : new Date(
+                  new Date(rangeDates[1]).getFullYear(),
+                  new Date(rangeDates[1]).getMonth(),
+                  new Date(rangeDates[1]).getDate()
+                ).getTime() ===
+                new Date(
+                  new Date(item).getFullYear(),
+                  new Date(item).getMonth(),
+                  new Date(item).getDate()
+                ).getTime()
+              ? "active range end"
+              : ""
+            : new Date(
+                new Date(date).getFullYear(),
+                new Date(date).getMonth(),
+                new Date(date).getDate()
+              ).getTime() ===
+              new Date(
+                new Date(item).getFullYear(),
+                new Date(item).getMonth(),
+                new Date(item).getDate()
+              ).getTime()
+            ? !rangeIsEnabled && "active"
+            : ""
+          : new Date(
+              new Date(date).getFullYear(),
+              new Date(date).getMonth(),
+              new Date(date).getDate()
+            ).getTime() ===
+            new Date(
+              new Date(item).getFullYear(),
+              new Date(item).getMonth(),
+              new Date(item).getDate()
+            ).getTime()
+          ? "active"
           : ""
-        : new Date(
-          new Date(date).getFullYear(),
-          new Date(date).getMonth(),
-          new Date(date).getDate()
-        ).getTime() ===
-        new Date(
-          new Date(item).getFullYear(),
-          new Date(item).getMonth(),
-          new Date(item).getDate()
-        ).getTime() ?'active':  ''
       }`}
     >
       {item && new Date(item).getDate()}
     </div>
-)
-} 
+  );
+};
 
 const refBookWithMonth = [
   "Январь",
@@ -86,9 +118,7 @@ const refBookWithMonth = [
   "Декабь",
 ];
 
-const refBookWithDaysOfWeekSystem = [
-  "ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"
-]
+const refBookWithDaysOfWeekSystem = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"];
 
 const Calendar = ({
   monthToShow,
@@ -106,14 +136,18 @@ const Calendar = ({
   const [editMode, setEditMode] = useState({ type: null, value: null });
   const [value, setValue] = useState("");
 
-  const [isInitedMatrix, setIsInitedMatrix] = useState(false)
+  const [isInitedMatrix, setIsInitedMatrix] = useState(false);
 
   useEffect(() => {
-    setIsInitedMatrix(false)
+    setIsInitedMatrix(false);
     if (typeRender === "month") {
       let dates = [];
 
-      let checkDate = new Date(new Date(monthToShow).getFullYear(), new Date(monthToShow).getMonth(), new Date(monthToShow).getDate()),
+      let checkDate = new Date(
+          new Date(monthToShow).getFullYear(),
+          new Date(monthToShow).getMonth(),
+          new Date(monthToShow).getDate()
+        ),
         startOf = new Date(checkDate.getFullYear(), checkDate.getMonth(), 1),
         endOf = new Date(checkDate.getFullYear(), checkDate.getMonth() + 1, 0);
 
@@ -176,7 +210,7 @@ const Calendar = ({
       setMatrix(rows);
     }
 
-    setIsInitedMatrix(true)
+    setIsInitedMatrix(true);
   }, [monthToShow, typeRender]);
 
   const switchMonthToShow = (moveTo, type) => {
@@ -202,12 +236,12 @@ const Calendar = ({
     onChangeDate && onChangeDate(new Date(year, month, day));
   };
 
-  console.log('rules', rules)
+  console.log("rules", rules);
 
   return (
     <div className={"system_calendar"}>
       {editMode?.type !== null && (
-        <div className="popup">
+        <div className='popup'>
           {editMode?.type === "year" && (
             <Row style={{ alignItems: "center", justifyContent: "center" }}>
               <Cell
@@ -234,7 +268,7 @@ const Calendar = ({
           )}
         </div>
       )}
-      <div className="picker row">
+      <div className='picker row'>
         <button onClick={() => switchMonthToShow(-1)}>{"<"}</button>
         <div>
           <button>
@@ -248,21 +282,33 @@ const Calendar = ({
         </div>
         <button onClick={() => switchMonthToShow(1)}>{">"}</button>
       </div>
-      <div className="row days_of_week">
-           {refBookOfDaysOfWeek && refBookOfDaysOfWeek.length > 0 && refBookOfDaysOfWeek.length < 8 ? <></> : 
-        refBookWithDaysOfWeekSystem.map(day => 
-          <div className="cell">{day}</div>
-        )
-      }
+      <div className='row days_of_week'>
+        {refBookOfDaysOfWeek &&
+        refBookOfDaysOfWeek.length > 0 &&
+        refBookOfDaysOfWeek.length < 8 ? (
+          <></>
+        ) : (
+          refBookWithDaysOfWeekSystem.map((day) => (
+            <div className='cell'>{day}</div>
+          ))
+        )}
       </div>
-      {isInitedMatrix && matrix &&
+      {isInitedMatrix &&
+        matrix &&
         matrix.length &&
         matrix.map((row) => (
-          <div className="row">
+          <div className='row'>
             {row &&
               row.length &&
-              row.map((item) => ( 
-                  <CalendarCell switchDate={switchDate} date={date} item={item} rangeDates={rangeDates} rangeIsEnabled={rules?.enableRage} monthToShow={monthToShow} />
+              row.map((item) => (
+                <CalendarCell
+                  switchDate={switchDate}
+                  date={date}
+                  item={item}
+                  rangeDates={rangeDates}
+                  rangeIsEnabled={rules?.enableRage}
+                  monthToShow={monthToShow}
+                />
               ))}
           </div>
         ))}
