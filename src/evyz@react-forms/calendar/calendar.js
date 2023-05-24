@@ -4,6 +4,73 @@ import { Cell, Row } from "../markup/markup";
 import Input from "../inputs/input";
 import Button from "../buttons/button";
 
+const CalendarCell = ({item, rangeIsEnabled, rangeDates, monthToShow, switchDate,date }) => {
+  return (
+    <div
+      date-value={`${new Date(item).getFullYear()}-${new Date(item).getMonth() < 10 ? '0' + new Date(item).getMonth() : new Date(item).getMonth()}-${new Date(item).getDate()}T${new Date(item).getHours()}:${new Date(item).getMinutes()}:${new Date().getSeconds()}`}
+      onClick={() => switchDate(item)}
+      className={`cell ${
+        new Date(item).getMonth() !==
+        new Date(monthToShow).getMonth()
+          ?  "inactive"
+          : ""
+      } ${
+        rangeIsEnabled && rangeDates.length > 1
+          ? new Date(rangeDates[0]).getDate() <
+              new Date(item).getDate() &&
+            new Date(item).getDate() <
+              new Date(rangeDates[1]).getDate()
+            ? "section_range"
+            : ""
+          : ""
+        }  ${
+        rangeIsEnabled ?
+          rangeDates?.length > 1 ?
+        new Date(
+          new Date(rangeDates[0]).getFullYear(),
+          new Date(rangeDates[0]).getMonth(),
+          new Date(rangeDates[0]).getDate()
+        ).getTime() === new Date(
+          new Date(item).getFullYear(),
+          new Date(item).getMonth(),
+          new Date(item).getDate()
+        ).getTime() ? 'active range start' : new Date(
+          new Date(rangeDates[1]).getFullYear(),
+          new Date(rangeDates[1]).getMonth(),
+          new Date(rangeDates[1]).getDate()
+        ).getTime() === new Date(
+          new Date(item).getFullYear(),
+          new Date(item).getMonth(),
+          new Date(item).getDate()
+        ).getTime() ? 'active range end' : '' :  new Date(
+          new Date(date).getFullYear(),
+          new Date(date).getMonth(),
+          new Date(date).getDate()
+        ).getTime() ===
+        new Date(
+          new Date(item).getFullYear(),
+          new Date(item).getMonth(),
+          new Date(item).getDate()
+        ).getTime() 
+        ? !rangeIsEnabled && "active"
+          : ""
+        : new Date(
+          new Date(date).getFullYear(),
+          new Date(date).getMonth(),
+          new Date(date).getDate()
+        ).getTime() ===
+        new Date(
+          new Date(item).getFullYear(),
+          new Date(item).getMonth(),
+          new Date(item).getDate()
+        ).getTime() ?'active':  ''
+      }`}
+    >
+      {item && new Date(item).getDate()}
+    </div>
+)
+} 
+
 const refBookWithMonth = [
   "Январь",
   "Февраль",
@@ -19,11 +86,16 @@ const refBookWithMonth = [
   "Декабь",
 ];
 
+const refBookWithDaysOfWeekSystem = [
+  "ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"
+]
+
 const Calendar = ({
   monthToShow,
   typeRender,
   onChangeMonthHandler,
   refBookOfMonths,
+  refBookOfDaysOfWeek,
   date,
   rangeDates,
   onChangeDate,
@@ -34,7 +106,10 @@ const Calendar = ({
   const [editMode, setEditMode] = useState({ type: null, value: null });
   const [value, setValue] = useState("");
 
+  const [isInitedMatrix, setIsInitedMatrix] = useState(false)
+
   useEffect(() => {
+    setIsInitedMatrix(false)
     if (typeRender === "month") {
       let dates = [];
 
@@ -100,7 +175,9 @@ const Calendar = ({
 
       setMatrix(rows);
     }
-  }, [monthToShow]);
+
+    setIsInitedMatrix(true)
+  }, [monthToShow, typeRender]);
 
   const switchMonthToShow = (moveTo, type) => {
     type = type || "month";
@@ -125,21 +202,7 @@ const Calendar = ({
     onChangeDate && onChangeDate(new Date(year, month, day));
   };
 
-  const isInRange = (date) => {
-    if (rangeDates.length > 1) {
-      let first = new Date(rangeDates[0]),
-        second = new Date(rangeDates[1]);
-
-      if (
-        new Date(first).getDate() < new Date(date).getDate() &&
-        new Date(date).getDate() < new Date(second).getDate()
-      ) {
-        return true;
-      }
-      return false;
-    }
-    return false;
-  };
+  console.log('rules', rules)
 
   return (
     <div className={"system_calendar"}>
@@ -185,64 +248,21 @@ const Calendar = ({
         </div>
         <button onClick={() => switchMonthToShow(1)}>{">"}</button>
       </div>
-      {matrix &&
+      <div className="row days_of_week">
+           {refBookOfDaysOfWeek && refBookOfDaysOfWeek.length > 0 && refBookOfDaysOfWeek.length < 8 ? <></> : 
+        refBookWithDaysOfWeekSystem.map(day => 
+          <div className="cell">{day}</div>
+        )
+      }
+      </div>
+      {isInitedMatrix && matrix &&
         matrix.length &&
         matrix.map((row) => (
           <div className="row">
             {row &&
               row.length &&
-              row.map((item) => (
-                <div
-                  date-value={`${new Date(item).getFullYear()}-${new Date(item).getMonth() < 10 ? '0' + new Date(item).getMonth() : new Date(item).getMonth()}-${new Date(item).getDate()}T${new Date(item).getHours()}:${new Date(item).getMinutes()}:${new Date().getSeconds()}`}
-                  onClick={() => switchDate(item)}
-                  className={`cell ${
-                    new Date(item).getMonth() !==
-                    new Date(monthToShow).getMonth()
-                      ? "inactive"
-                      : ""
-                  } ${
-                    rangeDates.length > 1
-                      ? new Date(rangeDates[0]).getDate() <
-                          new Date(item).getDate() &&
-                        new Date(item).getDate() <
-                          new Date(rangeDates[1]).getDate()
-                        ? "section_range"
-                        : ""
-                      : ""
-                    }  ${
-                    isInRange ? rangeDates.length > 1 &&
-                    new Date(
-                      new Date(rangeDates[0]).getFullYear(),
-                      new Date(rangeDates[0]).getMonth(),
-                      new Date(rangeDates[0]).getDate()
-                    ).getTime() === new Date(
-                      new Date(item).getFullYear(),
-                      new Date(item).getMonth(),
-                      new Date(item).getDate()
-                    ).getTime() ? 'active range start' : new Date(
-                      new Date(rangeDates[1]).getFullYear(),
-                      new Date(rangeDates[1]).getMonth(),
-                      new Date(rangeDates[1]).getDate()
-                    ).getTime() === new Date(
-                      new Date(item).getFullYear(),
-                      new Date(item).getMonth(),
-                      new Date(item).getDate()
-                    ).getTime() ? 'active range end' : '' :   new Date(
-                      new Date(date).getFullYear(),
-                      new Date(date).getMonth(),
-                      new Date(date).getDate()
-                    ).getTime() ===
-                    new Date(
-                      new Date(item).getFullYear(),
-                      new Date(item).getMonth(),
-                      new Date(item).getDate()
-                    ).getTime()
-                      ? "active"
-                      : ""
-                  }`}
-                >
-                  {item && new Date(item).getDate()}
-                </div>
+              row.map((item) => ( 
+                  <CalendarCell switchDate={switchDate} date={date} item={item} rangeDates={rangeDates} rangeIsEnabled={rules?.enableRage} monthToShow={monthToShow} />
               ))}
           </div>
         ))}

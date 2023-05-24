@@ -101,3 +101,7 @@
 
     background: #4c927a;
 }
+
+.system_calendar>.row.days_of_week>.cell {
+    background: #c7dbd4;
+}

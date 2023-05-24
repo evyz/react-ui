@@ -2,11 +2,12 @@ import { useEffect, useState } from "react"
 import { Cell, Row } from "./markup/markup"
 import Wrapper from "./wrapper/wrapper"
 import Input from "./inputs/input"
-import { Checkbox } from "./checkbox/checkbox"
+import { Checkbox, SwitchBox } from "./checkbox/checkbox"
 import Fieldset from "./fieldset/fieldset"
 import Button from "./buttons/button"
 import Dropdown from "./dropdown/dropdown"
 import Collapse from "./collapse/collapse"
+import Calendar from "./calendar/calendar"
 
 
 const CheckboxSlide = () => {
@@ -170,6 +171,62 @@ const ButtonSlide = () => {
     )
 }
 
+const CalendarSlide = () => {
+
+    const [monthToShow, setMonthToShow] = useState(new Date())
+    const [date, setDate] = useState(new Date())
+    const [dates, setDates] = useState([])
+
+
+    const [rangeOptions, setRangeOptions] = useState({
+        enableRange: false
+    })
+
+    return (
+        <Row>
+            <Cell size={11}>
+                <h1>Widget <span style={{ color: `var(--main-accent-text-color)`,  }}>Calendar <i style={{textDecoration: 'underline', cursor: 'help'}}>#</i></span></h1>
+                <desc>Товарищи! постоянное информационно-пропагандистское обеспечение нашей деятельности в значительной степени обуславливает создание модели развития. Задача организации, в особенности же постоянный количественный рост и сфера нашей активности влечет за собой процесс внедрения и модернизации систем массового участия. </desc>
+                <hr />
+                <Row>
+                    <Cell size={5}>
+                    <Fieldset cellStyles={{ minHeight: 200, display: 'flex', flexDirection: 'column',alignItems: 'center', justifyContent: 'center' }} label={"Result"}>
+                            <Calendar rangeDates={dates} onChangeRangeData={(date) => {
+                                 if (dates.length > 1) {
+                                setDates([])
+                            } else {
+                                if (dates.length === 1) {
+                                let newArr = []
+                                if (new Date(dates[0]) < new Date(date)) {
+                                    newArr = [dates[0], date]
+                                } else {
+                                    newArr= [ date, dates[0]]
+                                }
+                                setDates(newArr)
+                                } else {
+                                setDates([date])
+                                }
+                            }
+                        }} rules={{enableRage: rangeOptions?.enableRange}} date={date} onChangeDate={date => setDate(date)} typeRender={"month"} monthToShow={monthToShow} onChangeMonthHandler={(date) => setMonthToShow(date)} />
+                    </Fieldset>
+                    </Cell>
+                    <Cell size={5}>
+                        <Input value={date} />
+                        <Fieldset wrapperStyles={{marginTop: 30}} label={"Range rules"}>
+                         {Object.keys(rangeOptions).map(key =>
+                            typeof rangeOptions[key] === 'boolean' ? <SwitchBox labelOptions={{isCantSelect: true}} value={rangeOptions[key]} onClick={() => {
+                                let newObj = new Object()
+                                newObj[key] = !rangeOptions[key]
+                                setRangeOptions(prev => {return {...prev,  ...newObj}})
+                            }}>{key}</SwitchBox>     : <></>
+                            )}
+                            </Fieldset>
+                    </Cell>
+                </Row>
+            </Cell>
+        </Row>
+    )
+}
 
 const Wellcome = () => {
 
@@ -177,7 +234,8 @@ const Wellcome = () => {
         <CheckboxSlide></CheckboxSlide>,
         <InputSlide></InputSlide>,
         <CollapseSlide />,
-        <ButtonSlide />
+        <ButtonSlide />,
+        <CalendarSlide />
     ])
 
     const [activeComponent, setActiveComponent] = useState(0)

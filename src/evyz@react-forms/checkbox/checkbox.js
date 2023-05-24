@@ -25,12 +25,13 @@ function Checkbox({ value, setValue, onClick, label, children, labelOptions, lab
   );
 }
 
-function SwitchBox({ value, setValue, label, children }) {
+function SwitchBox({ value, setValue, label, children, onClick }) {
   return (
        <div
       className='system_switchbox'
       onClick={() => {
         setValue && setValue(!value);
+         onClick && onClick()
       }}
    >
     <div className={`box ${value && "active"}`}></div>
