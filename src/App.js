@@ -186,18 +186,20 @@ function App() {
             rangeDates={range}
             onChangeRangeData={(date) => {
               if (range.length > 1) {
-                console.log(1);
-                if (new Date(range[0]) < new Date(date)) {
-                  let newRange = [range[0], date];
-                  setRange(newRange);
-                } else {
-                  let newRange = [date, range[1]];
-                  setRange(newRange);
-                }
-              } else if (range.length === 1) {
-                setRange((prev) => [...prev, date]);
+                setRange([])
               } else {
-                setRange([date]);
+                if (range.length === 1) {
+                  let newArr = []
+                  if (new Date(range[0]) < new Date(date)) {
+                    newArr = [range[0], date]
+                  } else {
+                    newArr= [ date, range[0]]
+                  }
+                  setRange(newArr)
+                  // setRange()
+                } else {
+                  setRange([date])
+                }
               }
             }}
             rules={{ enableRage: true }}

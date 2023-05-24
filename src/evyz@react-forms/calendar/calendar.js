@@ -38,7 +38,7 @@ const Calendar = ({
     if (typeRender === "month") {
       let dates = [];
 
-      let checkDate = new Date(monthToShow),
+      let checkDate = new Date(new Date(monthToShow).getFullYear(), new Date(monthToShow).getMonth(), new Date(monthToShow).getDate()),
         startOf = new Date(checkDate.getFullYear(), checkDate.getMonth(), 1),
         endOf = new Date(checkDate.getFullYear(), checkDate.getMonth() + 1, 0);
 
@@ -193,6 +193,7 @@ const Calendar = ({
               row.length &&
               row.map((item) => (
                 <div
+                  date-value={`${new Date(item).getFullYear()}-${new Date(item).getMonth() < 10 ? '0' + new Date(item).getMonth() : new Date(item).getMonth()}-${new Date(item).getDate()}T${new Date(item).getHours()}:${new Date(item).getMinutes()}:${new Date().getSeconds()}`}
                   onClick={() => switchDate(item)}
                   className={`cell ${
                     new Date(item).getMonth() !==
@@ -208,9 +209,25 @@ const Calendar = ({
                         ? "section_range"
                         : ""
                       : ""
-                  }
-                  ${
+                    }  ${
+                    isInRange ? rangeDates.length > 1 &&
                     new Date(
+                      new Date(rangeDates[0]).getFullYear(),
+                      new Date(rangeDates[0]).getMonth(),
+                      new Date(rangeDates[0]).getDate()
+                    ).getTime() === new Date(
+                      new Date(item).getFullYear(),
+                      new Date(item).getMonth(),
+                      new Date(item).getDate()
+                    ).getTime() ? 'active range start' : new Date(
+                      new Date(rangeDates[1]).getFullYear(),
+                      new Date(rangeDates[1]).getMonth(),
+                      new Date(rangeDates[1]).getDate()
+                    ).getTime() === new Date(
+                      new Date(item).getFullYear(),
+                      new Date(item).getMonth(),
+                      new Date(item).getDate()
+                    ).getTime() ? 'active range end' : '' :   new Date(
                       new Date(date).getFullYear(),
                       new Date(date).getMonth(),
                       new Date(date).getDate()
