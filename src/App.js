@@ -14,6 +14,7 @@ import Login from "./Login";
 import Popup from "./evyz@react-forms/popup/popup";
 import Calendar from "./evyz@react-forms/calendar/calendar";
 import { setSelectionRange } from "@testing-library/user-event/dist/utils";
+import Paggination from "./evyz@react-forms/paggination/paggination";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -206,6 +207,9 @@ function App() {
           />
         </Cell>
       </Row>
+
+      <Paggination></Paggination>
+        
     </Wrapper>
   );
 }
