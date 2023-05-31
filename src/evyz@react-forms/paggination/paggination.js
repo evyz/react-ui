@@ -3,12 +3,13 @@ import { Cell, Row } from "../markup/markup"
 import { Checkbox } from "../checkbox/checkbox"
 import Button from "../buttons/button"
 
-const Paggination = () => {
+const Paggination = ({rules }) => {
 
-    const [count, setCount] = useState(101)
+    const [count, setCount] = useState(10)
     const [limit, setLimit] = useState(20)
     const [page, setPage] = useState(1)
     const [maxPage, setMaxPage] = useState(1)
+    const [pageButtons, setPageButtons] = useState([])
 
     const [limits, setLimits] = useState([
         1,
@@ -22,6 +23,9 @@ const Paggination = () => {
         if (count < limit) {
             return setMaxPage(1) // need to refactor
         }
+
+        console.log(count, limit)
+
         if (count % limit !== 0) {
             setMaxPage(count / limit + 1)            
         } else {
@@ -36,11 +40,13 @@ const Paggination = () => {
                     <Checkbox value={limit === item} label={String(item)} onClick={() => setLimit(item)} />
                 )}
             </Cell>
-            <Cell size={3}>
-                {/* {maxPage > 5 ? 
-                    []
-                } */}
-                <Button>{page}</Button>
+            <Cell size={4}>
+                {rules?.enablePages ?
+                    <Row></Row>
+                   :  <Row>
+                        <Button onClick={() => setPage(page - 1)} customValidationToDisable={page-1 > 0 ? true : false}>{"<"}</Button>
+                        <Button onClick={() => setPage(page + 1)} customValidationToDisable={page < maxPage ? true : false}>{">"}</Button>
+                    </Row> }
             </Cell>
         </Row>
     )
