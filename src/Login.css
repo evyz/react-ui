@@ -1,0 +1,27 @@
+.system_mode-blue {
+  --main-bg-color: #f5f5f5;
+  --main-cell-color: #fffefe;
+
+  --main-text-color: #666666;
+
+  --main-input-background: #f5f5f5;
+  --main-input-background-focus: #f3f1f1;
+  --main-input-background-hover: #f7f7f7;
+  --main-input-label-color: #a0a0a0;
+  --main-input-color: #363636;
+  --main-input-border: 1px solid var(--main-input-background);
+
+  --main-popup-background: rgba(0, 0, 0, 0.9);
+  --main-popup-content-background: #222222;
+
+  --main-collapse-button-background: #363636;
+  --main-collapse-button-background-active: #444444;
+  --main-collapse-div-background: #363636;
+  --main-collapse-label-color: #cdd1d6;
+  --main-collapse-label-active: #dadde2;
+
+  --main-button-background: #089fe0;
+  --main-button-background-hover: #048dc7;
+  --main-button-background-active: #40bdf3;
+  --main-button-background-inactive: #aaaaaa;
+}
