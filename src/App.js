@@ -6,6 +6,7 @@ import Input from "./evyz@react-forms/inputs/input";
 import Button from "./evyz@react-forms/buttons/button";
 import Grid from "./evyz@react-forms/grid/grid";
 import Dropdown from "./evyz@react-forms/dropdown/dropdown";
+import Tabcontainer from "./evyz@react-forms/tabcontainer/tabcontainer";
 import FullSizeLoader from "./evyz@react-forms/loaders/fullSizeLoader";
 import { Checkbox, SwitchBox } from "./evyz@react-forms/checkbox/checkbox";
 import Wellcome from "./evyz@react-forms/Wellcome";
@@ -36,6 +37,9 @@ function App() {
     { id: 0, value: "Заняться спортом" },
     { id: 1, value: "Купить хлеба" },
   ]);
+  const [currOption, setCurrOption] = useState(null);
+  const [tabOptions, setTabOptions] = useState(null);
+  console.log(currOption);
 
   const [month, setMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -153,6 +157,16 @@ function App() {
           ></Grid>
         </Cell>
       </Row>
+      <Row style={{ width: "300px" }}>
+        <Dropdown
+          currOption={currOption}
+          setCurrOption={setCurrOption}
+          options={options}
+          defaultValue={`Things my Войтенко does`}
+        />
+      </Row>
+      <Row style={{ marginTop: "20px" }}>
+        <Tabcontainer setTabOptions={setTabOptions} />
       <Row>
         <Cell size={11}>
           <SwitchBox value={isSelected} setValue={setIsSelected}>

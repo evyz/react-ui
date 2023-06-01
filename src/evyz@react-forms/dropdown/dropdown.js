@@ -4,6 +4,9 @@ import "./dropdown.css";
 const DropdownItem = ({ option, setOption, len, onClickItem }) => {
   return (
     <div
+
+      onClick={() => setOption(option)}
+      className="system_dropdown_option dropdown_value"
       onClick={() => {
         onClickItem && onClickItem()
         setOption(option)
@@ -18,30 +21,33 @@ const DropdownItem = ({ option, setOption, len, onClickItem }) => {
   );
 };
 
-const Dropdown = ({ options, defaultValue, rules, label, styleRules, onClickHandler }) => {
+const Dropdown = ({ currOption, setCurrOption, options, defaultValue }) => {
   const [isOpened, setIsOpened] = useState(false);
-  const [currOption, setCurrOption] = useState(null);
-
-  useEffect(() => {
-    if (rules?.closeAfterSomeChanges) {
-      setIsOpened(false);
-    }
-  }, [currOption, rules]);
 
   return (
-    <div
-      className={`system_dropdown_wrapper`}
-      style={{ display: "flex", flexDirection: "column" }}
-    >
+    <div className={`dropdown ${isOpened ? "dropdown_opened" : ""}`}>
       <div
-        style={{
-          borderBottom: isOpened ? "none" : "2px solid gray",
-          borderBottomLeftRadius: isOpened ? "0px" : "20px",
-          borderBottomRightRadius: isOpened ? "0px" : "20px",
-          border: "2px solid gray",
-        }}
-        className={`system_dropdown`}
+        className="dropdown_placeholder"
+        onClick={() => setIsOpened(!isOpened)}
       >
+        <span>{currOption === null ? defaultValue : currOption.value}</span>
+        <button
+          className={`dropdown_toggle ${
+            isOpened ? "dropdown_toggle_active" : ""
+          } `}
+        ></button>
+      </div>
+      <div
+        style={{ visibility: isOpened ? "initial" : "hidden" }}
+        className="dropdown_seperator"
+      />
+      <div
+        style={{ display: isOpened ? "flex" : "none" }}
+        className="dropdown_values_wrapper"
+      >
+        {options.map((option) => (
+          <DropdownItem option={option} setOption={setCurrOption} />
+        ))}
         <div
           className={`system_dropdown_ceiling`}
           onClick={() => setIsOpened(!isOpened)}
