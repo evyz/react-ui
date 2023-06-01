@@ -5,74 +5,40 @@ const DropdownItem = ({ option, setOption, len }) => {
   return (
     <div
       onClick={() => setOption(option)}
-      style={{
-        borderBottom: len - 1 === option.id ? "none" : "1px solid gray",
-      }}
-      className="system_dropdown_option"
+      className="system_dropdown_option dropdown_value"
     >
       {option.value}
     </div>
   );
 };
 
-const Dropdown = ({ options, defaultValue }) => {
+const Dropdown = ({ currOption, setCurrOption, options, defaultValue }) => {
   const [isOpened, setIsOpened] = useState(false);
-  const [currOption, setCurrOption] = useState(null);
-  console.log(currOption);
+
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div className={`dropdown ${isOpened ? "dropdown_opened" : ""}`}>
       <div
-        style={{
-          borderBottom: isOpened ? "none" : "2px solid gray",
-          borderBottomLeftRadius: isOpened ? "0px" : "20px",
-          borderBottomRightRadius: isOpened ? "0px" : "20px",
-          border: "2px solid gray",
-        }}
-        className={`system_dropdown`}
+        className="dropdown_placeholder"
+        onClick={() => setIsOpened(!isOpened)}
       >
-        <div
-          className={`system_dropdown_ceiling`}
-          onClick={() => setIsOpened(!isOpened)}
-        >
-          <span>{currOption === null ? defaultValue : currOption.value}</span>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <div
-              style={{ zIndex: 2, cursor: "pointer" }}
-              onClick={() => setCurrOption(null)}
-            >
-              x
-            </div>
-            <div
-              style={{ marginLeft: 10 }}
-              className={`system_dropdown_arrow ${
-                isOpened ? `arrow_up` : `arrow_down`
-              }`}
-            />
-          </div>
-        </div>
+        <span>{currOption === null ? defaultValue : currOption.value}</span>
+        <button
+          className={`dropdown_toggle ${
+            isOpened ? "dropdown_toggle_active" : ""
+          } `}
+        ></button>
       </div>
       <div
-        style={{
-          display: isOpened ? "" : "none",
-          border: "2px solid gray",
-        }}
-        className={`system_dropdown_options`}
+        style={{ visibility: isOpened ? "initial" : "hidden" }}
+        className="dropdown_seperator"
+      />
+      <div
+        style={{ display: isOpened ? "flex" : "none" }}
+        className="dropdown_values_wrapper"
       >
-        <div className={`system_dropdown_options_wrapper`}>
-          {options.map((option) => (
-            <DropdownItem
-              key={option.id}
-              option={option}
-              setOption={setCurrOption}
-              len={options.length}
-            />
-          ))}
-        </div>
+        {options.map((option) => (
+          <DropdownItem option={option} setOption={setCurrOption} />
+        ))}
       </div>
     </div>
   );

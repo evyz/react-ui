@@ -6,6 +6,7 @@ import Input from "./evyz@react-forms/inputs/input";
 import Button from "./evyz@react-forms/buttons/button";
 import Grid from "./evyz@react-forms/grid/grid";
 import Dropdown from "./evyz@react-forms/dropdown/dropdown";
+import Tabcontainer from "./evyz@react-forms/tabcontainer/tabcontainer";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -27,6 +28,9 @@ function App() {
     { id: 4, value: "Яйца помыт" },
     { id: 5, value: "Гречка навалит" },
   ]);
+  const [currOption, setCurrOption] = useState(null);
+  const [tabOptions, setTabOptions] = useState(null);
+  console.log(currOption);
 
   useEffect(() => {
     setIsLoading(true);
@@ -130,8 +134,16 @@ function App() {
           ></Grid>
         </Cell>
       </Row>
-      <Row>
-        <Dropdown options={options} defaultValue={`Things my Войтенко does`} />
+      <Row style={{ width: "300px" }}>
+        <Dropdown
+          currOption={currOption}
+          setCurrOption={setCurrOption}
+          options={options}
+          defaultValue={`Things my Войтенко does`}
+        />
+      </Row>
+      <Row style={{ marginTop: "20px" }}>
+        <Tabcontainer setTabOptions={setTabOptions} />
       </Row>
     </Wrapper>
   );

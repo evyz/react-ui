@@ -1,0 +1,22 @@
+.system_tabcont {
+  display: flex;
+  flex-direction: column;
+}
+
+.system_tabcont_folders {
+  display: flex;
+}
+
+.system_tabcont_folder {
+  background-color: lightblue;
+  padding: 10px 10px;
+  margin-right: 5px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  cursor: pointer;
+}
+
+.system_tabcont_pages_container {
+  padding: 10px 15px;
+  background-color: white;
+}
