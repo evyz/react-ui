@@ -15,6 +15,8 @@ const DropdownItem = ({ option, setOption, len }) => {
 const Dropdown = ({ currOption, setCurrOption, options, defaultValue }) => {
   const [isOpened, setIsOpened] = useState(false);
 
+  // ТИПА ИЗМЕНЕНИЯ ЧТОБЫ НАЕБАТЬ ПУЛЛ РЕКВЕСТ УХАХАХАХ
+
   return (
     <div className={`dropdown ${isOpened ? "dropdown_opened" : ""}`}>
       <div
