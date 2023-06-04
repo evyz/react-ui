@@ -8,13 +8,15 @@
   overflow: hidden;
 
   transition: 0.3s all;
+
+  margin: 5px 0;
 }
 
 .system_collapse.disabled {
   height: 40px;
 }
 
-.system_collapse > button {
+.system_collapse>button {
   width: 100%;
   position: absolute;
 
@@ -32,24 +34,29 @@
   outline: none;
 }
 
-.system_collapse > button:active {
+.system_collapse>button:active {
   background: var(--main-collapse-button-background-active);
 }
-.system_collapse > button:active > label {
+
+.system_collapse>button:active>label {
   color: var(--main-collapse-label-active);
 }
 
-.system_collapse > button::after {
-  position: absolute;
-  content: "Закрыть";
-  right: 12px;
-}
-
-.system_collapse.disabled > button::after {
-  content: "Открыть";
-}
-
-.system_collapse > div {
+.system_collapse>div {
   padding: 12px;
   background: var(--main-collapse-div-background);
+}
+
+.system_collapse>button>.icon {
+  width: 32px;
+  height: 32px;
+
+  position: absolute;
+  right: 12px;
+
+  transform: rotate(180deg);
+}
+
+.system_collapse>button>.icon.disabled {
+  transform: rotate(0deg);
 }

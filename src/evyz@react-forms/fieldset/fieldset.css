@@ -1,0 +1,17 @@
+.system_fieldset>.system_cell>label {
+    position: absolute;
+    top: calc(-12px - (15px / 2));
+    left: 12px;
+
+    font-size: 24px;
+
+    background: var(--main-cell-color);
+    padding: 0 6px;
+
+    font-weight: bold;
+}
+
+.system_fieldset>.system_cell {
+    padding-top: 15px;
+    position: relative;
+}

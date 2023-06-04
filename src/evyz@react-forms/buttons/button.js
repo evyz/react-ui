@@ -11,6 +11,8 @@ const Button = ({
   useLocalLoader,
   isLoading,
   setIsLoading,
+  customValidationToDisable,
+  styles
 }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLocalLoader, setIsLocalLoader] = useState(false);
@@ -42,13 +44,21 @@ const Button = ({
   const buttonHandler = () => {
     if (useLocalLoader) {
       setIsLocalLoader(true);
-      onClick().then(() => {
+      onClick && onClick().then(() => {
         setIsLocalLoader(false);
       });
       return;
     }
-    onClick();
+    onClick && onClick();
   };
+
+  useEffect(() => {
+    if (typeof customValidationToDisable === 'boolean') {
+      setIsDisabled(!customValidationToDisable)
+    } else {
+      console.error('customValidationToDisable is unvalidated. typeof must be boolean')
+    }
+  }, [customValidationToDisable])
 
   return (
     <button
@@ -60,6 +70,7 @@ const Button = ({
         "system_button " + (isLoading || isLocalLoader ? "isloading" : "")
       }
       onClick={buttonHandler}
+      style={{...styles}}
     >
       {(isLocalLoader || isLoading) && (
         <div className='system_loader'>
