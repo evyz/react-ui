@@ -39,7 +39,10 @@ function App() {
   ]);
   const [currOption, setCurrOption] = useState(null);
   const [tabOptions, setTabOptions] = useState(null);
-  console.log(currOption);
+
+  const onClickHandler = (value) => {
+    return value;
+  };
 
   const [month, setMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -122,6 +125,9 @@ function App() {
             options={options}
             defaultValue={`Нужно выполнить:`}
             label={"Укажите цель:"}
+            currOption={currOption}
+            setCurrOption={setCurrOption}
+            onClickHandler={onClickHandler}
           />
         </Cell>
       </Row>
@@ -157,16 +163,10 @@ function App() {
           ></Grid>
         </Cell>
       </Row>
-      <Row style={{ width: "300px" }}>
-        <Dropdown
-          currOption={currOption}
-          setCurrOption={setCurrOption}
-          options={options}
-          defaultValue={`Things my Войтенко does`}
-        />
-      </Row>
+
       <Row style={{ marginTop: "20px" }}>
         <Tabcontainer setTabOptions={setTabOptions} />
+      </Row>
       <Row>
         <Cell size={11}>
           <SwitchBox value={isSelected} setValue={setIsSelected}>
@@ -201,19 +201,19 @@ function App() {
             rangeDates={range}
             onChangeRangeData={(date) => {
               if (range.length > 1) {
-                setRange([])
+                setRange([]);
               } else {
                 if (range.length === 1) {
-                  let newArr = []
+                  let newArr = [];
                   if (new Date(range[0]) < new Date(date)) {
-                    newArr = [range[0], date]
+                    newArr = [range[0], date];
                   } else {
-                    newArr= [ date, range[0]]
+                    newArr = [date, range[0]];
                   }
-                  setRange(newArr)
+                  setRange(newArr);
                   // setRange()
                 } else {
-                  setRange([date])
+                  setRange([date]);
                 }
               }
             }}
@@ -223,7 +223,6 @@ function App() {
       </Row>
 
       <Paggination></Paggination>
-        
     </Wrapper>
   );
 }
