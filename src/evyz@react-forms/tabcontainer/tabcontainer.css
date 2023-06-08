@@ -1,3 +1,11 @@
+.darkness-bg.system_tabcont {
+  --main-tabcontainer-folder-background-active: #f0f0f0;
+}
+
+.darkness-bg.system_tabcont .system_tabcont_pages_container {
+  background: #f0f0f0;
+}
+
 .system_tabcont {
   width: 100%;
   display: flex;

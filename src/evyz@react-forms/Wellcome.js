@@ -8,6 +8,7 @@ import Button from "./buttons/button.tsx";
 import Collapse from "./collapse/collapse";
 import Calendar from "./calendar/calendar";
 import Popup from "./popup/popup";
+import Tabcontainer from "./tabcontainer/tabcontainer";
 
 const CheckboxSlide = () => {
   const [value, setValue] = useState(true);
@@ -454,6 +455,60 @@ const PopupSlide = () => {
   );
 }
 
+const TabContainerSlide = () => {
+
+  const [chapters, setChapters] = useState([])
+
+  useEffect(() => {
+    setChapters([
+      {id: 1, title: "Первый раздел", elem: <Row><Cell size={11}><Button>Click me</Button></Cell></Row>},
+      {id: 2, title: "Второй раздел", elem: <Row><Cell size={11}><h1>Второй раздел</h1></Cell></Row>},
+    ])
+  }, [])
+
+  return (
+      <Row>
+      <Cell size={11}>
+        <h1>
+          Widget{" "}
+          <span style={{ color: `var(--main-accent-text-color)` }}>
+            Tabcontainer{" "}
+            <i style={{ textDecoration: "underline", cursor: "help" }}>#</i>
+          </span>
+        </h1>
+        <desc>
+          Товарищи! постоянное информационно-пропагандистское обеспечение нашей
+          деятельности в значительной степени обуславливает создание модели
+          развития. Задача организации, в особенности же постоянный
+          количественный рост и сфера нашей активности влечет за собой процесс
+          внедрения и модернизации систем массового участия.{" "}
+        </desc>
+        <hr />
+        <Row>
+          <Cell size={5}>
+            <Fieldset
+              cellStyles={{
+                minHeight: 200,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              label={"Result"}
+            >
+              <Tabcontainer className={'darkness-bg'} chapters={chapters}></Tabcontainer>
+            </Fieldset>
+          </Cell>
+          <Cell size={5}>
+            {/* <Input disabled={true} value={null} /> */}
+           
+          </Cell>
+        </Row>
+      </Cell>
+    </Row>
+  )
+}
+
 const Wellcome = () => {
   const [components, setComponents] = useState([
     <CheckboxSlide></CheckboxSlide>,
@@ -462,6 +517,7 @@ const Wellcome = () => {
     <ButtonSlide />,
     <CalendarSlide />,
     <PopupSlide />,
+    <TabContainerSlide />
   ]);
 
   const [activeComponent, setActiveComponent] = useState(0);

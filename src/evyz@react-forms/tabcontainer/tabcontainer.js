@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./tabcontainer.css";
 
-const Tabcontainer = ({ chapters, value, setValue }) => {
+const Tabcontainer = ({ chapters, className }) => {
   const [activeTab, setActiveTab] = useState(null);
   const [folders, setFolder] = useState([])
 
@@ -21,7 +21,7 @@ const Tabcontainer = ({ chapters, value, setValue }) => {
   }, [activeTab])
 
   return (
-    <div className={`system_tabcont`}>
+    <div className={`system_tabcont ${className ? className : ''}`}>
       <div className={`system_tabcont_folders`}>
         {folders && folders.length && folders.map((folder) => (
           <div
