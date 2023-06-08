@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { Cell, Row } from "./markup/markup";
 import Wrapper from "./wrapper/wrapper";
-import Input from "./inputs/input";
-import { Checkbox, SwitchBox } from "./checkbox/checkbox";
+import Input from "./inputs/input.tsx";
+import { Checkbox, SwitchBox } from "./checkbox/checkbox.tsx";
 import Fieldset from "./fieldset/fieldset";
-import Button from "./buttons/button";
+import Button from "./buttons/button.tsx";
 import Collapse from "./collapse/collapse";
 import Calendar from "./calendar/calendar";
+import Popup from "./popup/popup";
 
 const CheckboxSlide = () => {
   const [value, setValue] = useState(true);
@@ -375,7 +376,7 @@ const CalendarSlide = () => {
             </Fieldset>
           </Cell>
           <Cell size={5}>
-            <Input value={date} />
+            <Input disabled={true} value={date} />
             <Fieldset wrapperStyles={{ marginTop: 30 }} label={"Range rules"}>
               {Object.keys(rangeOptions).map((key) =>
                 typeof rangeOptions[key] === "boolean" ? (
@@ -404,6 +405,55 @@ const CalendarSlide = () => {
   );
 };
 
+const PopupSlide = () => {
+  
+  const [isActive, setIsActive] = useState(false)
+
+   return (
+    <Row>
+      <Cell size={11}>
+        <h1>
+          Widget{" "}
+          <span style={{ color: `var(--main-accent-text-color)` }}>
+            Popup{" "}
+            <i style={{ textDecoration: "underline", cursor: "help" }}>#</i>
+          </span>
+        </h1>
+        <desc>
+          Товарищи! постоянное информационно-пропагандистское обеспечение нашей
+          деятельности в значительной степени обуславливает создание модели
+          развития. Задача организации, в особенности же постоянный
+          количественный рост и сфера нашей активности влечет за собой процесс
+          внедрения и модернизации систем массового участия.{" "}
+        </desc>
+        <hr />
+        <Row>
+          <Cell size={5}>
+            <Fieldset
+              cellStyles={{
+                minHeight: 200,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              label={"Result"}
+             >
+               <Popup isActive={isActive} setIsActive={setIsActive}>
+               </Popup>
+              <Button onClick={() => setIsActive(true)}>Open popup!</Button>
+            </Fieldset>
+          </Cell>
+          <Cell size={5}>
+            <Input disabled={true} value={null} />
+           
+          </Cell>
+        </Row>
+      </Cell>
+    </Row>
+  );
+}
+
 const Wellcome = () => {
   const [components, setComponents] = useState([
     <CheckboxSlide></CheckboxSlide>,
@@ -411,6 +461,7 @@ const Wellcome = () => {
     <CollapseSlide />,
     <ButtonSlide />,
     <CalendarSlide />,
+    <PopupSlide />,
   ]);
 
   const [activeComponent, setActiveComponent] = useState(0);

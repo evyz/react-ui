@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./grid.css";
-import Input from "../inputs/input";
+import Input from "../inputs/input.tsx";
 import useDebouncedFunction from "../utils/useDebouce";
 
 const Cell = ({ children, item, cell }) => {

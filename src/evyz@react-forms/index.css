@@ -63,6 +63,16 @@
   --main-fullsize-loader-background: rgba(0, 0, 0, 0.5);
   --main-fullsize-loader-label-color: #fff;
   --main-fullsize-loader-label-font-size: 24px;
+
+  --main-tabcontainer-folder-background: rgb(219, 220, 222);
+  --main-tabcontainer-folder-color: #292d32;
+  --main-tabcontainer-folder-padding: 10px 14px;
+  --main-tabcontainer-folder-border-radius: 8px 8px 0 0;
+  --main-tabcontainer-folder-background-active: #fff;
+  --main-tabcontainer-folder-background-color-active: #292d32;
+  --main-tabcontainer-folder-background-hover: #ebeaea;
+  --main-tabcontainer-page-border-radius: 0 0 8px 8px;
+  --main-tabcontainer-page-padding: 20px 12px;
 }
 
 .system_mode-dark {
@@ -86,4 +96,10 @@
   --main-collapse-div-background: #363636;
   --main-collapse-label-color: #cdd1d6;
   --main-collapse-label-active: #dadde2;
+
+  --main-tabcontainer-folder-background: #181818;
+  --main-tabcontainer-folder-color: #fff;
+  --main-tabcontainer-folder-background-hover: rgb(53, 53, 53);
+  --main-tabcontainer-folder-background-active: #222222;
+  --main-tabcontainer-folder-background-color-active: #fff;
 }

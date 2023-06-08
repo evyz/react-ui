@@ -2,13 +2,13 @@ import Wrapper from "./evyz@react-forms/wrapper/wrapper";
 import { useEffect, useState } from "react";
 import "./evyz@react-forms/index.css";
 import { Row, Cell } from "./evyz@react-forms/markup/markup";
-import Input from "./evyz@react-forms/inputs/input";
-import Button from "./evyz@react-forms/buttons/button";
+import Input from "./evyz@react-forms/inputs/input.tsx";
+import Button from "./evyz@react-forms/buttons/button.tsx";
 import Grid from "./evyz@react-forms/grid/grid";
 import Dropdown from "./evyz@react-forms/dropdown/dropdown";
 import Tabcontainer from "./evyz@react-forms/tabcontainer/tabcontainer";
 import FullSizeLoader from "./evyz@react-forms/loaders/fullSizeLoader";
-import { Checkbox, SwitchBox } from "./evyz@react-forms/checkbox/checkbox";
+import { Checkbox, SwitchBox } from "./evyz@react-forms/checkbox/checkbox.tsx";
 import Wellcome from "./evyz@react-forms/Wellcome";
 import Collapse from "./evyz@react-forms/collapse/collapse";
 import Login from "./Login";
@@ -106,8 +106,6 @@ function App() {
     return <Wellcome></Wellcome>;
   }
 
-  console.log("range =>", range);
-
   return (
     <Wrapper useCoreConsole={true} isDarkMode={isDarkMode}>
       <Button onClick={() => setPath("/login")}>Авторизация</Button>
@@ -165,7 +163,11 @@ function App() {
       </Row>
 
       <Row style={{ marginTop: "20px" }}>
-        <Tabcontainer setTabOptions={setTabOptions} />
+        <Tabcontainer chapters={[{ id: 1, title: "Первый раздел", elem: <div>12345</div> }, {
+          id: 2, title: "Второй раздел", elem: <div>
+          <h1>Бебрулья</h1>
+          </div>, onBeforeInit: function () { console.log('beforeInit') }
+}]} setTabOptions={setTabOptions} />
       </Row>
       <Row>
         <Cell size={11}>

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Wrapper from "./evyz@react-forms/wrapper/wrapper";
 import { Cell, Row } from "./evyz@react-forms/markup/markup";
 import "./Login.css";
-import Button from "./evyz@react-forms/buttons/button";
-import Input from "./evyz@react-forms/inputs/input";
+import Button from "./evyz@react-forms/buttons/button.tsx";
+import Input from "./evyz@react-forms/inputs/input.tsx";
 
 const Login = () => {
   const [name, setName] = useState("");

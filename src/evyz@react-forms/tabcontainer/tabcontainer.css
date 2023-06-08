@@ -1,4 +1,5 @@
 .system_tabcont {
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -8,15 +9,25 @@
 }
 
 .system_tabcont_folder {
-  background-color: lightblue;
-  padding: 10px 10px;
-  margin-right: 5px;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  background-color: var(--main-tabcontainer-folder-background);
+  color: var(--main-tabcontainer-folder-color);
+  padding: var(--main-tabcontainer-folder-padding, 10px 10px);
+  border-radius: var(--main-tabcontainer-folder-border-radius, 8px);
   cursor: pointer;
+  user-select: none;
+}
+
+.system_tabcont_folder:not(.active):hover {
+  background-color: var(--main-tabcontainer-folder-background-hover);
+}
+
+.system_tabcont_folder.active {
+  background-color: var(--main-tabcontainer-folder-background-active);
+  color: var(--main-tabcontainer-folder-background-color-active);
 }
 
 .system_tabcont_pages_container {
-  padding: 10px 15px;
-  background-color: white;
+  padding: var(--main-tabcontainer-page-padding, 14px);
+  background-color: var(--main-cell-color, #fff);
+  border-radius: var(--main-tabcontainer-page-border-radius, 8px);
 }

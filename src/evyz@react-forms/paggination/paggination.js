@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Cell, Row } from "../markup/markup"
-import { Checkbox } from "../checkbox/checkbox"
-import Button from "../buttons/button"
+import { Checkbox } from "../checkbox/checkbox.tsx"
+import Button from "../buttons/button.tsx"
 
 const Paggination = ({rules }) => {
 
@@ -23,8 +23,6 @@ const Paggination = ({rules }) => {
         if (count < limit) {
             return setMaxPage(1) // need to refactor
         }
-
-        console.log(count, limit)
 
         if (count % limit !== 0) {
             setMaxPage(count / limit + 1)            
