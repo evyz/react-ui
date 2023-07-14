@@ -63,7 +63,7 @@ const Input = (props: InputOptions) => {
         return;
       }
     }
-    onBlur && onBlur(event);
+    props?.events?.onBlur && props?.events?.onBlur(event);
     recalculateErrorLabel();
     if (props?.setError)
       props?.setError({ status: false, message: "It`s okay" });

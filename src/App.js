@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "./evyz@react-forms/index.css";
 import { Row } from "./evyz@react-forms/markup/markup";
 import Cell from './evyz@react-forms-confirmed/cell/cell.tsx'
-import Input from "./evyz@react-forms/inputs/input.tsx";
+import Input from "./evyz@react-forms-confirmed/input/input.tsx";
 import Button from "./evyz@react-forms-confirmed/button/button.tsx";
 import Grid from "./evyz@react-forms/grid/grid";
 import Dropdown from "./evyz@react-forms/dropdown/dropdown";
@@ -184,11 +184,8 @@ function App() {
       <Row>
         <Cell gui={{size: 4}}>
           <Input
-            value={name}
-            setValue={setName}
-            type={"calendarpicker"}
-            enableLogs={true}
-            label="Укажите дату"
+            state={{value: name, setValue: setName}}
+            gui={{ label: "Укажите дату" }}
           />
           <Input value={password} setValue={setPassword} label="Укажите 123" />
         </Cell>
