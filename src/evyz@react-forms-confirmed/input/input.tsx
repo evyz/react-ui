@@ -37,11 +37,12 @@ interface InputOptions extends WidgetBaseOptions {
 
 const Input = (props: InputOptions) => {
   const [isFocused, setIsFocused] = React.useState(false);
-  const errorRef = React.useRef<HTMLLabelElement>(null);
+  const errorRef = React.useRef<HTMLLabelElement>(0);
   const [errorRefOffsetHeigth, setErrorRefOffsetHeigth] = React.useState(0);
 
   const recalculateErrorLabel = () => {
-    setErrorRefOffsetHeigth(errorRef?.current?.clientHeight);
+    // let height = errorRef?.current?.clientHeight;
+    // setErrorRefOffsetHeigth(height);
   };
 
   const onFocus = (event: any) => {
