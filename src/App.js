@@ -1,21 +1,47 @@
 import Wrapper from "./evyz@react-forms/wrapper/wrapper";
 import { useEffect, useState } from "react";
 import "./evyz@react-forms/index.css";
-import { Row, Cell } from "./evyz@react-forms/markup/markup";
+import { Row } from "./evyz@react-forms/markup/markup";
+import Cell from './evyz@react-forms-confirmed/cell/cell.tsx'
 import Input from "./evyz@react-forms/inputs/input.tsx";
-import Button from "./evyz@react-forms/buttons/button.tsx";
+import Button from "./evyz@react-forms-confirmed/button/button.tsx";
 import Grid from "./evyz@react-forms/grid/grid";
 import Dropdown from "./evyz@react-forms/dropdown/dropdown";
 import Tabcontainer from "./evyz@react-forms/tabcontainer/tabcontainer";
 import FullSizeLoader from "./evyz@react-forms/loaders/fullSizeLoader";
-import { Checkbox, SwitchBox } from "./evyz@react-forms/checkbox/checkbox.tsx";
+import { SwitchBox } from "./evyz@react-forms/checkbox/checkbox.tsx";
 import Wellcome from "./evyz@react-forms/Wellcome";
 import Collapse from "./evyz@react-forms/collapse/collapse";
 import Login from "./Login";
-import Popup from "./evyz@react-forms/popup/popup";
 import Calendar from "./evyz@react-forms/calendar/calendar";
-import { setSelectionRange } from "@testing-library/user-event/dist/utils";
 import Paggination from "./evyz@react-forms/paggination/paggination";
+import Tree from "./evyz@react-forms/tree/tree";
+import FileUploader from "./evyz@react-forms/file-uploader/fileUploader";
+import Popup from "./evyz@react-forms-confirmed/popup/popup.tsx";
+
+const treeData = [
+  {
+    id: 1, name: "1", childs: [
+      {
+        id: 2, name: "1.1", childs: [
+      {id: 6, name: "1.1.1"},
+      {id: 6, name: "1.1.2"},
+      {id: 6, name: "1.1.3"},
+    ]},
+    {id: 3 , name: "1.2"},
+    {id: 4 , name: "1.3"},
+    {id: 5 , name: "1.4"},
+    ],
+  },
+  {
+    id: 1, name: "2", childs: [
+    {id: 2 , name: "2.1"},
+    {id: 3 , name: "2.2"},
+    {id: 4 , name: "2.3"},
+    {id: 5 , name: "2.4"},
+    ],
+  }
+]
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -39,6 +65,11 @@ function App() {
   ]);
   const [currOption, setCurrOption] = useState(null);
   const [tabOptions, setTabOptions] = useState(null);
+
+  const [isOpened, setIsOpened ] = useState(true)
+
+  const [files, setFiles] = useState([])
+
 
   const onClickHandler = (value) => {
     return value;
@@ -108,7 +139,28 @@ function App() {
 
   return (
     <Wrapper useCoreConsole={true} isDarkMode={isDarkMode}>
-      <Button onClick={() => setPath("/login")}>Авторизация</Button>
+
+      <Popup state={{active: isOpened}} onCloseWindow={(e) => setIsOpened(false)}></Popup>
+
+      <Row>
+        <Cell gui={{size: 6}}>
+         <FileUploader onUploadFile={(file) => setFiles(prev => [...prev, file])} options={{showImage: true}}></FileUploader>
+        </Cell>
+        <Cell gui={{size: 4}}>
+          { files && files.map(file => 
+            <Row>
+              {file.picSrc && <img style={{ height: 40 }} src={file.picSrc} />}
+              <span>{ file?.name}</span>
+            </Row>
+          )}
+        </Cell>
+      </Row>
+
+      <Cell gui={{size: 6}}>
+        <Tree data={treeData}></Tree>
+      </Cell>
+
+      <Button events={{onClick: () => setPath("/login")}}>Авторизация</Button>
       <FullSizeLoader
         label={"Загрузка, подождите пожалуйста..."}
         value={isLoading}
@@ -116,7 +168,7 @@ function App() {
         backgroundOpacity={0.5}
       ></FullSizeLoader>
       <Row>
-        <Cell size={11}>
+        <Cell gui={{size: 11}}>
           <Dropdown
             styleRules={{ isModalOptions: true }}
             rules={{ closeAfterSomeChanges: true }}
@@ -130,7 +182,7 @@ function App() {
         </Cell>
       </Row>
       <Row>
-        <Cell size={4}>
+        <Cell gui={{size: 4}}>
           <Input
             value={name}
             setValue={setName}
@@ -143,13 +195,13 @@ function App() {
       </Row>
       <Row>
         <Cell>
-          <Button onClick={() => setIsDarkMode(!isDarkMode)}>
+          <Button events={{onClick: () => setIsDarkMode(!isDarkMode)}} >
             Тёмная тема
           </Button>
         </Cell>
       </Row>
       <Row>
-        <Cell size={11}>
+        <Cell gui={{size:11}}>
           <Grid
             isHasFastSearch={true}
             isLoading={isGridLoading}
@@ -170,7 +222,7 @@ function App() {
 }]} setTabOptions={setTabOptions} />
       </Row>
       <Row>
-        <Cell size={11}>
+        <Cell gui={{size: 11}}>
           <SwitchBox value={isSelected} setValue={setIsSelected}>
             Is selected value
           </SwitchBox>
@@ -180,20 +232,20 @@ function App() {
       <Row>
         <Collapse label={"Новости:"}>
           <Row>
-            <Cell size={3}>
+            <Cell gui={{size: 3}}>
               <h1>Wellcome!</h1>
             </Cell>
-            <Cell size={3}>
+            <Cell gui={{size: 3}}>
               <h1>Wellcome!</h1>
             </Cell>
-            <Cell size={3}>
+            <Cell gui={{size: 3}}>
               <h1>Wellcome!</h1>
             </Cell>
           </Row>
         </Collapse>
       </Row>
       <Row>
-        <Cell size={11}>
+        <Cell gui={{size: 11}}>
           <Calendar
             date={selectedDate}
             onChangeMonthHandler={(date) => setMonth(date)}

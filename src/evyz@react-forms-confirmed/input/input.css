@@ -1,0 +1,233 @@
+.system_input {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    position: relative;
+
+    margin: var(--main-input-margin);
+    background: var(--main-input-background);
+    border: var(--main-input-border);
+    border-radius: var(--main-input-border-radius);
+
+    transition: 0.3s all;
+}
+
+.system_input>input {
+    width: 100%;
+    padding: var(--main-input-padding);
+
+    outline: none;
+    border: none;
+    background: none;
+
+    font-size: var(--main-input-font-size);
+    color: var(--main-input-color);
+}
+
+.system_input>input::placeholder {
+    color: var(--main-input-label-color);
+    font-size: var(--main-input-label-font-size);
+}
+
+.system_input>button.system_btn_ico {
+    background: none;
+    border: none;
+    outline: none;
+
+    position: relative;
+    /* z-index: 1; */
+
+    transform: 0.3s all;
+}
+
+.system_input>button.system_btn_ico>div {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 240px;
+    height: 240px;
+    background: white;
+    z-index: 1;
+}
+
+/* error  */
+.system_input.system_error {
+    border: var(--main-input-background-error);
+}
+
+.system_input>label.system_error {
+    position: absolute;
+    right: calc(var(--main-input-padding-horizontal) * 1);
+
+    border-radius: 15px;
+
+    font-size: 14px;
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--main-input-background);
+
+    border-radius: 50%;
+
+    color: var(--main-input-error-label-color);
+    border: var(--main-input-background-error);
+}
+
+.system_input>label.system_error[title]:hover::after {
+    content: attr(title);
+
+    position: absolute;
+    bottom: calc((var(--main-input-padding-vertical) * -1) - 12px);
+
+    width: max-content;
+
+    background: var(--main-input-background);
+}
+
+.system_input.system_error {
+    margin-bottom: 20px;
+}
+
+.system_input.system_error>.system_icon {
+    margin-right: 7px;
+}
+
+.system_input.system_error>.system_icon,
+.system_input.system_error>.system_icon.disabled {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s all;
+}
+
+.system_input.system_error>.system_icon.disabled circle {
+    fill: var(--main-input-error-label-color);
+}
+
+.system_input.system_error>.system_icon.disabled path {
+    stroke: var(--main-input-error-label-color);
+}
+
+.system_input.system_error>.system_icon:not(.disabled) {
+    fill: var(--main-input-error-label-color) !important;
+    stroke: var(--main-input-background) !important;
+}
+
+.system_input.system_error>.system_icon:hover {
+    transform: scale(1.05);
+}
+
+.system_input.system_error>.system_icon:active {
+    transform: scale(0.99);
+}
+
+.system_input.system_error>.system_icon>label {
+    position: absolute;
+    bottom: -30px;
+    width: max-content;
+    padding: 4px 10px;
+    z-index: 10;
+    background: var(--main-input-error-label-color);
+    color: var(--main-input-background);
+}
+
+.system_input>label {
+    position: absolute;
+    bottom: -23px;
+    left: var(--main-input-padding-horizontal);
+    color: var(--main-input-error-label-color);
+}
+
+.system_input.system_error>label {
+    position: absolute;
+    bottom: -23px;
+    left: var(--main-input-padding-horizontal);
+    color: var(--main-input-error-label-color);
+}
+
+.system_btn_ico>div>.system_calendar {
+    width: 100%;
+    height: 100%;
+}
+
+.system_btn_ico>div>.system_calendar {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.system_btn_ico>div>.system_calendar .system_row {
+    justify-content: space-between;
+    height: 26px;
+    margin: 4px 0;
+}
+
+.system_btn_ico>div>.system_calendar span {
+    width: 26px;
+    text-align: center;
+}
+
+.system_btn_ico>div>.system_calendar .reversed {
+    transform: scaleX(-1);
+}
+
+.system_btn_ico>div>.system_calendar .thead {
+    width: 100%;
+
+    border-bottom: 1px solid black;
+}
+
+.system_btn_ico>div>.system_calendar span.disabled {
+    color: var(--main-input-text-disabled);
+}
+
+/* error  */
+
+/* hover */
+
+.system_input:hover {
+    background: var(--main-input-background-hover);
+}
+
+.system_input>button.system_btn_ico.disabled:hover {
+    transform: scale(1.05);
+}
+
+/* hover */
+
+/* focus */
+
+.system_input.system_focused {
+    background: var(--main-input-background-focus);
+}
+
+/* focus */
+
+/* active */
+
+.system_input>button.system_btn_ico.disabled:active {
+    transform: scale(0.99);
+}
+
+/* active */
+
+
+.system_input.disabled>input {
+    color: var(--main-input-text-disabled);
+    cursor: not-allowed;
+}
+
+.system_input.disabled:hover {
+    background: var(--main-input-background);
+}

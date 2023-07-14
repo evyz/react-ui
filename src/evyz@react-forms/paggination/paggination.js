@@ -3,15 +3,16 @@ import { Cell, Row } from "../markup/markup"
 import { Checkbox } from "../checkbox/checkbox.tsx"
 import Button from "../buttons/button.tsx"
 
-const Paggination = ({rules }) => {
+const Paggination = ({rules, onChangePage, options}) => {
 
-    const [count, setCount] = useState(10)
-    const [limit, setLimit] = useState(20)
-    const [page, setPage] = useState(1)
+    const [count, setCount] = useState(options?.count ? options?.count : 10)
+    const [limit, setLimit] = useState(options?.limit ? options?.limit : 20)
+    const [page, setPage] = useState(options?.page ? options?.page : 1)
     const [maxPage, setMaxPage] = useState(1)
     const [pageButtons, setPageButtons] = useState([])
 
-    const [limits, setLimits] = useState([
+    const [limits, setLimits] = useState(
+        options?.limits ? options?.limits : [
         1,
         5,
         10,
@@ -38,14 +39,14 @@ const Paggination = ({rules }) => {
                     <Checkbox value={limit === item} label={String(item)} onClick={() => setLimit(item)} />
                 )}
             </Cell>
-            <Cell size={4}>
-                {rules?.enablePages ?
-                    <Row></Row>
-                   :  <Row>
+            {rules?.enablePages &&
+                <Cell size={4}> 
+                    <Row>
                         <Button onClick={() => setPage(page - 1)} customValidationToDisable={page-1 > 0 ? true : false}>{"<"}</Button>
                         <Button onClick={() => setPage(page + 1)} customValidationToDisable={page < maxPage ? true : false}>{">"}</Button>
-                    </Row> }
-            </Cell>
+                    </Row> 
+                </Cell>
+            }
         </Row>
     )
 }
