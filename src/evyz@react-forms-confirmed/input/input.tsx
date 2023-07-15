@@ -10,7 +10,10 @@ interface InputOptions extends WidgetBaseOptions {
   };
   gui: {
     label: string;
-    type: string;
+    /**
+     * @description input type
+     */
+    type: string; 
   };
   state: {
     value: any;
@@ -37,12 +40,12 @@ interface InputOptions extends WidgetBaseOptions {
 
 const Input = (props: InputOptions) => {
   const [isFocused, setIsFocused] = React.useState(false);
-  const errorRef = React.useRef<HTMLLabelElement>(0);
-  const [errorRefOffsetHeigth, setErrorRefOffsetHeigth] = React.useState(0);
+  const errorRef = React.useRef<HTMLLabelElement>(null);
+  const [errorRefOffsetHeigth, setErrorRefOffsetHeigth] = React.useState<number |undefined>(0);
 
   const recalculateErrorLabel = () => {
-    // let height = errorRef?.current?.clientHeight;
-    // setErrorRefOffsetHeigth(height);
+    let height = errorRef?.current?.clientHeight;
+    setErrorRefOffsetHeigth(height);
   };
 
   const onFocus = (event: any) => {
@@ -91,13 +94,14 @@ const Input = (props: InputOptions) => {
         }
         onBlur={onBlur}
         placeholder={props?.gui?.label}
+        type={props?.gui?.type ? props?.gui?.type : 'text'}
         security={props?.gui?.type === "password" ? "true" : "false"}
       />
 
       <label
         ref={errorRef}
         style={{
-          bottom: props?.error?.status ? errorRefOffsetHeigth * -1 : 0,
+          bottom: props?.error?.status ? errorRefOffsetHeigth ? errorRefOffsetHeigth * -1 : 0: 0,
           opacity: props?.error?.status ? 1 : 0,
         }}>
         {props?.error?.message}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Cell, Row } from "./markup/markup";
 import Wrapper from "./wrapper/wrapper";
-import Input from "./inputs/input.tsx";
+// import Input from "./inputs/input.tsx";
 import { Checkbox, SwitchBox } from "./checkbox/checkbox.tsx";
 import Fieldset from "./fieldset/fieldset";
 import Button from "./buttons/button.tsx";
@@ -407,10 +407,9 @@ const CalendarSlide = () => {
 };
 
 const PopupSlide = () => {
-  
-  const [isActive, setIsActive] = useState(false)
+  const [isActive, setIsActive] = useState(false);
 
-   return (
+  return (
     <Row>
       <Cell size={11}>
         <h1>
@@ -439,35 +438,52 @@ const PopupSlide = () => {
                 justifyContent: "center",
               }}
               label={"Result"}
-             >
-               <Popup isActive={isActive} setIsActive={setIsActive}>
-               </Popup>
+            >
+              <Popup isActive={isActive} setIsActive={setIsActive}></Popup>
               <Button onClick={() => setIsActive(true)}>Open popup!</Button>
             </Fieldset>
           </Cell>
           <Cell size={5}>
             <Input disabled={true} value={null} />
-           
           </Cell>
         </Row>
       </Cell>
     </Row>
   );
-}
+};
 
 const TabContainerSlide = () => {
-
-  const [chapters, setChapters] = useState([])
+  const [chapters, setChapters] = useState([]);
 
   useEffect(() => {
     setChapters([
-      {id: 1, title: "Первый раздел", elem: <Row><Cell size={11}><Button>Click me</Button></Cell></Row>},
-      {id: 2, title: "Второй раздел", elem: <Row><Cell size={11}><h1>Второй раздел</h1></Cell></Row>},
-    ])
-  }, [])
+      {
+        id: 1,
+        title: "Первый раздел",
+        elem: (
+          <Row>
+            <Cell size={11}>
+              <Button>Click me</Button>
+            </Cell>
+          </Row>
+        ),
+      },
+      {
+        id: 2,
+        title: "Второй раздел",
+        elem: (
+          <Row>
+            <Cell size={11}>
+              <h1>Второй раздел</h1>
+            </Cell>
+          </Row>
+        ),
+      },
+    ]);
+  }, []);
 
   return (
-      <Row>
+    <Row>
       <Cell size={11}>
         <h1>
           Widget{" "}
@@ -496,18 +512,18 @@ const TabContainerSlide = () => {
               }}
               label={"Result"}
             >
-              <Tabcontainer className={'darkness-bg'} chapters={chapters}></Tabcontainer>
+              <Tabcontainer
+                className={"darkness-bg"}
+                chapters={chapters}
+              ></Tabcontainer>
             </Fieldset>
           </Cell>
-          <Cell size={5}>
-            {/* <Input disabled={true} value={null} /> */}
-           
-          </Cell>
+          <Cell size={5}>{/* <Input disabled={true} value={null} /> */}</Cell>
         </Row>
       </Cell>
     </Row>
-  )
-}
+  );
+};
 
 const Wellcome = () => {
   const [components, setComponents] = useState([
@@ -517,7 +533,7 @@ const Wellcome = () => {
     <ButtonSlide />,
     <CalendarSlide />,
     <PopupSlide />,
-    <TabContainerSlide />
+    <TabContainerSlide />,
   ]);
 
   const [activeComponent, setActiveComponent] = useState(0);

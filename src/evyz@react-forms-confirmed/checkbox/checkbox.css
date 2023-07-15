@@ -1,0 +1,63 @@
+.system_checkbox,
+.system_switchbox {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.system_checkbox > input[type="checkbox"] {
+  padding: 10px;
+}
+
+.system_checkbox > input[type="checkbox"]:checked {
+  accent-color: var(--main-checkbox-accent-color);
+}
+
+.system_checkbox > label {
+  color: var(--main-text-color);
+}
+
+.system_switchbox > .box {
+  padding: var(--main-switchbox-padding);
+  border-radius: 15px;
+
+  min-width: var(--main-switchbox-min-width);
+
+  background: var(--main-switchbox-background-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  transition: 0.15s all;
+}
+
+.system_switchbox > .box.active {
+  background: var(--main-switchbox-active-background-color);
+}
+
+.system_switchbox > .box::after {
+  content: "";
+  width: var(--main-switchbox-size);
+  height: var(--main-switchbox-size);
+  background: white;
+
+  position: absolute;
+  left: 0px;
+  margin-left: var(--main-switchbox-margin-left);
+
+  border-radius: 50%;
+  transition: 0.15s all;
+}
+
+.system_switchbox > .box.active::after {
+  margin-left: calc(100% - 16px - 5px);
+  transition: 0.15s all;
+}
+
+.system_switchbox > label {
+  margin-left: 5px;
+}

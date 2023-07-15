@@ -4,7 +4,7 @@ import "./row.css";
 
 interface RowOptions extends WidgetBaseOptions {
   events: {
-    onClick: Function;
+    onClick: Function ;
   };
 }
 

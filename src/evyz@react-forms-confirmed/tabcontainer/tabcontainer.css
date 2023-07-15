@@ -1,0 +1,14 @@
+.system_tabcontainer {
+  width: 100%;
+}
+
+.system_tabcontainer > .pages {
+  width: 100%;
+  height: 50px;
+
+  overflow-x: scroll;
+}
+
+.system_tabcontainer > .pages::-webkit-scrollbar {
+  display: none;
+}
