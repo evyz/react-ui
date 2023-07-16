@@ -42,6 +42,7 @@ function App() {
             gui={{
               components: [
                 { id: 1, title: "Первый раздел", component: <h1>123</h1> },
+                { id: 2, title: "Второй раздел", component: <h1>456</h1> },
               ],
             }}
           ></TabContainer>

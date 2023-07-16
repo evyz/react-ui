@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { WidgetBaseOptions } from "..";
+import { Button, WidgetBaseOptions } from "..";
 import './tabcontainer.css'
 
 
@@ -25,19 +25,29 @@ interface TabContainerOptions extends WidgetBaseOptions{
     gui: {
         components: TabContainerComponent[]
     }
+    events: {
+        onClickToOpenComponent: Function
+    }
 }
 
 const TabContainer = (props: TabContainerOptions) => {
 
     React.useEffect(() => {
-        props?.state?.setActive(props?.gui?.components?.length > 0 && props?.gui?.components[0])
-    }, [])
+        !props?.state?.active?.id && props?.state?.setActive(props?.gui?.components?.length > 0 && props?.gui?.components[0])
+    }, [props])
+
+    const onClickToOpenComponent = (event:any, state: TabContainerComponent) => {
+        props?.events?.onClickToOpenComponent && props?.events?.onClickToOpenComponent(event)
+        props?.state?.setActive(state)
+    }
 
     return (
         <div className='system_tabcontainer'>
             <div className='pages'>
-                {props?.gui?.components  && props?.gui?.components?.length > 0 && props?.gui?.components?.map(component => 
-                    <div>{component?.title}</div>
+                {props?.gui?.components && props?.gui?.components?.length > 0 && props?.gui?.components?.map(component => 
+                <Button className={component?.id === props?.state?.active?.id ? 'active' : ''}  events={{onClick: (event: any) => onClickToOpenComponent(event, component) }} key={component?.id} >
+                    asdads
+                </Button>
                 )}
             </div>
             <div className='layout'>

@@ -3,24 +3,24 @@ import "./button.css";
 import { WidgetBaseOptions } from "..";
 
 interface ButtonOptions extends WidgetBaseOptions {
-  events: {
-    onClick: Function;
+  events?: {
+    onClick?: Function;
   };
-  validation: {
-    custom: boolean;
-    deps: [];
-    depsValidation: {
-      notNull: boolean;
-      custom: boolean;
+  validation?: {
+    custom?: boolean | undefined;
+    deps?: [];
+    depsValidation?: {
+      notNull?: boolean;
+      custom?: boolean;
     };
   };
-  gui: {
-    loader: {
-      promiseLoader: Function;
-      custom: boolean;
-      customLoaderComponent: React.FC;
+  gui?: {
+    loader?: {
+      promiseLoader?: Function;
+      custom?: boolean;
+      customLoaderComponent?: React.FC;
     };
-    label: string;
+    label?: string;
   };
 }
 
@@ -33,7 +33,8 @@ const Button = (props: ButtonOptions) => {
     if (props?.validation?.depsValidation?.notNull) {
       let status = true;
 
-      for (let dep of props?.validation?.deps) {
+
+      for (let dep of props?.validation?.deps !== undefined ? props?.validation?.deps :  []) {
         if (dep) {
           status = false;
           continue;
@@ -44,6 +45,7 @@ const Button = (props: ButtonOptions) => {
       }
 
       setIsDisabled(status);
+
     }
   }, [props?.validation?.deps, props?.validation?.depsValidation]);
 
@@ -64,7 +66,7 @@ const Button = (props: ButtonOptions) => {
       props?.validation?.custom !== undefined ||
       props?.validation?.custom !== null
     ) {
-      setIsDisabled(props?.validation?.custom);
+      setIsDisabled(props?.validation?.custom !== undefined && props?.validation?.custom);
     }
   }, [props?.validation?.custom]);
 
@@ -114,7 +116,7 @@ const Button = (props: ButtonOptions) => {
       ) : (
         <></>
       )}
-      {props.children ? props.children : props.gui.label}
+      {props?.children ? props?.children : props?.gui?.label !== undefined ? props?.gui?.label : null}
     </button>
   );
 };
