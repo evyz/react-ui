@@ -8,14 +8,15 @@
 
   --main-cell-color: #fff;
   --main-cell-border-radius: 20px;
-  --main-cell-col-size: 9%;
+  --main-cell-col-size: 9.7%;
 
   --main-text-color: #292d32;
   --main-accent-text-color: #10684b;
 
   --main-input-padding-vertical: 12px;
   --main-input-padding-horizontal: 16px;
-  --main-input-padding: var(--main-input-padding-vertical) var(--main-input-padding-horizontal);
+  --main-input-padding: var(--main-input-padding-vertical)
+    var(--main-input-padding-horizontal);
   --main-input-border-radius: 15px;
   --main-input-background: #f8f8f8;
   --main-input-background-error: 1px solid #da5656;

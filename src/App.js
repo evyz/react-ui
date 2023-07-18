@@ -1,6 +1,19 @@
 import Wrapper from "./evyz@react-forms/wrapper/wrapper";
 import { useEffect, useState } from "react";
 import "./evyz@react-forms/index.css";
+import "./evyz@react-forms-confirmed/index.css";
+import {
+  Button,
+  Cell,
+  Checkbox,
+  Input,
+  Popup,
+  Row,
+  Selectize,
+  SwitchBox,
+  TabContainer,
+  Wrapper,
+} from "./evyz@react-forms-confirmed";
 import { Row, Cell } from "./evyz@react-forms/markup/markup";
 import Input from "./evyz@react-forms/inputs/input";
 import Button from "./evyz@react-forms/buttons/button";
@@ -20,6 +33,10 @@ import Alert from "./evyz@react-forms/alert/alert";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  
+  const [isOpened, setIsOpened] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+  const [activeSlide, setActiveSlide] = useState({});
 
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -120,120 +137,36 @@ function App() {
   console.log("range =>", range);
 
   return (
-    <Wrapper useCoreConsole={true} isDarkMode={isDarkMode}>
-      <Button onClick={() => setPath("/login")}>Авторизация</Button>
-      <FullSizeLoader
-        label={"Загрузка, подождите пожалуйста..."}
-        value={isLoading}
-        setValue={setIsLoading}
-        backgroundOpacity={0.5}
-      ></FullSizeLoader>
-      <Row>
-        <Cell size={11}>
-          <Dropdown
-            styleRules={{ isModalOptions: true }}
-            rules={{ closeAfterSomeChanges: true }}
-            options={options}
-            defaultValue={`Нужно выполнить:`}
-            label={"Укажите цель:"}
-            currOption={currOption}
-            setCurrOption={setCurrOption}
-            onClickHandler={onClickHandler}
-          />
-        </Cell>
-      </Row>
-      <Row>
-        <Cell size={4}>
-          <Input
-            value={name}
-            setValue={setName}
-            type={"calendarpicker"}
-            enableLogs={true}
-            label="Укажите дату"
-          />
-          <Input value={password} setValue={setPassword} label="Укажите 123" />
-        </Cell>
-      </Row>
-      <Row>
-        <Cell>
-          <Button onClick={() => setIsDarkMode(!isDarkMode)}>
-            Тёмная тема
+    <Wrapper>
+      <Row styles={{ justifyContent: "space-between" }}>
+        <Popup state={{ active: isOpened, setActive: setIsOpened }}>
+          1`23132`
+        </Popup>
+        <Cell gui={{ size: 5 }}>
+          <Button events={{ onClick: () => setIsOpened(true) }}>
+            Open Popup!
           </Button>
         </Cell>
-      </Row>
-      <Row>
-        <Cell size={11}>
-          <Grid
-            isHasFastSearch={true}
-            isLoading={isGridLoading}
-            gridFilter={gridFilter}
-            setGridFilter={setGridFilter}
-            data={todos}
-            gridSettings={gridSettings}
-            enableDebounce={true}
-          ></Grid>
-        </Cell>
-      </Row>
-
-      <Row style={{ marginTop: "20px" }}>
-        <Tabcontainer setTabOptions={setTabOptions} />
-      </Row>
-      <Row>
-        <Cell size={11}>
-          <SwitchBox value={isSelected} setValue={setIsSelected}>
-            Is selected value
+        <Cell gui={{ size: 5 }}>
+          <SwitchBox state={{ value: isClicked, setValue: setIsClicked }}>
+            asdasd
           </SwitchBox>
         </Cell>
       </Row>
-
       <Row>
-        <Collapse label={"Новости:"}>
-          <Row>
-            <Cell size={3}>
-              <h1>Wellcome!</h1>
-            </Cell>
-            <Cell size={3}>
-              <h1>Wellcome!</h1>
-            </Cell>
-            <Cell size={3}>
-              <h1>Wellcome!</h1>
-            </Cell>
-          </Row>
-        </Collapse>
-      </Row>
-      <Row>
-        <Cell size={11}>
-          <Calendar
-            date={selectedDate}
-            onChangeMonthHandler={(date) => setMonth(date)}
-            monthToShow={month}
-            typeRender={"month"}
-            onChangeDate={(date) => setSelectedDate(date)}
-            rangeDates={range}
-            onChangeRangeData={(date) => {
-              if (range.length > 1) {
-                setRange([]);
-              } else {
-                if (range.length === 1) {
-                  let newArr = [];
-                  if (new Date(range[0]) < new Date(date)) {
-                    newArr = [range[0], date];
-                  } else {
-                    newArr = [date, range[0]];
-                  }
-                  setRange(newArr);
-                  // setRange()
-                } else {
-                  setRange([date]);
-                }
-              }
+        <Cell gui={{ size: 11 }}>
+          <TabContainer
+            state={{ active: activeSlide, setActive: setActiveSlide }}
+            gui={{
+              components: [
+                { id: 1, title: "Первый раздел", component: <h1>123</h1> },
+                { id: 2, title: "Второй раздел", component: <h1>456</h1> },
+              ],
             }}
-            rules={{ enableRage: true }}
-          />
+          ></TabContainer>
         </Cell>
       </Row>
       <Alert settings={alertSettings} />
-
       <Paggination></Paggination>
     </Wrapper>
   );

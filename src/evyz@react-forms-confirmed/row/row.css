@@ -1,0 +1,9 @@
+.system_row {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    box-sizing: border-box;
+}

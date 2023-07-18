@@ -1,6 +1,18 @@
 import "./checkbox.css";
+import { WidgetBaseParams } from "../utils/interface";
+import React from "react";
 
-function Checkbox({
+interface CheckboxInterface extends WidgetBaseParams {
+  value: boolean;
+  setValue: Function;
+  onClick: Function;
+  labelOptions: {
+    isCantSelect: boolean;
+  };
+  labelStyles: React.CSSProperties;
+}
+
+const Checkbox = ({
   value,
   setValue,
   onClick,
@@ -9,23 +21,21 @@ function Checkbox({
   labelOptions,
   labelStyles,
   styles,
-}) {
+}: CheckboxInterface) => {
   return (
     <div
-      className='system_checkbox'
+      className="system_checkbox"
       onClick={() => {
         setValue && setValue(!value);
         onClick && onClick();
       }}
-      style={{ ...styles }}
-    >
-      <input type='checkbox' checked={value} />
+      style={{ ...styles }}>
+      <input type="checkbox" checked={value} />
       <label
         style={{
           userSelect: labelOptions?.isCantSelect ? "none" : "auto",
-          labelStyles,
-        }}
-      >
+          ...labelStyles,
+        }}>
         {label
           ? label.slice(0, 50) + (label.length > 50 ? "..." : "")
           : children
@@ -34,21 +44,26 @@ function Checkbox({
       </label>
     </div>
   );
-}
+};
 
-function SwitchBox({ value, setValue, label, children, onClick }) {
+const SwitchBox = ({
+  value,
+  setValue,
+  label,
+  children,
+  onClick,
+}: CheckboxInterface) => {
   return (
     <div
-      className='system_switchbox'
+      className="system_switchbox"
       onClick={() => {
         setValue && setValue(!value);
         onClick && onClick();
-      }}
-    >
+      }}>
       <div className={`box ${value && "active"}`}></div>
       <label>{label ? label : children ? children : null}</label>
     </div>
   );
-}
+};
 
 export { Checkbox, SwitchBox };

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./calendar.css";
 import { Cell, Row } from "../markup/markup";
-import Input from "../inputs/input";
-import Button from "../buttons/button";
+import Input from "../inputs/input.tsx";
+import Button from "../buttons/button.tsx";
 
 const CalendarCell = ({
   item,
@@ -150,9 +150,9 @@ const Calendar = ({
         ),
         startOf = new Date(checkDate.getFullYear(), checkDate.getMonth(), 1),
         endOf = new Date(checkDate.getFullYear(), checkDate.getMonth() + 1, 0);
-
+      
       let currentDate = startOf;
-      while (currentDate < endOf) {
+      while (currentDate <= endOf) {
         dates.push(currentDate);
         currentDate = new Date(
           currentDate.getFullYear(),
@@ -198,12 +198,12 @@ const Calendar = ({
         let endIteration = 7 - rows[rows.length - 1].length;
 
         for (let i = 0; i < endIteration; i++) {
+          rows[rows.length - 1].push(currentDate);
           currentDate = new Date(
             currentDate.getFullYear(),
             currentDate.getMonth(),
             currentDate.getDate() + 1
           );
-          rows[rows.length - 1].push(currentDate);
         }
       }
 
@@ -235,8 +235,6 @@ const Calendar = ({
 
     onChangeDate && onChangeDate(new Date(year, month, day));
   };
-
-  console.log("rules", rules);
 
   return (
     <div className={"system_calendar"}>

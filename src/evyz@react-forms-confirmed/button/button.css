@@ -1,0 +1,79 @@
+button.system_button {
+  padding: var(--main-button-padding);
+  margin: var(--main-button-margin);
+  outline: none;
+  border: none;
+  background: var(--main-button-background);
+  color: var(--main-button-color);
+  font-size: var(--main-button-font-size);
+  border-radius: var(--main-button-border-radius);
+
+  position: relative;
+
+  transition: 0.15s all;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+button.system_button:hover {
+  background: var(--main-button-background-hover);
+  transform: scale(1.02);
+}
+
+button.system_button:active {
+  background: var(--main-button-background-active);
+  transform: scale(0.95);
+}
+
+
+button.system_button:disabled {
+  background: var(--main-button-background-inactive);
+}
+
+button.system_button:disabled:hover {
+  transform: scale(1);
+}
+
+
+button.system_button.isloading {
+  transform: scale(0.95);
+}
+
+button.system_button.isloading:hover {
+  transform: scale(0.95);
+}
+
+button.system_button>.system_loader {
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--main-button-background-inactive);
+  z-index: 2;
+}
+
+button.system_button>.system_loader>svg {
+  fill: var(--main-button-color);
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
