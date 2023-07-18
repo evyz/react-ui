@@ -16,6 +16,7 @@ import Popup from "./evyz@react-forms/popup/popup";
 import Calendar from "./evyz@react-forms/calendar/calendar";
 import { setSelectionRange } from "@testing-library/user-event/dist/utils";
 import Paggination from "./evyz@react-forms/paggination/paggination";
+import Alert from "./evyz@react-forms/alert/alert";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -47,6 +48,16 @@ function App() {
   const [month, setMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [range, setRange] = useState([]);
+
+  const alertSettings = {
+    withTitle: true,
+    // все значения типа string
+    title: "Яйца братва", //Заголовок уведомления (optional)
+    message:
+      "Я оказался с пятью потными усатыми мужиками в ванной, задавайте вопросы", //Сообщения (required)
+    xPosition: "right", //Положение на экране по оси Х. Возможные опции: left, center, right (required)
+    yPosition: "top", //Положение на экране по оси Y. Возможные опции: top, bottom (required)
+  };
 
   useEffect(() => {
     setIsGridLoading(true);
@@ -221,6 +232,7 @@ function App() {
           />
         </Cell>
       </Row>
+      <Alert settings={alertSettings} />
 
       <Paggination></Paggination>
     </Wrapper>
