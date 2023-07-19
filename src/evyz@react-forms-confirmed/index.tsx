@@ -5,13 +5,28 @@ import Popup from "./popup/popup";
 import Wrapper from "./wrapper/wrapper";
 import Selectize from "./selectize/selectize";
 import Input from "./input/input";
-import {Checkbox, SwitchBox} from "./checkbox/checkbox";
+import { Checkbox, SwitchBox } from "./checkbox/checkbox";
 import TabContainer from "./tabcontainer/tabcontainer";
+import Alert from "./alert/alert";
+import StackAlerts from "./stackalerts/stackalerts";
 
 export interface WidgetBaseOptions {
   className?: string;
-  children?: React.ReactChild;
+  children?: React.ReactNode;
   styles?: React.CSSProperties;
 }
 
-export { Cell, Button, Row, Popup, Wrapper, Selectize, Input, Checkbox, SwitchBox, TabContainer};
+export {
+  Cell,
+  Button,
+  Row,
+  Popup,
+  Wrapper,
+  Selectize,
+  Input,
+  Checkbox,
+  SwitchBox,
+  TabContainer,
+  Alert,
+  StackAlerts,
+};

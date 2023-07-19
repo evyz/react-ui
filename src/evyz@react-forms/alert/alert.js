@@ -1,6 +1,7 @@
 import "./alert.css";
 import cancelClose from "../assets/cancel-close.svg";
 import { useEffect, useRef, useState } from "react";
+import useAlertHook from "./useAlertHook";
 
 const Alert = ({ settings }) => {
   const { withTitle, title, message, xPosition, yPosition } = settings;
@@ -16,13 +17,7 @@ const Alert = ({ settings }) => {
     throw new Error("Either xPosition or yPosition property was not set");
   }
 
-  const handleClose = () => {
-    if (alertRef.current.classList.contains("on_close")) {
-      return;
-    }
-    alertRef.current.classList.add("on_close");
-    alertRef.current.style.display = "none";
-  };
+  const {handleClose} = useAlertHook(alertRef)
 
   useEffect(() => {
     if (alertRef.current.style.animationPlayState === "running") {

@@ -16,5 +16,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"]
+  "include": ["src", "src/evyz@react-forms-confirmed/svg.d.ts"]
 }
