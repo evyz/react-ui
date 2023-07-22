@@ -104,3 +104,7 @@
   --main-tabcontainer-folder-background-active: #222222;
   --main-tabcontainer-folder-background-color-active: #fff;
 }
+
+body {
+  background: var(--main-bg-color);
+}

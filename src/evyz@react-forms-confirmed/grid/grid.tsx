@@ -35,7 +35,7 @@ interface gui {
   };
 }
 
-export interface GridOptions extends WidgetBaseOptions {
+export interface GridOptions extends WidgetBaseOptions, gui {
   events?: {
     row?: {
       onClick?: Function;
@@ -64,23 +64,23 @@ const Thead = (props: GridOptions) => {
   );
 };
 
-interface TBodyProps {
-  gui: {};
-  data: [];
-  onClickRow;
-  onClickCell;
-}
-
-const Tbody = ({}) => {
+const Grid = (props: GridOptions) => {
+  const {
+    data,
+    events: { onClickRow, onClickCell },
+  } = usePaginationGrid(props);
   return (
-    <tbody>
+    <div>
+      <table>
+        <Thead gui={{ fields: props?.gui?.fields }} />
+        <tbody>
       {data &&
         data?.length &&
         data.map((row) => (
           <tr onClick={onClickRow}>
-            {gui?.fields &&
-              gui?.fields?.length &&
-              gui?.fields.map((field) => (
+            {props?.gui?.fields &&
+              props?.gui?.fields?.length &&
+              props?.gui?.fields.map((field) => (
                 <th
                   onClick={(e) =>
                     onClickCell(e, {
@@ -95,18 +95,6 @@ const Tbody = ({}) => {
           </tr>
         ))}
     </tbody>
-  );
-};
-
-const Grid = (props: GridOptions) => {
-  const {
-    data,
-    events: { onClickRow, onClickCell },
-  } = usePaginationGrid(props);
-  return (
-    <div>
-      <table>
-        <Thead gui={{ fields: props?.gui?.fields }} />
       </table>
     </div>
   );

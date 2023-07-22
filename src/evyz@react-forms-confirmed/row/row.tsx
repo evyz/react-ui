@@ -3,8 +3,8 @@ import { WidgetBaseOptions } from "..";
 import "./row.css";
 
 interface RowOptions extends WidgetBaseOptions {
-  events: {
-    onClick: Function ;
+  events?: {
+    onClick?: Function ;
   };
 }
 

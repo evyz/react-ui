@@ -3,11 +3,11 @@ import { WidgetBaseOptions } from "..";
 import "./cell.css";
 
 interface CellOptions extends WidgetBaseOptions {
-  events: {
-    onClick: Function;
+  events?: {
+    onClick?: Function;
   };
-  gui: {
-    size: Number;
+  gui?: {
+    size?: Number;
   };
 }
 
