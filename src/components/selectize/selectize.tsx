@@ -1,5 +1,4 @@
 import * as React from "react";
-import "./selectize.css";
 import useHandleKeyPress from "./src/handlekeyPress";
 import { SelectizeOptions } from "./src/selectize.types";
 

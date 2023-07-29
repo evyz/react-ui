@@ -1,4 +1,4 @@
-import * as React$1 from 'react';
+import * as React from 'react';
 import { FC } from 'react';
 
 /**
@@ -6,27 +6,11 @@ import { FC } from 'react';
  */
 declare const Row: FC;
 
-interface WidgetBaseOptions {
-    className?: string;
-    children?: React.ReactNode;
-    styles?: React.CSSProperties;
-}
-
-interface CellOptions extends WidgetBaseOptions {
-    events?: {
-        onClick?: Function;
-    };
-    gui?: {
-        /**
-         * @description Write number to set cell size
-         */
-        size?: Number;
-    };
-}
-
 /**
  * @description Markup widget
  */
-declare const Cell: (props: CellOptions) => React$1.JSX.Element;
+declare const Cell: React.FC;
 
-export { Cell, Row };
+declare const Selectize: React.FC;
+
+export { Cell, Row, Selectize };
