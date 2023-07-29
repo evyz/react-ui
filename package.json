@@ -1,6 +1,6 @@
 {
   "name": "@evyz/react-widgets",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "React UI widgets",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
