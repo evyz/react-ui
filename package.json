@@ -14,6 +14,10 @@
     "widgets",
     "ui"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/evyz/evyz-react-widgets"
+  },
   "author": "evyz",
   "license": "ISC",
   "devDependencies": {
