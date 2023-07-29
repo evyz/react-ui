@@ -1,6 +1,7 @@
-import { FC } from "react";
+import React from "react";
+import { RowOptions } from "./row.types";
 /**
  * @description Markup widget
  */
-declare const Row: FC;
+declare const Row: (props: RowOptions) => React.JSX.Element;
 export default Row;
