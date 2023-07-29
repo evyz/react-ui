@@ -6,7 +6,7 @@ const DEFAULT_CELL_SIZE = 3;
 /**
  * @description Markup widget
  */
-const Cell = (props: CellOptions) => {
+const Cell: React.FC = (props: CellOptions) => {
   const [size, setSize] = React.useState("system_col-" + DEFAULT_CELL_SIZE);
 
   React.useEffect(() => {

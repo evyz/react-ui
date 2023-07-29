@@ -3,7 +3,7 @@ import "./selectize.css";
 import useHandleKeyPress from "./src/handlekeyPress";
 import { SelectizeOptions } from "./src/selectize.types";
 
-const Selectize = (props: SelectizeOptions) => {
+const Selectize: React.FC = (props: SelectizeOptions) => {
   const [text, setText] = React.useState("");
 
   const {handleKeyPress} = useHandleKeyPress({...props, text, setText})
