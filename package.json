@@ -1,10 +1,10 @@
 {
-  "name": "evyz-react-widgets",
+  "name": "@evyz/react-widgets",
   "version": "0.0.1",
   "description": "React UI widgets",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
-  "type": "module",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c --bundleConfigAsCjs"
@@ -24,5 +24,8 @@
     "rollup-plugin-terser": "^7.0.2",
     "tslib": "^2.6.1",
     "typescript": "^5.1.6"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
