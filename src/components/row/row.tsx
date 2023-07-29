@@ -1,6 +1,9 @@
 import React, {FC} from "react";
 import { RowOptions } from "./row.types";
 
+/**
+ * @description Markup widget
+ */
 const Row: FC = (props: RowOptions) => {
   const onClick = (event: any) => {
     props?.events?.onClick && props?.events?.onClick(event);

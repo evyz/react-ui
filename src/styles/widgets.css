@@ -1,4 +1,4 @@
-/* ROW STYLES */
+/* ----- ROW STYLES ----- */
 
 .system_row {
   width: 100%;
@@ -10,9 +10,9 @@
   box-sizing: border-box;
 }
 
-/* ROW STYLES */
+/* ----- ROW STYLES ----- */
 
-/* CELL STYLES */
+/* ----- CELL STYLES ----- */
 
 .system_cell {
   height: min-content;
@@ -76,4 +76,38 @@
 
 /* COLUMN SIZES */
 
-/* CELL STYLES */
+/* ----- CELL STYLES ----- */
+
+/* ----- SELECTIZE STYLES ----- */
+
+.system_selectize {
+  width: 100%;
+  border: 1px solid grey;
+  border-radius: 7px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.system_selectize span {
+  padding: 4px;
+  border: 1px solid grey;
+  border-radius: 7px;
+}
+
+.system_selectize > input {
+  padding: 4px;
+
+  width: min-content;
+  flex: auto;
+
+  outline: none;
+  border: none;
+  background: none;
+
+  font-size: var(--main-input-font-size);
+  color: var(--main-input-color);
+}
+
+/* ----- SELECTIZE STYLES ----- */

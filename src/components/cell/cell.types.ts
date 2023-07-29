@@ -5,6 +5,9 @@ export interface CellOptions extends WidgetBaseOptions {
       onClick?: Function;
     };
     gui?: {
+      /**
+       * @description Write number to set cell size
+       */
       size?: Number;
     };
 }
