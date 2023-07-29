@@ -3,37 +3,40 @@ import { WidgetBaseOptions } from "..";
 import "./input.css";
 
 interface InputOptions extends WidgetBaseOptions {
-  events: {
-    onFocus: Function;
-    onBlur: Function;
-    onInput: Function;
+  events?: {
+    onFocus?: Function;
+    onBlur?: Function;
+    onInput?: Function;
   };
-  gui: {
-    label: string;
+  gui?: {
+    label?: string;
     /**
      * @description input type
      */
-    type: string; 
+    type?: string; 
+    input?:{
+      styles?: React.CSSProperties;
+    }
   };
-  state: {
-    value: any;
-    setValue: Function;
+  state?: {
+    value?: any;
+    setValue?: Function;
   };
-  error: {
-    status: boolean;
-    message: string;
+  error?: {
+    status?: boolean;
+    message?: string;
   };
-  setError: Function;
-  validation: {
-    prefix: string;
-    postfix: string;
-    unique: boolean;
-    depsValidation: {
-      notNull: boolean;
-      custom: boolean;
+  setError?: Function;
+  validation?: {
+    prefix?: string;
+    postfix?: string;
+    unique?: boolean;
+    depsValidation?: {
+      notNull?: boolean;
+      custom?: boolean;
     };
-    disabled: {
-      custom: boolean;
+    disabled?: {
+      custom?: boolean;
     };
   };
 }
@@ -83,6 +86,7 @@ const Input = (props: InputOptions) => {
       }
       style={{
         marginBottom: props?.error?.status ? errorRefOffsetHeigth : 0,
+        ...props?.styles
       }}>
       <input
         disabled={props?.validation?.disabled?.custom}
@@ -96,6 +100,9 @@ const Input = (props: InputOptions) => {
         placeholder={props?.gui?.label}
         type={props?.gui?.type ? props?.gui?.type : 'text'}
         security={props?.gui?.type === "password" ? "true" : "false"}
+        style={{
+          ...props?.gui?.input?.styles
+        }}
       />
 
       <label

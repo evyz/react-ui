@@ -5,13 +5,13 @@ import Cell from "../cell/cell";
 import "./popup.css";
 
 interface PopupOptions extends WidgetBaseOptions {
-  onCloseWindow: Function;
-  state: {
-    active: boolean;
-    setActive: Function;
+  onCloseWindow?: Function;
+  state?: {
+    active?: boolean;
+    setActive?: Function;
   };
-  gui: {
-    cellSize: Number;
+  gui?: {
+    cellSize?: Number;
   };
 }
 
@@ -40,6 +40,9 @@ const Popup = (props: PopupOptions) => {
         </Cell>
       </Row>
     );
+  return (
+    <div></div>
+  )
 };
 
 export default Popup;

@@ -19,9 +19,9 @@ interface FieldOptions {
   };
 }
 
-interface FieldsOptions extends Array<FieldOptions> {}
+export interface FieldsOptions extends Array<FieldOptions> {}
 
-interface gui {
+export interface GridGui {
   gui: {
     fields: FieldsOptions;
     thead?: {
@@ -35,7 +35,7 @@ interface gui {
   };
 }
 
-export interface GridOptions extends WidgetBaseOptions, gui {
+export interface GridOptions extends WidgetBaseOptions, GridGui {
   events?: {
     row?: {
       onClick?: Function;
