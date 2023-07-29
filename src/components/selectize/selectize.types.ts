@@ -1,4 +1,4 @@
-import { WidgetBaseOptions } from "../../base.types";
+import { WidgetBaseOptions } from "../base.types";
 
 export interface SelectizeOptions extends WidgetBaseOptions {
     validation?: {

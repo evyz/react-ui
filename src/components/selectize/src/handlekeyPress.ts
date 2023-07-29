@@ -1,4 +1,4 @@
-import { SelectizeOptions } from "./selectize.types";
+import { SelectizeOptions } from "../selectize.types";
 
 interface useHandleKeyPressInterface extends SelectizeOptions{
     text: String,

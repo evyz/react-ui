@@ -111,3 +111,246 @@
 }
 
 /* ----- SELECTIZE STYLES ----- */
+
+/* ----- Wrapper STYLES ----- */
+
+.system_wrapper {
+  width: 1440px;
+  min-height: 100vh;
+
+  color: var(--main-text-color);
+
+  box-sizing: border-box;
+
+  position: relative;
+
+  margin: auto;
+}
+
+@media (max-width: 1440px) {
+  .system_wrapper > div {
+    width: 1140px;
+  }
+}
+
+@media (max-width: 1140px) {
+  .system_wrapper > div {
+    width: 768px;
+  }
+
+  .system_wrapper > div .system_row > .system_cell {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .system_wrapper > div {
+    width: 440px;
+  }
+
+  .system_wrapper > div .system_row > .system_cell {
+    width: 100%;
+  }
+}
+
+/* ----- Wrapper STYLES ----- */
+
+/* ----- Button STYLES ----- */
+
+button.system_button {
+  padding: var(--main-button-padding);
+  margin: var(--main-button-margin);
+  outline: none;
+  border: none;
+  background: var(--main-button-background);
+  color: var(--main-button-color);
+  font-size: var(--main-button-font-size);
+  border-radius: var(--main-button-border-radius);
+
+  position: relative;
+
+  transition: 0.15s all;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+button.system_button:hover {
+  background: var(--main-button-background-hover);
+  transform: scale(1.02);
+}
+
+button.system_button:active {
+  background: var(--main-button-background-active);
+  transform: scale(0.95);
+}
+
+button.system_button:disabled {
+  background: var(--main-button-background-inactive);
+}
+
+button.system_button:disabled:hover {
+  transform: scale(1);
+}
+
+button.system_button.isloading {
+  transform: scale(0.95);
+}
+
+button.system_button.isloading:hover {
+  transform: scale(0.95);
+}
+
+button.system_button > .system_loader {
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--main-button-background-inactive);
+  z-index: 2;
+}
+
+button.system_button > .system_loader > svg {
+  fill: var(--main-button-color);
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ----- Button STYLES ----- */
+
+/* ----- Checkbox STYLES ----- */
+
+.system_checkbox,
+.system_switchbox {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.system_checkbox > input[type="checkbox"] {
+  padding: 10px;
+}
+
+.system_checkbox > input[type="checkbox"]:checked {
+  accent-color: var(--main-checkbox-accent-color);
+}
+
+.system_checkbox > label {
+  color: var(--main-text-color);
+}
+
+.system_switchbox > .box {
+  padding: var(--main-switchbox-padding);
+  border-radius: 15px;
+
+  min-width: var(--main-switchbox-min-width);
+
+  background: var(--main-switchbox-background-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  transition: 0.15s all;
+}
+
+.system_switchbox > .box.active {
+  background: var(--main-switchbox-active-background-color);
+}
+
+.system_switchbox > .box::after {
+  content: "";
+  width: var(--main-switchbox-size);
+  height: var(--main-switchbox-size);
+  background: white;
+
+  position: absolute;
+  left: 0px;
+  margin-left: var(--main-switchbox-margin-left);
+
+  border-radius: 50%;
+  transition: 0.15s all;
+}
+
+.system_switchbox > .box.active::after {
+  margin-left: calc(100% - 16px - 5px);
+  transition: 0.15s all;
+}
+
+.system_switchbox > label {
+  margin-left: 5px;
+}
+
+/* ----- Checkbox STYLES ----- */
+
+/* ----- Tabcontainer STYLES ----- */
+
+.system_tabcontainer {
+  width: 100%;
+}
+
+.system_tabcontainer > .pages {
+  width: 100%;
+  height: 50px;
+
+  overflow-x: scroll;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  border-bottom: 1px solid black;
+}
+
+.system_tabcontainer > .pages::-webkit-scrollbar {
+  display: none;
+}
+
+.system_tabcontainer > .pages {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.system_tabcontainer > .pages > .system_button {
+  margin-left: 0;
+  margin-right: 10px;
+
+  margin-bottom: 0;
+
+  background: none;
+  color: black;
+
+  border-radius: 8px 8px 0 0;
+}
+
+.system_tabcontainer > .pages > .system_button.active {
+  background: green;
+
+  position: relative;
+}
+
+/* ----- Tabcontainer STYLES ----- */
