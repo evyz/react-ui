@@ -9,6 +9,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c --bundleConfigAsCjs"
   },
+  "keywords": [
+    "react",
+    "widgets",
+    "ui"
+  ],
   "author": "evyz",
   "license": "ISC",
   "devDependencies": {
