@@ -76,6 +76,10 @@
   --main-tabcontainer-folder-background-hover: #ebeaea;
   --main-tabcontainer-page-border-radius: 0 0 8px 8px;
   --main-tabcontainer-page-padding: 20px 12px;
+
+  --main-dropdown-wrapper-bg: #fff;
+  --main-dropdown-wrapper-height: 50px;
+  --main-dropdown-item-bg: #fff;
 }
 
 .system_mode-dark {

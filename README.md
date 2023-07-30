@@ -3,9 +3,9 @@
 ## Example
 
 ```
-import "@evyz/react-widgets/src/styles/widgets.css"; // --- default styles
-import "@evyz/react-widgets/src/styles/index.css"; // --- default vars styles
-import { Button, Cell, Row, Wrapper } from "@evyz/react-widgets";
+import "@lzstudio/react-widgets/src/styles/widgets.css"; // --- default styles
+import "@lzstudio/react-widgets/src/styles/index.css"; // --- default vars styles
+import { Button, Cell, Row, Wrapper } from "@lzstudio/react-widgets";
 
 function App() {
   return (

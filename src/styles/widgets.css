@@ -354,3 +354,59 @@ button.system_button > .system_loader > svg {
 }
 
 /* ----- Tabcontainer STYLES ----- */
+
+/* ----- Dropdown STYLES ----- */
+
+.system_dropdown_wrapper {
+  width: 100%;
+  height: var(--main-dropdown-wrapper-height);
+  position: relative;
+  z-index: 1;
+
+  background: var(--main-dropdown-wrapper-bg);
+}
+
+.system_dropdown_wrapper .selected_item {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  position: relative;
+}
+
+.system_dropdown_wrapper .selected_item button {
+  position: absolute;
+  right: 0;
+}
+
+.system_dropdown_wrapper .items {
+  display: none;
+
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  width: 100%;
+
+  z-index: 100;
+
+  background: var(--main-dropdown-item-bg);
+}
+
+.system_dropdown_wrapper .items.active {
+  display: flex;
+  flex-direction: column;
+
+  padding: 0;
+}
+
+.system_dropdown_wrapper .items li {
+  padding: 10px 16px;
+  margin: 10px 0;
+  list-style: none;
+}
+
+/* ----- Dropdown STYLES ----- */
