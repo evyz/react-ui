@@ -1,7 +1,7 @@
 {
-  "name": "@evyz/react-widgets",
-  "version": "0.1.1",
-  "description": "React UI widgets",
+  "name": "@lzstudio/react-ui",
+  "version": "0.0.2",
+  "description": "React UI library",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
@@ -9,6 +9,20 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c --bundleConfigAsCjs"
   },
+  "contributors": [
+    {
+      "name": "evyz",
+      "url": "https://github.com/evyz"
+    },
+    {
+      "name": "magic1andeagle",
+      "url": "https://github.com/magic1andeagle"
+    },
+    {
+      "name": "FlowningMonk",
+      "url": "https://github.com/FlowningMonk"
+    }
+  ],
   "keywords": [
     "react",
     "widgets",
