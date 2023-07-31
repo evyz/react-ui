@@ -35,6 +35,7 @@ Markup:
 - Wrapper
 - Cell
 - Row
+- FieldSet
 
 Forms:
 
@@ -42,3 +43,5 @@ Forms:
 - Selectize
 - Checkbox
 - Switchbox
+- Dropdown
+
