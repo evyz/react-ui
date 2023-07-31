@@ -432,3 +432,70 @@ button.system_button > .system_loader > svg {
 }
 
 /* ----- Fieldset STYLES ----- */
+
+/* ----- Collapse STYLES ----- */
+
+.system_collapse {
+  width: 100%;
+  position: relative;
+  height: max-content;
+  border: var(--main-collapse-border);
+
+  border-radius: var(--main-border-radius);
+  overflow: hidden;
+
+  transition: 0.3s all;
+
+  margin: 5px 0;
+}
+
+.system_collapse.disabled {
+  height: 40px;
+}
+
+.system_collapse>button {
+  width: 100%;
+  position: absolute;
+
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  position: relative;
+
+  color: var(--main-collapse-label-color);
+  background: var(--main-collapse-button-background);
+  border: none;
+  outline: none;
+}
+
+.system_collapse>button:active {
+  background: var(--main-collapse-button-background-active);
+}
+
+.system_collapse>button:active>label {
+  color: var(--main-collapse-label-active);
+}
+
+.system_collapse>div {
+  padding: 12px;
+  background: var(--main-collapse-div-background);
+}
+
+.system_collapse>button>.icon {
+  width: 32px;
+  height: 32px;
+
+  position: absolute;
+  right: 12px;
+
+  transform: rotate(180deg);
+}
+
+.system_collapse>button>.icon.disabled {
+  transform: rotate(0deg);
+}
+
+/* ----- Collapse STYLES ----- */
