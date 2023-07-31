@@ -9,7 +9,7 @@ const Row = (props: RowOptions) => {
     props?.events?.onClick && props?.events?.onClick(event);
   };
   return (
-    <div
+    <div {...props?.DOMAttributes}
       onClick={onClick}
       className={`system_row ${props?.className}`}
       style={{ ...props?.styles }}>

@@ -17,6 +17,7 @@ const Cell= (props: CellOptions) => {
 
   return (
     <div
+      {...props?.DOMAttributes}
       onClick={onClick}
       style={{ ...props?.styles }}
       className={`system_cell ${size && size} ${props?.className}`}>

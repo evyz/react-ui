@@ -4,7 +4,7 @@ import { CheckboxOptions } from './switchbox.types';
 
 const SwitchBox = (props: CheckboxOptions) => {
     return (
-        <div
+        <div {...props?.DOMAttributes}
           className="system_switchbox"
           onClick={(event) => {
             props?.state?.setValue && props?.state?.setValue(!props?.state?.value);
