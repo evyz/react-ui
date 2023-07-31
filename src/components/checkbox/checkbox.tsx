@@ -4,6 +4,7 @@ import { CheckboxOptions } from './checkbox.types';
 const Checkbox = (props: CheckboxOptions) => {
     return (
       <div
+        {...props?.DOMAttributes}
         className="system_checkbox"
         onClick={(event) => {
           props?.state?.setValue && props?.state?.setValue(!props?.state?.value);

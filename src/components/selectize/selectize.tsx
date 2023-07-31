@@ -8,7 +8,7 @@ const Selectize = (props: SelectizeOptions) => {
   const {handleKeyPress} = useHandleKeyPress({...props, text, setText})
 
   return (
-    <div className="system_selectize">
+    <div className="system_selectize" {...props?.DOMAttributes}>
       {props?.state?.value &&
         props?.state?.value.length > 0 &&
         props?.state?.value.map(

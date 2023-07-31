@@ -16,6 +16,7 @@ const Button = (props: ButtonOptions) => {
 
   return (
     <button
+      {...props?.DOMAttributes}
       ref={ref}
       title={
         isDisabled

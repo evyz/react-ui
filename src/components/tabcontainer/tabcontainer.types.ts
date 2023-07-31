@@ -1,9 +1,13 @@
-import { WidgetBaseOptions } from '../base.types';
+import { WidgetBaseEvents, WidgetBaseOptions } from '../base.types';
 
 
 
 export interface TabContainerComponent{
     id: number; title: string; component: any
+}
+
+export interface TabContainerEvents{
+    onClickToOpenComponent?: Function;
 }
     
 export interface TabContainerOptions extends WidgetBaseOptions{
@@ -18,7 +22,5 @@ export interface TabContainerOptions extends WidgetBaseOptions{
     gui: {
         components: TabContainerComponent[]
     }
-    events: {
-        onClickToOpenComponent: Function
-    }
+    events?: TabContainerEvents;
 }
