@@ -7,4 +7,5 @@ export { default as Checbox} from './checkbox';
 export { default as Switchbox} from './switchbox';
 export { default as Tabcontainer} from './tabcontainer';
 export { default as Dropdown} from './dropdown';
-export { default as fieldset} from './fieldset';
+export { default as Fieldset} from './fieldset';
+export { default as Collapse} from './collapse';
