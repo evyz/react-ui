@@ -1,40 +1,25 @@
 import * as React from 'react'
-import { WidgetBaseOptions } from "..";
-import './dropdown.css'
+import { DropdownOptions } from './dropdown.types'
+import initEffects from './src/initEffects'
+import Input from '../input/input'
 
-interface DropdownItem {
-    id?: Number
-    value?: string
-    component?: React.ReactNode
-}
-
-interface DropdownItems extends Array<DropdownItem>{}
-
-
-interface DropdownOptions extends WidgetBaseOptions{
-    state?: {
-        value?: DropdownItem
-        setValue?: Function;
-    }
-    gui?: {
-        items?: DropdownItems
-    }
+const DropdownArrow = (props: any) => {
+    return props?.gui?.arrow ? props?.gui?.arrow : <button>{props?.isOpened ? "Close" : "Open"}</button>
 }
 
 const Dropdown = (props: DropdownOptions) => {
 
     const [isOpened, setIsOpened] = React.useState(false)
+    const [searchValue, setSearchValue] = React.useState("")
 
-    React.useEffect(() => {
-        setIsOpened(false)
-    }, [props?.state?.value])
+    initEffects({...props, isOpened ,setIsOpened})
 
     return (
-        <div className={`system_dropdown_wrapper`}>
-            <div  onClick={() => setIsOpened(!isOpened)} className={`selected_item`}>{props?.state?.value?.value} <button>{isOpened ? "Close" : "Open"}</button></div>
+        <div {...props?.DOMAttributes} className={`system_dropdown_wrapper`}>
+            <div onClick={() => setIsOpened(!isOpened)} className={`selected_item`}>{props?.state?.value?.value} <DropdownArrow gui={props?.gui} isOpened={isOpened} setIsOpened={setIsOpened}  /></div>
             <ul className={`items ${isOpened && "active"}`}>
-                {props?.gui?.items && props?.gui?.items?.map(item => 
-                    <li onClick={() => props?.state?.setValue && props?.state?.setValue(item)}>{item?.value}</li>    
+                {props?.gui?.items && props?.gui?.items?.state?.map(item => 
+                    <li className={`${props?.gui?.items?.className ? props?.gui?.items?.className : ''} ${props?.state?.value?.id === item?.id ? 'active' : ''}`} style={props?.gui?.items?.styles} onClick={() => props?.state?.setValue && props?.state?.setValue(item)}>{item?.value}</li>    
                 )}
             </ul>
         </div> 
