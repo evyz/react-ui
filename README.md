@@ -45,3 +45,12 @@ Forms:
 - Switchbox
 - Dropdown
 
+
+
+## Usage patterns examples
+
+### Markup pattern:
+![image](https://github.com/evyz/react-ui/assets/73714921/f5b5d23b-ab26-446a-b387-b6829d95d435)
+
+### Pattern with nesting markup 
+![image](https://github.com/evyz/react-ui/assets/73714921/71b52f05-3ba7-42c5-9f04-12b0c4f20dbe)
