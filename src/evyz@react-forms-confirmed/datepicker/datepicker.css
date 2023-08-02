@@ -1,0 +1,26 @@
+.system_calendar{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 16px;
+}
+
+.system_calendar .bar{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.system_calendar table{
+    width: 100%;
+}
+
+.system_calendar table th{
+    width: 14%;
+}

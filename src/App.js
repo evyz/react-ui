@@ -5,17 +5,23 @@ import { useState } from "react";
 import { Input, Row } from "./evyz@react-forms-confirmed";
 
 import './evyz@react-forms-confirmed/widgets.css'
+import DatePicker from "./evyz@react-forms-confirmed/datepicker/datepicker";
 
 function App() {
 
-  const [active, setActive ] = useState({id: 1 ,name: "123"})
+  const [active, setActive ] = useState(new Date())
 
   return (
     <Wrapper>
-      <Row>
-        <Dropdown state={{ value: active, setValue: setActive }} gui={{ items: { state: [{ id: 1, value: "123" }, { id: 2, value: '456' }] } }} />
-        <Input />
-      </Row>
+      <DatePicker gui={{
+        dates: {
+          renderDate: {
+            value: new Date(),
+            format: {
+              value: 'year.month'
+            }
+        }
+      }, }}/>
     </Wrapper>
   );
 }
