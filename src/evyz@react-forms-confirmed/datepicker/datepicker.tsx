@@ -29,7 +29,7 @@ const DateBar = (props: DateBarInterface) => {
         if (props?.format?.value) {
             result = props?.format?.value                    
             result = result?.replace('year', value.getFullYear().toString())
-            result = result?.replace('month', normalizeNumber(value.getMonth().toString()))
+            result = result?.replace('month', normalizeNumber((value.getMonth() + 1).toString()))
             } else if (props?.format?.custom) {
             result = props?.format?.custom(props?.dateRender)
         }
