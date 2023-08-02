@@ -5,6 +5,7 @@ import initStates from './src/initStates'
 import './datepicker.css'
 
 const dayOfWeek = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"]
+const months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
 
 const DateBar = (props: DateBarInterface) => {
 
@@ -39,12 +40,12 @@ const DateBar = (props: DateBarInterface) => {
     }, [props.dateRender])
 
     return (
-        <label>{date}</label>
+        <label onClick={(e) => props?.onClick && props?.onClick(e)}>{date}</label>
     )
 }
 
 const DatePicker = (props: DatepickerOptions) => {
-    const { dateRender, setDateRender, matrix, setMatrix } = initStates()
+    const { dateRender, setDateRender, matrix, setMatrix, isOpenedFullEditor, setIsOpenedFullEditor } = initStates()
 
     React.useEffect(() => {
         let startOf = new Date(dateRender.getFullYear(), dateRender.getMonth(), 1)
@@ -83,6 +84,10 @@ const DatePicker = (props: DatepickerOptions) => {
         }
         
         setMatrix(tempMatrix)
+
+        if (isOpenedFullEditor) {
+            setIsOpenedFullEditor(false)
+        }
     }, [dateRender])
     
     const changeDateRender = (isNext: boolean) => {
@@ -95,10 +100,14 @@ const DatePicker = (props: DatepickerOptions) => {
         <div className='system_calendar'>
             <div className='bar'>
                 <button onClick={() => changeDateRender(false)}>Prev</button>
-                <DateBar dateRender={dateRender} format={props?.gui?.dates?.renderDate?.format} />
+                <DateBar onClick={() =>  setIsOpenedFullEditor(!isOpenedFullEditor)} dateRender={dateRender} format={props?.gui?.dates?.renderDate?.format} />
                 <button onClick={() => changeDateRender(true)}>Next</button>
             </div>
-            <table>
+            {isOpenedFullEditor ? <div>
+                {months.map((month, index) => 
+                    <button onClick={( ) => setDateRender(new Date(dateRender.getFullYear(), index, 1))}>{ month}</button>
+                )}
+            </div> : <table>
                 <thead>
                     <tr>
                         {dayOfWeek.map(day => 
@@ -115,7 +124,8 @@ const DatePicker = (props: DatepickerOptions) => {
                         </tr>    
                     )}
                 </tbody>
-            </table>
+            </table>}
+          
         </div>
     )
 }

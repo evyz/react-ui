@@ -48,4 +48,5 @@ export interface DatepickerOptions extends WidgetBaseOptions{
 export interface DateBarInterface {
     dateRender: Date;
     format?: FormatMonthInterface
+    onClick?: Function;
 }
