@@ -1,4 +1,4 @@
-import { SetStateAction } from "react";
+import React, { SetStateAction } from "react";
 import { WidgetBaseOptions } from "../..";
 
 interface DateInterface {
@@ -16,12 +16,11 @@ interface FormatInterface{
 
 
 interface FormatMonthInterface extends FormatInterface{ 
-    value?: "year.month" | "year/month";
+    value?: string | "year.month" | "year/month" | "year month" | "year.mm" | "year/mm" | "year mm";
 }
 
 interface FormatDateInterface extends FormatInterface{ 
-    value?: "year.month.day" | "year/month/day";
-
+    value?: "year.month.day" | "year/month/day" | "year month day" | "year.mm.day" | "year/mm/day" | "year mm day";
 }
 
 export interface DatepickerOptions extends WidgetBaseOptions{
@@ -33,7 +32,18 @@ export interface DatepickerOptions extends WidgetBaseOptions{
         dates: {
             renderDate?: {
                 value?: string | Date;
-                format?: FormatMonthInterface 
+                format?: FormatMonthInterface;
+                bar?: {
+                    custom?: React.ReactNode;
+                    year?: {
+                        isCanEdit?: true | false;
+                        max?: Date | string;
+                        min?: Date | string;
+                    };
+                    month?: {
+                        isCanEdit?: Boolean | false;
+                    };
+                }
             };
             date?: DateInterface;
             today?: DateInterface;
@@ -41,6 +51,7 @@ export interface DatepickerOptions extends WidgetBaseOptions{
             disabledDate?: DateInterface;
             selectedDate?: DateInterface;
         }
+        daysOfWeek?: string[];
         format?: FormatDateInterface
     }
 }

@@ -4,8 +4,8 @@ import initStates from './src/initStates'
 
 import './datepicker.css'
 
-const dayOfWeek = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"]
-const months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
+export const DAYSOFWEEK = ["S", "M", "T", "W", "T", "F", "S"]
+export const MONTHS = ["January", "February", "March", "April", "May", "June", "Jule", "August", "September", "October", "November", "December"]
 
 const DateBar = (props: DateBarInterface) => {
 
@@ -29,7 +29,8 @@ const DateBar = (props: DateBarInterface) => {
         if (props?.format?.value) {
             result = props?.format?.value                    
             result = result?.replace('year', value.getFullYear().toString())
-            result = result?.replace('month', normalizeNumber((value.getMonth() + 1).toString()))
+            result = result?.replace('month', MONTHS[value.getMonth() + 1])
+            result = result?.replace('mm', normalizeNumber((value.getMonth() + 1).toString()))
             } else if (props?.format?.custom) {
             result = props?.format?.custom(props?.dateRender)
         }
@@ -104,13 +105,15 @@ const DatePicker = (props: DatepickerOptions) => {
                 <button onClick={() => changeDateRender(true)}>Next</button>
             </div>
             {isOpenedFullEditor ? <div>
-                {months.map((month, index) => 
+                {props?.gui?.dates?.renderDate?.bar?.month?.isCanEdit && MONTHS.map((month, index) => 
                     <button onClick={( ) => setDateRender(new Date(dateRender.getFullYear(), index, 1))}>{ month}</button>
                 )}
             </div> : <table>
                 <thead>
-                    <tr>
-                        {dayOfWeek.map(day => 
+                        <tr>
+                        {props?.gui?.daysOfWeek && props?.gui?.daysOfWeek?.length ? props?.gui?.daysOfWeek.map(day => 
+                            <th>{day}</th>
+                        ) : DAYSOFWEEK.map(day => 
                             <th>{day}</th>
                         )}
                     </tr>
