@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/react-ui/static/css/main.2ef4b4f0.css",
-    "main.js": "/react-ui/static/js/main.24b89f0f.js",
+    "main.js": "/react-ui/static/js/main.ef0b8bbb.js",
     "static/media/lzstudio.svg": "/react-ui/static/media/lzstudio.d16aba062a5dcf74f493211f199cd57a.svg",
     "static/media/telegram.png": "/react-ui/static/media/telegram.79e48270ad02f6ce7ed0.png",
     "static/media/github-mark-white.svg": "/react-ui/static/media/github-mark-white.97ed8e7eef60d61ca469881dd6f34511.svg",
     "index.html": "/react-ui/index.html",
     "main.2ef4b4f0.css.map": "/react-ui/static/css/main.2ef4b4f0.css.map",
-    "main.24b89f0f.js.map": "/react-ui/static/js/main.24b89f0f.js.map"
+    "main.ef0b8bbb.js.map": "/react-ui/static/js/main.ef0b8bbb.js.map"
   },
   "entrypoints": [
     "static/css/main.2ef4b4f0.css",
-    "static/js/main.24b89f0f.js"
+    "static/js/main.ef0b8bbb.js"
   ]
 }
