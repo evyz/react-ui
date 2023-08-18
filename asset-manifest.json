@@ -1,16 +1,17 @@
 {
   "files": {
-    "main.css": "/react-ui/static/css/main.2ef4b4f0.css",
-    "main.js": "/react-ui/static/js/main.2e732bd5.js",
+    "main.css": "/react-ui/static/css/main.6f0d370c.css",
+    "main.js": "/react-ui/static/js/main.10d6b5b2.js",
     "static/media/lzstudio.svg": "/react-ui/static/media/lzstudio.d16aba062a5dcf74f493211f199cd57a.svg",
     "static/media/telegram.png": "/react-ui/static/media/telegram.79e48270ad02f6ce7ed0.png",
     "static/media/github-mark-white.svg": "/react-ui/static/media/github-mark-white.97ed8e7eef60d61ca469881dd6f34511.svg",
     "index.html": "/react-ui/index.html",
-    "main.2ef4b4f0.css.map": "/react-ui/static/css/main.2ef4b4f0.css.map",
-    "main.2e732bd5.js.map": "/react-ui/static/js/main.2e732bd5.js.map"
+    "static/media/logo-bg.svg": "/react-ui/static/media/logo-bg.c6ca8ff81e5905c6319d1167d837eddd.svg",
+    "main.6f0d370c.css.map": "/react-ui/static/css/main.6f0d370c.css.map",
+    "main.10d6b5b2.js.map": "/react-ui/static/js/main.10d6b5b2.js.map"
   },
   "entrypoints": [
-    "static/css/main.2ef4b4f0.css",
-    "static/js/main.2e732bd5.js"
+    "static/css/main.6f0d370c.css",
+    "static/js/main.10d6b5b2.js"
   ]
 }
