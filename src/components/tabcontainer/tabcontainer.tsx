@@ -16,7 +16,7 @@ const TabContainer = (props: TabContainerOptions) => {
             <div className='pages'>
                 {props?.gui?.components && props?.gui?.components?.length > 0 && props?.gui?.components?.map(component => 
                 <Button className={component?.id === props?.state?.active?.id ? 'active' : ''}  events={{onClick: (event: any) => onClickToOpenComponent(event, component) }} key={component?.id} >
-                    asdads
+                    {component?.title}
                 </Button>
                 )}
             </div>
