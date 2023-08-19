@@ -8,6 +8,7 @@ export interface WidgetBaseEvents {
     DOMAttributes?: WidgetBaseDOMAttributes;
 }
 export interface WidgetBaseOptions extends WidgetBaseEvents {
+    enableClassNameBase?: Boolean;
     className?: string;
     children?: React.ReactNode;
     styles?: React.CSSProperties;
