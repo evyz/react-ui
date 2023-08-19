@@ -2,6 +2,12 @@ import { DOMAttributes } from "react";
 
 interface WidgetBaseDOMAttributes extends DOMAttributes<any>{}
 
+export interface WidgetBaseStyles{
+    enableClassNameBase?: Boolean;
+    className?: string;
+    styles?: React.CSSProperties;
+}
+
 export interface WidgetBaseEvents {
     /**
      * @description React.DOMAttributes
@@ -9,9 +15,6 @@ export interface WidgetBaseEvents {
     DOMAttributes?: WidgetBaseDOMAttributes
 }
 
-export interface WidgetBaseOptions extends WidgetBaseEvents {
-    enableClassNameBase?: Boolean;
-    className?: string;
+export interface WidgetBaseOptions extends WidgetBaseEvents, WidgetBaseStyles {
     children?: React.ReactNode;
-    styles?: React.CSSProperties;
 }
