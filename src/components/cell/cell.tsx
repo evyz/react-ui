@@ -20,7 +20,7 @@ const Cell= (props: CellOptions) => {
       {...props?.DOMAttributes}
       onClick={onClick}
       style={{ ...props?.styles }}
-      className={`system_cell ${size && size} ${props?.className}`}>
+      className={`${props?.enableClassNameBase ? "system_cell" : ""} ${size && size} ${props?.className}`}>
       {props?.children}
     </div>
   );

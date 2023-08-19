@@ -11,7 +11,7 @@ const Row = (props: RowOptions) => {
   return (
     <div {...props?.DOMAttributes}
       onClick={onClick}
-      className={`system_row ${props?.className}`}
+      className={`${props?.enableClassNameBase ? "system_row" : ""} ${props?.className}`}
       style={{ ...props?.styles }}>
       {props?.children}
     </div>
