@@ -13,8 +13,7 @@ const Input = (props: InputOptions) => {
     return (
         <div
             className={
-                "system_input " +
-                `${props?.error?.status ? "system_error" : ""} ${
+                `${props?.enableClassNameBase ? "system_input " : " "} ${props?.error?.status ? "system_error" : ""} ${
                 isFocused ? "system_focused" : ""
                 } ${props?.validation?.disabled?.custom ? "disabled" : ""}`
             }
