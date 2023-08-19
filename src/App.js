@@ -1,27 +1,56 @@
-import Wrapper from "./evyz@react-forms-confirmed/wrapper/wrapper";
-import "./evyz@react-forms-confirmed/index.css";
-import Dropdown from "./evyz@react-forms-confirmed/dropdown";
-import { useState } from "react";
-import { Input, Row } from "./evyz@react-forms-confirmed";
+import { useEffect, useState } from "react";
+import { Cell, Row, Wrapper } from "./src";
 
-import './evyz@react-forms-confirmed/widgets.css'
-import DatePicker from "./evyz@react-forms-confirmed/datepicker/datepicker";
+import "./src/styles/index.css";
+import "./src/styles/widgets.css";
+import Calendar from "./src/components/calendar/calendar";
 
 function App() {
+  const [data, setData] = useState([]);
 
-  const [active, setActive ] = useState(new Date())
+  useEffect(() => {
+    setData([
+      { id: 1, name: "Viktor", surname: "Alabaev", phone: "+7 999 999 99-99" },
+      { id: 2, name: "Gleb", surname: "Shiskov", phone: "+7 999 999 99-99" },
+      { id: 1, name: "Alesya", surname: "Burseva", phone: "+7 999 999 99-99" },
+      {
+        id: 1,
+        name: "Yaroslav",
+        surname: "Antonov",
+        phone: "+7 999 999 99-99",
+      },
+      {
+        id: 1,
+        name: "Viktor",
+        surname: "Viktorich",
+        phone: "+7 999 999 99-99",
+      },
+    ]);
+  }, []);
 
   return (
-    <Wrapper>
-      <DatePicker gui={{
-        dates: {
-          renderDate: {
-            value: new Date(),
-            format: {
-              value: 'year.month'
-            }
-        }
-      }, }}/>
+    <Wrapper enableClassNameBase>
+      <Row enableClassNameBase>
+        <Cell enableClassNameBase gui={{ size: 11 }}>
+          <Calendar
+            gui={{
+              thead: {
+                cols: [
+                  {
+                    id: 1,
+                    value: "id",
+                  },
+                  { id: 2, value: "name" },
+                  { id: 3, value: "surname" },
+                  { id: 4, value: "phone" },
+                ],
+              },
+            }}
+            enableClassNameBase
+            state={{ value: data }}
+          ></Calendar>
+        </Cell>
+      </Row>
     </Wrapper>
   );
 }
