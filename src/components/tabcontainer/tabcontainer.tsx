@@ -12,7 +12,7 @@ const TabContainer = (props: TabContainerOptions) => {
     const {onClickToOpenComponent} = onOpenComponent(props)
 
     return (
-        <div {...props?.DOMAttributes} className='system_tabcontainer'>
+        <div {...props?.DOMAttributes} className={`${props?.enableClassNameBase ? 'system_tabcontainer' : ''}`}>
             <div className='pages'>
                 {props?.gui?.components && props?.gui?.components?.length > 0 && props?.gui?.components?.map(component => 
                 <Button className={component?.id === props?.state?.active?.id ? 'active' : ''}  events={{onClick: (event: any) => onClickToOpenComponent(event, component) }} key={component?.id} >

@@ -5,7 +5,7 @@ import { CheckboxOptions } from './switchbox.types';
 const SwitchBox = (props: CheckboxOptions) => {
     return (
         <div {...props?.DOMAttributes}
-          className="system_switchbox"
+          className={`${props?.enableClassNameBase ? "system_switchbox" : ""}`}
           onClick={(event) => {
             props?.state?.setValue && props?.state?.setValue(!props?.state?.value);
             props?.events?.onClick && props?.events?.onClick(event);

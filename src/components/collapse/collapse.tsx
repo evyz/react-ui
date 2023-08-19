@@ -13,7 +13,7 @@ const Collapse = (props: CollapseOptions) => {
     return (
         <div
             {...props?.DOMAttributes}
-        className={`system_collapse ${isActive ? "" : "disabled"}`}
+        className={`${props?.enableClassNameBase ? "system_collapse" : ""} ${isActive ? "" : "disabled"}`}
         style={{
             height: isActive ? 40 + childrenRef?.current?.clientHeight : 40,
         }}

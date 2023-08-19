@@ -5,7 +5,7 @@ const Checkbox = (props: CheckboxOptions) => {
     return (
       <div
         {...props?.DOMAttributes}
-        className="system_checkbox"
+        className={`${props?.enableClassNameBase ? "system_checkbox" : ""}`}
         onClick={(event) => {
           props?.state?.setValue && props?.state?.setValue(!props?.state?.value);
           props?.events?.onClick && props?.events?.onClick(event);

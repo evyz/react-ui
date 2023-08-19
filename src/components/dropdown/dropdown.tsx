@@ -13,7 +13,7 @@ const Dropdown = (props: DropdownOptions) => {
     initEffects({...props, isOpened ,setIsOpened})
 
     return (
-        <div {...props?.DOMAttributes} className={`system_dropdown_wrapper`}>
+        <div {...props?.DOMAttributes} className={`${props?.enableClassNameBase ? "system_dropdown_wrapper" : ""}`}>
             <div onClick={() => setIsOpened(!isOpened)} className={`selected_item`}>{props?.state?.value?.value} <DropdownArrow gui={props?.gui} isOpened={isOpened} setIsOpened={setIsOpened}  /></div>
             <ul className={`items ${isOpened && "active"}`}>
                 {props?.gui?.items && props?.gui?.items?.state?.map(item => 

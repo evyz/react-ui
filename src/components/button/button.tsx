@@ -27,7 +27,7 @@ const Button = (props: ButtonOptions) => {
       }
       disabled={isDisabled}
       onClick={buttonHandler}
-      className={`system_button ${props.className} ${
+      className={`${props?.enableClassNameBase ? "system_button" : ""} ${props.className} ${
         isLocalLoader || props?.gui?.loader?.custom ? "isLoading" : ""
       }`}
       style={{...props?.styles}}
