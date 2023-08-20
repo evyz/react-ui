@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { CalendarOptions } from "./src/calendar.types"
+import { GridOptions } from "./src/calendar.types"
 
-const Calendar = (props: CalendarOptions) => {
+const Grid = (props: GridOptions) => {
     return (
         <table>
             <thead>
@@ -14,4 +14,4 @@ const Calendar = (props: CalendarOptions) => {
     )
 }
 
-export default Calendar
+export default Grid

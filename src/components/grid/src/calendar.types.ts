@@ -23,7 +23,7 @@ export interface CalendarGuiInterface extends WidgetBaseStyles{
 }
 
 
-export interface CalendarOptions extends WidgetBaseOptions, CalendarGuiInterface{
+export interface GridOptions extends WidgetBaseOptions, CalendarGuiInterface{
     state?: {
         value?: CellsItems;
     }
