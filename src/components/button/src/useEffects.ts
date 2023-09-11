@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { ButtonOptions } from "../button.types";
 
 interface initEffectsInterface extends ButtonOptions{

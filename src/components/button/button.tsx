@@ -6,6 +6,7 @@ import useButtonHandler from "./src/buttonHandler";
 
 
 const Button = (props: ButtonOptions) => {
+  console.log("REACT", React)
   const [isDisabled, setIsDisabled] = React.useState(false);
   const [isLocalLoader, setIsLocalLoader] = React.useState(false);
   const ref = React.useRef(null);
